@@ -1,0 +1,235 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": ".editorconfig",
+      "change": "CREATED",
+      "purpose": "Portable editor whitespace/encoding settings"
+    },
+    {
+      "path": ".gitattributes",
+      "change": "CREATED",
+      "purpose": "Preserve evidence bytes across future Git checkout while using LF for new source"
+    },
+    {
+      "path": ".github/CODEOWNERS",
+      "change": "CREATED",
+      "purpose": "Draft ownership-review routing to the interim technical/security contact; inactive until hosting is authorised"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/work-item.md",
+      "change": "CREATED",
+      "purpose": "Scoped requirements/defect template with safe evidence"
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md",
+      "change": "CREATED",
+      "purpose": "Reviewable changes, actual tests and risk/rollback evidence"
+    },
+    {
+      "path": ".github/workflows/governance.yml",
+      "change": "CREATED",
+      "purpose": "Pinned minimally privileged foundation CI configuration"
+    },
+    {
+      "path": ".gitignore",
+      "change": "CREATED",
+      "purpose": "Exclude credentials, dependencies and temporary artifacts without losing references"
+    },
+    {
+      "path": "AGENTS.md",
+      "change": "CREATED",
+      "purpose": "Concise agent authority, change and verification instructions"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "change": "CREATED",
+      "purpose": "Contributor, Git/review and verification process"
+    },
+    {
+      "path": "README.md",
+      "change": "CREATED",
+      "purpose": "Root project state, navigation, runnable foundation commands and boundaries"
+    },
+    {
+      "path": "SECURITY.md",
+      "change": "CREATED",
+      "purpose": "Private reporting, remediation and incident contact gap"
+    },
+    {
+      "path": "docs/README.md",
+      "change": "UPDATED",
+      "purpose": "Append governance navigation while retaining existing design index"
+    },
+    {
+      "path": "docs/governance/README.md",
+      "change": "CREATED",
+      "purpose": "Governance index, control states and ownership"
+    },
+    {
+      "path": "docs/governance/adr/ADR-001-modular-platform.md",
+      "change": "CREATED",
+      "purpose": "Accepted stack/modular topology and proposed implementation details"
+    },
+    {
+      "path": "docs/governance/adr/ADR-002-integrity-and-manual-launch.md",
+      "change": "CREATED",
+      "purpose": "Accepted manual operation/integrity boundaries"
+    },
+    {
+      "path": "docs/governance/adr/ADR-003-deferred-platform-decisions.md",
+      "change": "CREATED",
+      "purpose": "Deferred identity/deployment with explicit gates"
+    },
+    {
+      "path": "docs/governance/adr/ADR-004-hosting-target-github.md",
+      "change": "CREATED",
+      "purpose": "Records the GitHub hosting target and its activation conditions; repository not created"
+    },
+    {
+      "path": "docs/governance/adr/README.md",
+      "change": "CREATED",
+      "purpose": "ADR use and acceptance standard"
+    },
+    {
+      "path": "docs/governance/ai-workflow.md",
+      "change": "CREATED",
+      "purpose": "Instruction resolution, tool risk and truthful agent protocol"
+    },
+    {
+      "path": "docs/governance/category-review.md",
+      "change": "CREATED",
+      "purpose": "Generated readable assessment of all 30 categories; controls.json remains authoritative"
+    },
+    {
+      "path": "docs/governance/controls.json",
+      "change": "CREATED",
+      "purpose": "All 30 governance categories with separate enforcement/gaps"
+    },
+    {
+      "path": "docs/governance/delivery.md",
+      "change": "CREATED",
+      "purpose": "CI/environments, application activation, migrations, release/rollback, containers and IaC"
+    },
+    {
+      "path": "docs/governance/discovery.md",
+      "change": "CREATED",
+      "purpose": "Actual workspace findings, sources, assumptions and scope"
+    },
+    {
+      "path": "docs/governance/engineering.md",
+      "change": "CREATED",
+      "purpose": "Module/data/API/coding/dependency/transaction standards"
+    },
+    {
+      "path": "docs/governance/failures.json",
+      "change": "CREATED",
+      "purpose": "Impact-first failure/edge case register and recovery/test needs"
+    },
+    {
+      "path": "docs/governance/files.json",
+      "change": "CREATED",
+      "purpose": "Complete created/updated file inventory and purpose"
+    },
+    {
+      "path": "docs/governance/foundation.json",
+      "change": "CREATED",
+      "purpose": "Exact bounded manifest, phase and preserved file hashes"
+    },
+    {
+      "path": "docs/governance/handoff.md",
+      "change": "CREATED",
+      "purpose": "Assessment, governance plan, actual verification, gaps and readiness"
+    },
+    {
+      "path": "docs/governance/operations.md",
+      "change": "CREATED",
+      "purpose": "Observability, capacity/cost, incident and job/restore runbooks"
+    },
+    {
+      "path": "docs/governance/requirements.json",
+      "change": "CREATED",
+      "purpose": "Authoritative seeded business requirement/design/acceptance traceability"
+    },
+    {
+      "path": "docs/governance/security.md",
+      "change": "CREATED",
+      "purpose": "SSDLC, threat model, privacy, secrets and baseline applicability"
+    },
+    {
+      "path": "docs/governance/templates/adr.md",
+      "change": "CREATED",
+      "purpose": "Significant decision/revisit template"
+    },
+    {
+      "path": "docs/governance/templates/feature.md",
+      "change": "CREATED",
+      "purpose": "Requirements and implementation/test/release trace template"
+    },
+    {
+      "path": "docs/governance/templates/incident.md",
+      "change": "CREATED",
+      "purpose": "Nonsecret incident evidence/recovery/postmortem template"
+    },
+    {
+      "path": "docs/governance/templates/test-plan.md",
+      "change": "CREATED",
+      "purpose": "Actual-vs-planned verification template"
+    },
+    {
+      "path": "docs/governance/templates/threat-model.md",
+      "change": "CREATED",
+      "purpose": "Reusable boundary/abuse assessment template"
+    },
+    {
+      "path": "docs/governance/testing.md",
+      "change": "CREATED",
+      "purpose": "Risk-based suites, current exact checks, data and stage gates"
+    },
+    {
+      "path": "docs/governance/verification.json",
+      "change": "CREATED",
+      "purpose": "Machine-readable actual local validation evidence (written after execution)"
+    },
+    {
+      "path": "scripts/governance/check-foundation.mjs",
+      "change": "CREATED",
+      "purpose": "Dependency-free fail-closed foundation validator"
+    },
+    {
+      "path": "scripts/governance/check-foundation.test.mjs",
+      "change": "CREATED",
+      "purpose": "Meaningful positive/negative fixture tests for validator behavior"
+    },
+    {
+      "path": "docs/governance/ownership.json",
+      "change": "CREATED",
+      "purpose": "Required accountable roles; all five assigned with flagged placeholder contacts"
+    },
+    {
+      "path": "docs/governance/authorizations.json",
+      "change": "CREATED",
+      "purpose": "Durable human authorisation register for sensitive operations; empty until approved"
+    },
+    {
+      "path": "docs/governance/templates/authorization.md",
+      "change": "CREATED",
+      "purpose": "Field-by-field authorisation record template with enforced rules and agent-approver prohibition"
+    },
+    {
+      "path": "docs/governance/layout-change.md",
+      "change": "CREATED",
+      "purpose": "Pending instruction for the concurrent session to simplify the repository layout"
+    },
+    {
+      "path": "scripts/governance/record-verification.mjs",
+      "change": "CREATED",
+      "purpose": "Runs both foundation commands and writes a self-consistent execution record"
+    },
+    {
+      "path": "scripts/governance/render-category-review.mjs",
+      "change": "CREATED",
+      "purpose": "Deterministic renderer for category-review.md from the control register"
+    }
+  ]
+}

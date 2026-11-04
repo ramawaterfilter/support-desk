@@ -1,0 +1,192 @@
+{
+  "schemaVersion": 1,
+  "projectPhase": "foundation",
+  "runtime": "24.16.0",
+  "manifest": "docs/governance/files.json",
+  "registers": [
+    "docs/governance/controls.json",
+    "docs/governance/requirements.json",
+    "docs/governance/failures.json",
+    "docs/governance/ownership.json",
+    "docs/governance/authorizations.json"
+  ],
+  "protectedFiles": {
+    "MASTER PROMPT AI Software Engineering Governance System.md": "d8dd147e3b08039b531986267ff5dc1ed88b32338f15bdf1a6db3e37b288c4b3",
+    "Support_Desk_Design_Handoff.zip": "94598707fad7160c2383177d325774017fe7b7b52a3914dc2401aaf27b6b4cf2",
+    "Support_Desk_Final_Validation_Report.pdf": "4ea559703e265e3102527f8cc09e519754ee8b3fba613cf4ffe98b6c783e5dd4",
+    "Support_Desk_V6_Development_Specification.pdf": "bae086a77cfdfd40f6ce90a8a53c4bc83803f1c66a197192ac1e126c46fbac04",
+    "Support_Desk_V6_Proposed_AWS_Architecture.pdf": "65153568a1533941e377b44deb77298d71c7a2954beafeb702b8dbd52175477b",
+    "docs/Decisions.html": "fd08d1f3b1be958bc14aa15e013a21adfdcf74d53f112703e9c6f4e301bef5f1",
+    "docs/Decisions.md": "7050c11d6bf316232185e3f9d81634467606ace52aa680359e64042894cc0220",
+    "docs/Decisions.pdf": "7920cd16659f91a16dd30104ae5e573b2100069b55c87c132158f8e2f1f23f4a",
+    "docs/Support_Desk_HLD.html": "81b55709d06d8b5a1cefb938cff20df4bc153fd5a09b244bfab72cff80070dad",
+    "docs/Support_Desk_HLD.md": "cfe6e724f47dfa8ea5d2aedae6d9fa0b39c17e519822bb552348f7d787d84df7",
+    "docs/Support_Desk_HLD.pdf": "4d6c58c391efdda536aae77b28c5b9619740d147aed60fbe8f1b085f6879f49c",
+    "docs/Support_Desk_LLD.html": "3b6cf88e833ebe1eadb82fc618b07de56e26da70ece71762b9ed21965b1f306a",
+    "docs/Support_Desk_LLD.md": "68c8ccfcb756a072457cc55601dd7a85878a38bf64c9f776e17a3fb411cd432d",
+    "docs/Support_Desk_LLD.pdf": "fb7d6db4394409c20700dad51f44079e0b5c9a89f4bb94624e48085305372f99",
+    "docs/reference/design-validation.json": "e7915bd350087b61b10486ee7668352712c080ea2bd1729984eb9285a5d4a23e",
+    "docs/reference/prototype-source-manifest.json": "9fb356b3e938a2e881807f23e93fe7140a77c813698061f68c31cd047e400281",
+    "docs/reference/screens.json": "3d53b78f15cc439079eb82adc6e9745b0cf3b220af7fdf1aa3bdda3f542abbd2",
+    "docs/reference/source-manifest.json": "3d00903ef96a9ac7ff765e75745c0e3f517fe401875dd78a7bd131909d64d1ae",
+    "docs/reference/prototype-source/admin.js": "9fd2bd8b703d0277014c169fcb3f45c97d87da54fe82800a96969589b9899f72",
+    "docs/reference/prototype-source/cancellations.js": "fe9df771629ec02097c3c06a6e72a6314aa864f21cea0b3e7bb43647f8b0aa70",
+    "docs/reference/prototype-source/catalog.js": "37989cc29b27d4e2d6de1f1cb242bedcd14cb30b794f54021d04d910a835e7ff",
+    "docs/reference/prototype-source/cs-records.js": "229093ad6535a4f5d8748b1be560cbd3e5f8aee18691ddd712109819068d5c86",
+    "docs/reference/prototype-source/data.js": "559ec91fd2374fe60b49b6ab6d711c77a0d74ff12936abd8157b4425f5477467",
+    "docs/reference/prototype-source/finance.js": "1dd97085a57e1525cd0d9b170262594fa8e1fbe9dc01f87b3f1aa140d5abcbdd",
+    "docs/reference/prototype-source/operations.js": "45ce59794bec01a4c2d5f5589c7ea4858db8275fb4ad2c7a024d56267dd7b6f2",
+    "docs/reference/prototype-source/portal.js": "130f36d94c5ba009d90d947b599da49089b6744dd4b9790257abd9eede2f1f0c",
+    "docs/reference/prototype-source/replacements.js": "17a0e0fba0aec103f301b044988dab267cef8b290c94bc46b3e80b216054fe80",
+    "docs/reference/prototype-source/rma-waivers.js": "49ebaf1a19381c5d5c14c90c4daebce394226ba27296fc86e6b8fdbc85af3d92",
+    "docs/reference/prototype-source/styles.css": "d878d96651e2e3fc20cd0645c5aadf050e93fba41f5b24996bda7e715f0e17fe",
+    "docs/reference/prototype-source/workflow-access.js": "04ba952337e292a672c0ef45b1e3180faea1993fdd291031aa38de8af8083702",
+    "docs/reference/screenshots/category-shortcut.png": "de768d1c506f23a727c89899b86a41bdf5980610b06c5064dd9f15e655422a60",
+    "docs/reference/screenshots/customers.png": "e2bf7c38209eafefa9ddf472d5ff83f66f62d1cd2c62b9b441799fa09f6cbd9f",
+    "docs/reference/screenshots/dashboard.png": "40dcbfe15dc1e8c5d590f9b4b7d8167cecd98e4cbce05ed58dcd83a4d71898ee",
+    "docs/reference/screenshots/exports.png": "67970907382e2faa6b7fb78b6e54d9c507907fdf42d37c371cc49697f165d241",
+    "docs/reference/screenshots/insights.png": "d0133aa2573db125ab16221b056ad332f29a477bdcd34d574849257bf24125ae",
+    "docs/reference/screenshots/logistics.png": "a3dd5789abce4a36170921aed8714ab4ece89f2ac18fdbde8e6873ce75f56870",
+    "docs/reference/screenshots/masters.png": "de768d1c506f23a727c89899b86a41bdf5980610b06c5064dd9f15e655422a60",
+    "docs/reference/screenshots/new.png": "3e23c1a479bca4add8cd01a31aa16f216fd4a069690bd75d03f10a2e081deacb",
+    "docs/reference/screenshots/product-shortcut.png": "8595dcdfc1886eb74b9b29c282cc940804cbccd93f342cbbac229c17d3e2926d",
+    "docs/reference/screenshots/profile.png": "495dd576f525ee4a3a14fdc85c45a604618b3168e93e27e21a6e90cdc1e47966",
+    "docs/reference/screenshots/requests.png": "2d1cd49c24e758feb402c59db9ada914e83f0cfda7068282b538543727a71ccc",
+    "docs/reference/screenshots/resets.png": "2bb5d629e4deeeb0b52461e71b4f710e16ba3638c6e26cab1bf0fb744848de47",
+    "docs/reference/screenshots/tasks.png": "61ce6e09b213d26989c8937cb35d227fba0ef6489d59c9039bd2836c5e9bef61",
+    "docs/reference/screenshots/tickets.png": "77a8022c9b9478875191c20127654910d6ee33a7e4f03cbe8d0318fdb7b4dab7",
+    "docs/reference/screenshots/users.png": "c0e3729645af0e76761c03ee5a855ad8fc200ce1d779df84fbec2f0549cab69c"
+  },
+  "maxManagedFileBytes": 250000,
+  "maxManagedTotalBytes": 2000000,
+  "managedTextExtensions": [
+    ".md",
+    ".json",
+    ".mjs",
+    ".yml"
+  ],
+  "applicationRoots": [
+    "apps",
+    "packages",
+    "tests",
+    "db/migrations"
+  ],
+  "foundationPhaseAllowedTopLevel": [
+    ".editorconfig",
+    ".gitattributes",
+    ".github",
+    ".gitignore",
+    ".tmp",
+    "AGENTS.md",
+    "CONTRIBUTING.md",
+    "docs",
+    "MASTER PROMPT AI Software Engineering Governance System.md",
+    "README.md",
+    "scripts",
+    "SECURITY.md",
+    "Support_Desk_Design_Handoff.zip",
+    "Support_Desk_Final_Validation_Report.pdf",
+    "Support_Desk_V6_Development_Specification.pdf",
+    "Support_Desk_V6_Proposed_AWS_Architecture.pdf"
+  ],
+  "reviewGatedPaths": [
+    ".editorconfig",
+    ".gitattributes",
+    ".github/ISSUE_TEMPLATE/work-item.md",
+    ".github/PULL_REQUEST_TEMPLATE.md",
+    ".github/workflows/governance.yml",
+    ".gitignore",
+    "AGENTS.md",
+    "CONTRIBUTING.md",
+    "README.md",
+    "SECURITY.md",
+    "docs/README.md",
+    "docs/governance/README.md",
+    "docs/governance/adr/README.md",
+    "docs/governance/adr/ADR-001-modular-platform.md",
+    "docs/governance/adr/ADR-002-integrity-and-manual-launch.md",
+    "docs/governance/adr/ADR-003-deferred-platform-decisions.md",
+    "docs/governance/ai-workflow.md",
+    "docs/governance/authorizations.json",
+    "docs/governance/category-review.md",
+    "docs/governance/controls.json",
+    "docs/governance/delivery.md",
+    "docs/governance/discovery.md",
+    "docs/governance/engineering.md",
+    "docs/governance/failures.json",
+    "docs/governance/files.json",
+    "docs/governance/foundation.json",
+    "docs/governance/handoff.md",
+    "docs/governance/layout-change.md",
+    "docs/governance/operations.md",
+    "docs/governance/ownership.json",
+    "docs/governance/requirements.json",
+    "docs/governance/security.md",
+    "docs/governance/templates/adr.md",
+    "docs/governance/templates/authorization.md",
+    "docs/governance/templates/feature.md",
+    "docs/governance/templates/incident.md",
+    "docs/governance/templates/test-plan.md",
+    "docs/governance/templates/threat-model.md",
+    "docs/governance/testing.md",
+    "docs/governance/verification.json",
+    "scripts/governance/check-foundation.mjs",
+    "scripts/governance/check-foundation.test.mjs",
+    "scripts/governance/record-verification.mjs",
+    "scripts/governance/render-category-review.mjs"
+  ],
+  "forbiddenInstructionPhrases": {
+    "AGENTS.md": [
+      "it is fine to suppress the foundation checker",
+      "may proceed without separate approval",
+      "without specific authorisation",
+      "skip the foundation check"
+    ],
+    "docs/governance/ai-workflow.md": [
+      "agent may approve its own",
+      "no approval is required"
+    ],
+    "CONTRIBUTING.md": [
+      "no approval is required",
+      "self approval is sufficient"
+    ],
+    "SECURITY.md": [
+      "post security details publicly",
+      "no private reporting channel is needed"
+    ]
+  },
+  "instructionDigests": {
+    "AGENTS.md": "946ae5264f7b44ae46c1e9735ceefa09ee628f9d8d623ec014830801cafefd49",
+    "CONTRIBUTING.md": "47d067e9dadcc3fb2b9797e3ec3bebc81cf7bbbdc635a835f3ab9beca94958c1",
+    "SECURITY.md": "8ac8463e34384f734e844db3d00b077e33f1860dc4571afadbe855458e326f9a",
+    "docs/governance/ai-workflow.md": "1279ea74cadf47f6be492cde12298bd80431056bb8ac0dce48359a22d474f17b"
+  },
+  "verification": {
+    "record": "docs/governance/verification.json",
+    "foundationVerifiableControls": [
+      "GOV-26",
+      "GOV-27"
+    ]
+  },
+  "hostedControls": {
+    "status": "NOT IMPLEMENTED",
+    "reason": "No hosted repository exists. Branch protection, required status checks, CODEOWNERS, protected environments and an external run log cannot be configured or verified from this workspace, so in-repository digest and path checks are the only available protection and are not tamper-proof.",
+    "required": [
+      "CODEOWNERS covering the review-gated paths",
+      "required status checks on the foundation workflow",
+      "protected branches and the pull-request review requirement",
+      "an external, non-forge-editable record of verification runs"
+    ]
+  },
+  "applicationGateActivation": "docs/governance/delivery.md",
+  "commands": [
+    "node --test scripts/governance/check-foundation.test.mjs",
+    "node scripts/governance/check-foundation.mjs"
+  ],
+  "ci": {
+    "workflow": ".github/workflows/governance.yml",
+    "checkoutSha": "11d5960a326750d5838078e36cf38b85af677262",
+    "setupNodeSha": "49933ea5288caeca8642d1e84afbd3f7d6820020",
+    "hostedStatus": "NOT IMPLEMENTED"
+  }
+}

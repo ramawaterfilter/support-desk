@@ -1,0 +1,13 @@
+# New source/config text is portable LF; genuinely protected reference evidence retains exact bytes.
+* text=auto eol=lf
+*.pdf binary
+*.png binary
+*.zip binary
+docs/Decisions.md -text
+docs/Decisions.html -text
+docs/Support_Desk_HLD.md -text
+docs/Support_Desk_HLD.html -text
+docs/Support_Desk_LLD.md -text
+docs/Support_Desk_LLD.html -text
+docs/reference/** -text
+"MASTER PROMPT AI Software Engineering Governance System.md" -text

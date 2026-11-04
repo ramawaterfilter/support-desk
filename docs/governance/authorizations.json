@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "scope": "Durable record of human authorization for sensitive operations. Empty until a named human authorises something; no approval is fabricated, and a chat instruction, an AI-generated approval or the agent's own review is not independent human authorization.",
+  "recordFormat": "docs/governance/templates/authorization.md",
+  "register": {
+    "fields": [
+      "operation",
+      "requestingIdentity",
+      "approvingIdentity",
+      "approverRole",
+      "approvedScope",
+      "environment",
+      "expiry",
+      "evidence",
+      "executionOutcome",
+      "authorizationSource",
+      "recordedAtUtc"
+    ],
+    "authorizationSources": [
+      "SIGNED_CHANGE",
+      "APPROVED_TICKET",
+      "EMAIL_CONFIRMATION",
+      "OTHER_DOCUMENTED"
+    ],
+    "executionOutcomes": [
+      "NOT_EXECUTED",
+      "EXECUTED",
+      "PARTIALLY_EXECUTED",
+      "FAILED",
+      "ROLLED_BACK"
+    ]
+  },
+  "records": [
+    {
+      "operation": "github-repo-creation",
+      "requestingIdentity": "divya",
+      "approvingIdentity": "Nice Pal",
+      "approverRole": "operations",
+      "approvedScope": "Admin",
+      "environment": "production-github",
+      "expiry": "2028-01-01T00:00:00Z",
+      "evidence": "email",
+      "executionOutcome": "NOT_EXECUTED",
+      "authorizationSource": "EMAIL_CONFIRMATION",
+      "recordedAtUtc": "2026-11-04T08:30:00+05:30"
+    }
+  ]
+}

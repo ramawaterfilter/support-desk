@@ -1,0 +1,1282 @@
+{
+  "version": 1,
+  "scope": "Seed traceability covering documented application modules; refine to feature/criterion IDs before implementation. No application is implemented.",
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "title": "Shared customer identity",
+      "description": "One person identity spans brands; household contacts do not force a merge.",
+      "businessJustification": "Preserve customer history safely.",
+      "priority": "MUST",
+      "dependencies": [],
+      "modules": [
+        "customers"
+      ],
+      "source": "DEV pp.16–20",
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "designSection": "LLD §8.1",
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "acceptanceCriteria": [
+        "positive: Given two records sharing one canonical contact, When an agent selects the explicitly disambiguated person, Then the case attaches to that exact customer ID and both histories stay separate.",
+        "negative: Given a household contact shared by two persons, When intake resolves the contact, Then neither person is auto-merged and the agent must choose.",
+        "prohibited: Given any case or correction flow, When a duplicate or merge is attempted, Then creating a duplicate customer master or silently merging identities is prohibited.",
+        "boundary: Given an ambiguous person with exactly two candidate records, When the agent picks one, Then the chosen ID is recorded and the rejected candidate remains untouched.",
+        "failure: Given a concurrent competing correction to the same customer, When both commits race, Then one wins deterministically by revision and the loser is rejected without data loss."
+      ],
+      "verificationMethod": "API identity/alias/shared-contact and concurrent correction cases",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "failureScenarios": [
+        "FAIL-05"
+      ]
+    },
+    {
+      "id": "REQ-002",
+      "title": "Controlled intake",
+      "description": "Lookup precedes issue form; active dependent choices and original wording are retained.",
+      "businessJustification": "Reduce duplicate/retyped incorrect intake.",
+      "priority": "MUST",
+      "dependencies": [
+        "REQ-001",
+        "REQ-023"
+      ],
+      "modules": [
+        "customers",
+        "catalogue",
+        "tickets"
+      ],
+      "source": "DEV pp.20–23",
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "designSection": "LLD §3.3",
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "acceptanceCriteria": [
+        "positive: Given an existing customer and active catalogue choices, When the agent completes intake, Then the original wording and dependent choices are retained on the new case.",
+        "negative: Given a person switch mid-form, When the draft depended on the previous person, Then that draft is cleared while same-person history is kept.",
+        "prohibited: Given an unknown label, When it is entered during intake, Then it cannot create a master record from free text.",
+        "boundary: Given the last active option in a dependent list, When selected, Then intake succeeds; any inactive option is rejected.",
+        "failure: Given a malformed or oversized intake request, When submitted, Then it is rejected at the boundary and never reaches business logic."
+      ],
+      "verificationMethod": "Component/API/browser dependency and draft cases",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "failureScenarios": [
+        "FAIL-20"
+      ]
+    },
+    {
+      "id": "REQ-003",
+      "title": "Manager classification",
+      "description": "Unknown category creates scoped eligible manager obligation that generic completion cannot bypass.",
+      "businessJustification": "Make classification accountable.",
+      "priority": "MUST",
+      "dependencies": [
+        "REQ-002",
+        "REQ-022"
+      ],
+      "modules": [
+        "tickets",
+        "tasks",
+        "access"
+      ],
+      "source": "DEV pp.21–26",
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "designSection": "LLD §8.1",
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "acceptanceCriteria": [
+        "positive: Given an unknown-category case, When an eligible manager classifies it, Then the original message is preserved and only the applicable classification task completes.",
+        "negative: Given a case with no eligible manager, When create is attempted, Then it is blocked.",
+        "prohibited: Given a generic completion action, When it is used to complete the task, Then it cannot bypass the classification obligation.",
+        "boundary: Given a manager with the right role but wrong market, When classification is attempted, Then it is denied at the eligibility boundary.",
+        "failure: Given a classification task racing case closure, When both commit, Then closure waits or fails and the obligation cannot be hidden."
+      ],
+      "verificationMethod": "Policy/API classification-through-closure cases",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "failureScenarios": [
+        "FAIL-04"
+      ]
+    },
+    {
+      "id": "REQ-004",
+      "title": "Claims and collaboration",
+      "description": "Assignment, current worker and task owner remain separate with explicit takeover and stale-version protection.",
+      "businessJustification": "Prevent lost/shared work.",
+      "priority": "SHOULD",
+      "dependencies": [],
+      "modules": [
+        "tickets",
+        "tasks"
+      ],
+      "source": "DEV pp.23–26",
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "designSection": "LLD §7.2",
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "acceptanceCriteria": [
+        "positive: Given an unassigned case, When a worker claims it, Then assignment, current worker and task owner are stored as separate fields.",
+        "negative: Given a live other-worker edit, When a stale save arrives, Then it is refused without losing the local draft.",
+        "prohibited: Given any takeover, When a worker takes over, Then silent reassignment without an explicit takeover action is prohibited.",
+        "boundary: Given the configured working lease (D-07, proposed test value 120s), When it has just expired, Then takeover becomes possible; one second before, it is refused.",
+        "failure: Given a worker crash mid-edit, When the lease expires, Then another worker can take over and miss/ownership history is preserved."
+      ],
+      "verificationMethod": "Concurrent API and browser claim/takeover cases",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "failureScenarios": []
+    },
+    {
+      "id": "REQ-005",
+      "title": "Shared discovery search",
+      "description": "Authorised whitelisted linked fields support broad discovery distinct from exact identity lookup.",
+      "businessJustification": "Find cases without leaking hidden fields.",
+      "priority": "SHOULD",
+      "dependencies": [],
+      "modules": [
+        "customers",
+        "tickets",
+        "reporting"
+      ],
+      "source": "DEV pp.29–31",
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "designSection": "LLD §6.2",
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "acceptanceCriteria": [
+        "positive: Given a formatted phone query, When search runs, Then it matches the real phone fields through the authorised projection.",
+        "negative: Given a field outside the whitelist, When included in the query, Then it is denied and never returned.",
+        "prohibited: Given a partial search result, When it is used to pick a customer, Then it must never auto-select an identity or grant write/export rights.",
+        "boundary: Given a query matching zero authorised fields, When submitted, Then an empty result is returned without information leakage.",
+        "failure: Given an authorisation-service failure during search, When queried, Then the request fails closed with no results."
+      ],
+      "verificationMethod": "API field projection/search/filter tests",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "failureScenarios": [
+        "FAIL-01"
+      ]
+    },
+    {
+      "id": "REQ-006",
+      "title": "Revisioned service decisions",
+      "description": "Only exact current final approved revision enables consequential execution.",
+      "businessJustification": "Avoid stale approval execution.",
+      "priority": "MUST",
+      "dependencies": [
+        "REQ-022",
+        "REQ-023",
+        "REQ-026"
+      ],
+      "modules": [
+        "service",
+        "access"
+      ],
+      "source": "DEV pp.40–42",
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "designSection": "LLD §8.3",
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "acceptanceCriteria": [
+        "positive: Given a final approved revision, When the exact current revision executes, Then the consequential action commits against that revision.",
+        "negative: Given a need-info state, When a final decision is attempted, Then it is refused until scope and revision are final.",
+        "prohibited: Given any service decision, When a decision is executed, Then executing twice or against a superseded revision is prohibited.",
+        "boundary: Given shipped/received/waiver constraints on a revision, When an edit is attempted, Then it is refused once the constraint applies.",
+        "failure: Given a concurrent dispatch race, When decision and dispatch commit together, Then exactly one ordering wins and the other is safely rejected."
+      ],
+      "verificationMethod": "Real-DB decision/revision/dispatch races",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "failureScenarios": [
+        "FAIL-02"
+      ]
+    },
+    {
+      "id": "REQ-007",
+      "title": "Allowed manager self-approval",
+      "description": "Eligible managers may approve their own/materially edited request under ordinary scope rules.",
+      "businessJustification": "Preserve confirmed business policy.",
+      "priority": "MUST",
+      "dependencies": [],
+      "modules": [
+        "service",
+        "finance",
+        "returns",
+        "access"
+      ],
+      "source": "User decision C-08/C-10",
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "designSection": "Decisions C-08/C-10",
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "acceptanceCriteria": [
+        "positive: Given an eligible manager’s own materially edited request, When they approve it, Then the approval succeeds with identity, scope and audit recorded.",
+        "negative: Given a custom title or wrong market, When self-approval is attempted, Then it fails under ordinary scope rules.",
+        "prohibited: Given any non-manager or automated agent, When the approval is submitted, Then approving as a manager is prohibited.",
+        "boundary: Given a manager who is not eligible for the scope, When approval is attempted, Then it is denied exactly at the eligibility boundary.",
+        "failure: Given an audit-write failure, When self-approval commits, Then the approval is not recorded as valid."
+      ],
+      "verificationMethod": "Policy/API positive self-approval and prohibited authority cases",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "failureScenarios": [
+        "FAIL-18"
+      ]
+    },
+    {
+      "id": "REQ-008",
+      "title": "Replacement paths",
+      "description": "Return-first, advance and no-return paths retain independent exact inbound/outbound obligations.",
+      "businessJustification": "Prevent unapproved dispatch/closure.",
+      "priority": "MUST",
+      "dependencies": [
+        "REQ-006",
+        "REQ-010",
+        "REQ-011"
+      ],
+      "modules": [
+        "fulfilment",
+        "returns"
+      ],
+      "source": "DEV pp.44–46",
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "designSection": "LLD §8.4",
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "acceptanceCriteria": [
+        "positive: Given an approved return-first path, When the inbound receipt is due or damaged, Then dispatch is blocked until it is resolved.",
+        "negative: Given an advance replacement path, When the replacement ships, Then the inbound obligation remains open.",
+        "prohibited: Given a no-return path, When dispatch is requested, Then dispatch requires explicit approved assent; it is never inferred.",
+        "boundary: Given the exact approved scope, When quantity or address deviates by any amount, Then dispatch is refused.",
+        "failure: Given closure racing a new obligation, When both commit, Then closure fails and the obligation stands."
+      ],
+      "verificationMethod": "Workflow and concurrent release/receipt cases",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "failureScenarios": [
+        "FAIL-04"
+      ]
+    },
+    {
+      "id": "REQ-009",
+      "title": "Cancellation fallback",
+      "description": "External cancellation result is separate from approval and failed dispatch needs valid same-ticket full-coverage Return.",
+      "businessJustification": "Retain actual operational outcome.",
+      "priority": "MUST",
+      "dependencies": [
+        "REQ-006",
+        "REQ-010",
+        "REQ-013"
+      ],
+      "modules": [
+        "fulfilment",
+        "service"
+      ],
+      "source": "DEV pp.42–44",
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "designSection": "LLD §8.4",
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "acceptanceCriteria": [
+        "positive: Given an external cancellation result, When recorded on the same ticket, Then it is stored separately from the original approval.",
+        "negative: Given an already dispatched order, When cancellation is confirmed, Then it is refused.",
+        "prohibited: Given an incomplete or wrong fallback, When it is recorded, Then it cannot settle the original obligation.",
+        "boundary: Given a failed dispatch needing fallback, When a full-coverage Return is created on the same ticket, Then the original obligation stays open until the Return completes.",
+        "failure: Given an uncertain provider side effect, When the result is unknown, Then no settlement is recorded and the case stays pending."
+      ],
+      "verificationMethod": "API/workflow fallback through remedy/finance closure",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "failureScenarios": [
+        "FAIL-19"
+      ]
+    },
+    {
+      "id": "REQ-010",
+      "title": "Physical receipts and inspection",
+      "description": "Cumulative entry appends immutable physical events and current-scope inspection.",
+      "businessJustification": "Preserve physical truth.",
+      "priority": "MUST",
+      "dependencies": [
+        "REQ-006",
+        "REQ-026"
+      ],
+      "modules": [
+        "returns"
+      ],
+      "source": "DEV pp.46–48",
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "designSection": "LLD §8.5",
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "acceptanceCriteria": [
+        "positive: Given a cumulative entry, When quantities are recorded, Then immutable physical events append with current-scope inspection.",
+        "negative: Given a carrier status or matching change, When it occurs, Then no received quantity changes.",
+        "prohibited: Given under, over, fractional or future-dated input, When it is submitted, Then it fails atomically with no partial receipt.",
+        "boundary: Given the exact approved quantity, When the last unit is received, Then the receipt completes; one further unit is refused.",
+        "failure: Given a receipt racing a pending waiver, When both commit, Then the receipt supersedes the stale waiver without rewriting the approval."
+      ],
+      "verificationMethod": "Real-DB receipt/inspection/version tests",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "failureScenarios": [
+        "FAIL-03"
+      ]
+    },
+    {
+      "id": "REQ-011",
+      "title": "Collection waiver",
+      "description": "Manager waives only outstanding quantities on exact snapshot; receipt stays separate.",
+      "businessJustification": "Control collection exceptions.",
+      "priority": "MUST",
+      "dependencies": [
+        "REQ-010",
+        "REQ-022"
+      ],
+      "modules": [
+        "returns",
+        "access"
+      ],
+      "source": "DEV pp.48–50",
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "designSection": "LLD §8.5",
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "acceptanceCriteria": [
+        "positive: Given an exact snapshot with outstanding quantities, When a manager waives, Then only the outstanding quantities are waived and the receipt stays separate.",
+        "negative: Given a late receipt after waiver, When it arrives, Then the effective waiver reduces without rewriting the original approval.",
+        "prohibited: Given any user below manager authority, When a waiver is requested, Then waiving is prohibited.",
+        "boundary: Given zero outstanding quantities, When waiver is attempted, Then it is refused because there is nothing to waive.",
+        "failure: Given a receipt/waiver race in either order, When both commit, Then the outcome is deterministic and audited, never double-counted."
+      ],
+      "verificationMethod": "Both-order receipt/waiver races and late-arrival UAT",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "failureScenarios": [
+        "FAIL-03"
+      ]
+    },
+    {
+      "id": "REQ-012",
+      "title": "Unmatched parcels",
+      "description": "Verified parcel identity match finishes identity task without creating receipt/payment.",
+      "businessJustification": "Prevent invented customer fulfilment.",
+      "priority": "SHOULD",
+      "dependencies": [
+        "REQ-010"
+      ],
+      "modules": [
+        "returns",
+        "tasks"
+      ],
+      "source": "DEV pp.50–51",
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "designSection": "LLD §8.5",
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "acceptanceCriteria": [
+        "positive: Given a verified parcel identity match, When confirmed, Then the identity task finishes without creating a receipt or payment.",
+        "negative: Given a wrong-warehouse parcel, When matching is attempted, Then it fails safely and the parcel stays unmatched.",
+        "prohibited: Given any match, When a match is confirmed, Then inventing customer fulfilment from an unverified parcel is prohibited.",
+        "boundary: Given concurrent matches on the same parcel, When both commit, Then exactly one succeeds.",
+        "failure: Given a matching-service failure, When attempted, Then the badge reflects the current unmatched state and no partial link persists."
+      ],
+      "verificationMethod": "API real-DB parcel matching cases",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "failureScenarios": []
+    },
+    {
+      "id": "REQ-013",
+      "title": "Refund authority",
+      "description": "Exact verified order/currency/scope/amount manager authority precedes external-result entry.",
+      "businessJustification": "Avoid unsupported financial promise.",
+      "priority": "MUST",
+      "dependencies": [
+        "REQ-006",
+        "REQ-022",
+        "REQ-026"
+      ],
+      "modules": [
+        "finance",
+        "service"
+      ],
+      "source": "DEV pp.51–53",
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "designSection": "LLD §8.6",
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "acceptanceCriteria": [
+        "positive: Given exact verified order, currency, scope and amount, When a manager grants authority, Then external-result entry is enabled against that authority.",
+        "negative: Given a rejected amendment, When reverted, Then the prior approved amount and attempts are restored.",
+        "prohibited: Given any duplicate live authority, When a second authority is requested, Then a second concurrent authority for the same obligation is blocked.",
+        "boundary: Given the exact eligible amount, When one unit more is requested, Then it is refused.",
+        "failure: Given a stale concurrent refund attempt, When it races the current authority, Then it is rejected without effect."
+      ],
+      "verificationMethod": "DB/API amendment/duplicate/scope tests",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "failureScenarios": [
+        "FAIL-02"
+      ]
+    },
+    {
+      "id": "REQ-014",
+      "title": "Financial attempts",
+      "description": "Pending/unknown reserves authority; success pays; failure releases; final outcomes immutable.",
+      "businessJustification": "Prevent overpayment or lost reconciliation.",
+      "priority": "MUST",
+      "dependencies": [
+        "REQ-013",
+        "REQ-026"
+      ],
+      "modules": [
+        "finance"
+      ],
+      "source": "DEV pp.54–55",
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "designSection": "LLD §8.6",
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "acceptanceCriteria": [
+        "positive: Given a pending or unknown result, When recorded, Then the authority stays reserved until a final outcome.",
+        "negative: Given a failed attempt, When recorded, Then the reservation is released.",
+        "prohibited: Given paid plus reserved totals, When a new attempt is added, Then they must never exceed the granted authority.",
+        "boundary: Given blank proof or a duplicate provider reference, When submitted, Then it fails; a retry uses a distinct reference.",
+        "failure: Given a provider timeout with an uncertain side effect, When reconciled later, Then no duplicate payment is created."
+      ],
+      "verificationMethod": "Concurrent real-DB reservation and reconciliation cases",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "failureScenarios": [
+        "FAIL-19"
+      ]
+    },
+    {
+      "id": "REQ-015",
+      "title": "Disputes",
+      "description": "Provider deadline/evidence/state is independent of internal follow-up and checked at closure.",
+      "businessJustification": "Prevent premature case completion.",
+      "priority": "MUST",
+      "dependencies": [
+        "REQ-017",
+        "REQ-022"
+      ],
+      "modules": [
+        "disputes",
+        "tickets"
+      ],
+      "source": "DEV pp.56–57",
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "designSection": "LLD §8.7",
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "acceptanceCriteria": [
+        "positive: Given a provider deadline, evidence and state, When the case closes, Then closure checks the independent dispute domain.",
+        "negative: Given a draft dispute, When viewed, Then it is not presented as submitted.",
+        "prohibited: Given a final provider result, When a state change is requested, Then downgrading it is prohibited.",
+        "boundary: Given an unresolved dispute with a missing follow-up task, When closure is attempted, Then closure is still blocked.",
+        "failure: Given a provider integration timeout, When the state is unknown, Then closure is refused and the case stays open."
+      ],
+      "verificationMethod": "API/domain deadline/evidence/closure tests",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "failureScenarios": [
+        "FAIL-19"
+      ]
+    },
+    {
+      "id": "REQ-016",
+      "title": "All-obligation closure",
+      "description": "Resolve/Close recheck every current domain fact and open task transactionally; reopen preserves history.",
+      "businessJustification": "Prevent unsupported final state.",
+      "priority": "MUST",
+      "dependencies": [
+        "REQ-003",
+        "REQ-006",
+        "REQ-008",
+        "REQ-009",
+        "REQ-010",
+        "REQ-011",
+        "REQ-013",
+        "REQ-014",
+        "REQ-015",
+        "REQ-017",
+        "REQ-026"
+      ],
+      "modules": [
+        "tickets",
+        "service",
+        "returns",
+        "fulfilment",
+        "finance",
+        "disputes",
+        "tasks"
+      ],
+      "source": "DEV pp.57–63",
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "designSection": "LLD §8.2",
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "acceptanceCriteria": [
+        "positive: Given Resolved state plus customer assent, When Close executes, Then every current domain fact and open task is rechecked in one transaction.",
+        "negative: Given any open obligation, When Close executes, Then it fails and nothing changes.",
+        "prohibited: Given any closure path, When closure is attempted, Then bypassing a domain gate is prohibited.",
+        "boundary: Given the last open obligation, When it completes and Close executes immediately, Then closure succeeds.",
+        "failure: Given a new obligation racing closure, When both commit, Then the gate holds and an unsupported final state is impossible."
+      ],
+      "verificationMethod": "Real-DB closure race and per-gate UAT",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "failureScenarios": [
+        "FAIL-04",
+        "FAIL-21"
+      ]
+    },
+    {
+      "id": "REQ-017",
+      "title": "Durable follow-ups",
+      "description": "Independent eligible source/stage tasks preserve original deadline/first miss owner and actual/recorded completion.",
+      "businessJustification": "Maintain accountability.",
+      "priority": "MUST",
+      "dependencies": [
+        "REQ-022",
+        "REQ-026"
+      ],
+      "modules": [
+        "tasks",
+        "access"
+      ],
+      "source": "DEV pp.26–29",
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "designSection": "LLD §8.8",
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "acceptanceCriteria": [
+        "positive: Given an eligible source/stage task, When created, Then the original deadline and first-miss owner are preserved.",
+        "negative: Given a snooze, reassign or reschedule, When applied, Then the recorded miss is not erased.",
+        "prohibited: Given any completion, When completion is recorded, Then affecting a task outside the applicable source is prohibited.",
+        "boundary: Given the exact completion for one applicable source, When recorded, Then only that source is affected.",
+        "failure: Given clock or timezone ambiguity, When due-work is computed, Then the canonical timezone applies and backdating needs explicit authority."
+      ],
+      "verificationMethod": "Clock/policy/task transitions and DB concurrency",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "failureScenarios": [
+        "FAIL-16"
+      ]
+    },
+    {
+      "id": "REQ-018",
+      "title": "Reliable background work",
+      "description": "Scheduler/outbox/inbox operate with browser closed and duplicate-safe recovery.",
+      "businessJustification": "Do not lose reminders/next work.",
+      "priority": "MUST",
+      "dependencies": [
+        "REQ-017",
+        "REQ-026"
+      ],
+      "modules": [
+        "tasks"
+      ],
+      "source": "DEV pp.7–13",
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "designSection": "LLD §7.3",
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "acceptanceCriteria": [
+        "positive: Given committed work with the browser closed, When the scheduler runs, Then the next work happens exactly once.",
+        "negative: Given a lost response after commit, When retried, Then no second effect is accepted.",
+        "prohibited: Given any replay, When an event is replayed, Then duplicate business effects are prohibited.",
+        "boundary: Given a crash exactly at the commit boundary, When recovery runs, Then the outcome is one accepted effect with retained miss evidence.",
+        "failure: Given an outbox, inbox or queue crash or duplicate event, When recovered, Then idempotency dedupes and nothing is lost."
+      ],
+      "verificationMethod": "Worker crash boundaries and DLQ replay",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "failureScenarios": [
+        "FAIL-09"
+      ]
+    },
+    {
+      "id": "REQ-019",
+      "title": "Governed analytics",
+      "description": "Defined created-cohort and first-miss metrics use canonical timezone/filters and explicit unknown coverage.",
+      "businessJustification": "Make decisions traceable to rows.",
+      "priority": "SHOULD",
+      "dependencies": [
+        "REQ-017"
+      ],
+      "modules": [
+        "reporting"
+      ],
+      "source": "DEV pp.31–34;85–90",
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "designSection": "LLD §10.1",
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "acceptanceCriteria": [
+        "positive: Given defined created-cohort and first-miss metrics, When computed, Then canonical timezone/filters apply and drilldowns reconcile to rows.",
+        "negative: Given an unavailable denominator, When computed, Then it is marked unknown, not zero.",
+        "prohibited: Given any metric, When it is published or compared, Then silently changing its definition is prohibited.",
+        "boundary: Given the half-open final-day boundary, When evaluated, Then the final day is included exactly once.",
+        "failure: Given clock or timezone skew, When metrics run, Then the canonical timezone governs and the anomaly is detectable."
+      ],
+      "verificationMethod": "Metric boundary/cohort/drilldown tests",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "failureScenarios": [
+        "FAIL-16"
+      ]
+    },
+    {
+      "id": "REQ-020",
+      "title": "Eight complete exports",
+      "description": "Stable versioned schemas retain full filtered evidence and safe CSV encoding with download reauthorisation.",
+      "businessJustification": "Support trustworthy controlled extraction.",
+      "priority": "SHOULD",
+      "dependencies": [
+        "REQ-019",
+        "REQ-025"
+      ],
+      "modules": [
+        "reporting"
+      ],
+      "source": "DEV pp.34–39",
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "designSection": "LLD §10.2",
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "acceptanceCriteria": [
+        "positive: Given the full filtered cohort, When one of the eight exports runs, Then the parsed file matches the cohort exactly with safe CSV encoding.",
+        "negative: Given revoked access, When a download link is used, Then it is refused.",
+        "prohibited: Given any export, When an export is generated, Then exporting hidden or unauthorised fields is prohibited.",
+        "boundary: Given Unicode or nested-history edge cases, When encoded, Then parsing round-trips without corruption or formula injection.",
+        "failure: Given a partially failed export job, When resumed, Then either the full consistent file or no file is delivered."
+      ],
+      "verificationMethod": "API/job/actual-download CSV tests",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "failureScenarios": [
+        "FAIL-07"
+      ]
+    },
+    {
+      "id": "REQ-021",
+      "title": "Legacy migration",
+      "description": "Real preview/review/publish uses source IDs, stale/conflict handling and known-vs-unknown history.",
+      "businessJustification": "Import without duplicating/overwriting live truth.",
+      "priority": "MUST",
+      "dependencies": [
+        "REQ-001",
+        "REQ-023",
+        "REQ-026"
+      ],
+      "modules": [
+        "reporting",
+        "customers"
+      ],
+      "source": "DEV pp.11;18–20",
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "designSection": "LLD §10.3",
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "acceptanceCriteria": [
+        "positive: Given a real preview/review/publish cycle, When published, Then source IDs, known-versus-unknown history and reconciled balances are preserved.",
+        "negative: Given newer manual data, When a replay conflicts, Then it is held as a conflict, not overwritten.",
+        "prohibited: Given ambiguous people, When records are matched during import, Then merging them during import is prohibited.",
+        "boundary: Given an unchanged re-import, When replayed, Then it no-ops.",
+        "failure: Given a stale or replayed import or schema mismatch, When detected, Then publishing halts and prior state is intact."
+      ],
+      "verificationMethod": "Migration replay/race and staging rehearsal",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "failureScenarios": [
+        "FAIL-14",
+        "FAIL-17"
+      ]
+    },
+    {
+      "id": "REQ-022",
+      "title": "User/role access lifecycle",
+      "description": "Current union grants and scope govern commands; access removal cannot strand work/final admin.",
+      "businessJustification": "Prevent privilege/ownership failures.",
+      "priority": "MUST",
+      "dependencies": [],
+      "modules": [
+        "access"
+      ],
+      "source": "DEV pp.64–70",
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "designSection": "LLD §5",
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "acceptanceCriteria": [
+        "positive: Given current union grants and scope, When a command executes, Then it is authorised against the live state.",
+        "negative: Given a removed grant, When the same still-valid token is presented, Then the request is denied because access is re-checked.",
+        "prohibited: Given any role change, When roles are changed, Then stranding open work or removing the final admin is prohibited.",
+        "boundary: Given the last-admin removal attempt, When committed, Then it is refused.",
+        "failure: Given concurrent shared-role or new-assignment edits, When racing, Then required authority is never silently removed."
+      ],
+      "verificationMethod": "Real-DB access-guard and direct denial tests",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "failureScenarios": [
+        "FAIL-01",
+        "FAIL-06"
+      ]
+    },
+    {
+      "id": "REQ-023",
+      "title": "Controlled reference data",
+      "description": "Stable master IDs and historical snapshots; fixed lifecycle; reference-only outreach/stores.",
+      "businessJustification": "Prevent label edits breaking approvals/reporting.",
+      "priority": "SHOULD",
+      "dependencies": [],
+      "modules": [
+        "catalogue"
+      ],
+      "source": "DEV pp.73–85",
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "designSection": "LLD §8.9",
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "acceptanceCriteria": [
+        "positive: Given stable master IDs and historical snapshots, When referenced by approvals or reporting, Then edits never break the references.",
+        "negative: Given an archived hierarchy or product, When selected for new work, Then it is unavailable.",
+        "prohibited: Given status mutations, When a master record is mutated, Then changing reference semantics in place is prohibited.",
+        "boundary: Given a referenced delete racing a new reference, When both commit, Then the delete is rejected.",
+        "failure: Given an incompatible reference change, When detected, Then dependent records keep their historical snapshot."
+      ],
+      "verificationMethod": "Catalogue referential/branch/API tests",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "failureScenarios": [
+        "FAIL-17"
+      ]
+    },
+    {
+      "id": "REQ-024",
+      "title": "Identity/recovery truth",
+      "description": "Authenticated staff provider and actual verification/delivery states replace simulated role/reset.",
+      "businessJustification": "Avoid false login/recovery claims.",
+      "priority": "MUST",
+      "dependencies": [
+        "REQ-022"
+      ],
+      "modules": [
+        "access"
+      ],
+      "source": "DEV pp.7–8;71–73",
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "designSection": "LLD §9",
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "acceptanceCriteria": [
+        "positive: Given the chosen identity provider, When staff authenticate, Then actual verification and delivery states are used.",
+        "negative: Given an altered or revoked token, When presented, Then access is denied and identity is re-checked per request.",
+        "prohibited: Given a verified state, When it is presented as evidence, Then presenting it as proof-of-send is prohibited.",
+        "boundary: Given an expired or reused recovery token, When presented, Then it is refused.",
+        "failure: Given an identity-provider failure or configuration error, When login is attempted, Then it fails closed and the state is observable."
+      ],
+      "verificationMethod": "Chosen-provider sandbox/token/session tests",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "failureScenarios": [
+        "FAIL-11"
+      ]
+    },
+    {
+      "id": "REQ-025",
+      "title": "Evidence and privacy",
+      "description": "Quarantine/type/size/checksum/scan and current authorised download protect files/PII.",
+      "businessJustification": "Prevent unsafe uploads/data disclosure.",
+      "priority": "MUST",
+      "dependencies": [
+        "REQ-022"
+      ],
+      "modules": [
+        "reporting",
+        "access"
+      ],
+      "source": "DEV pp.7–11;98",
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "designSection": "LLD §9",
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "acceptanceCriteria": [
+        "positive: Given an uploaded file, When stored, Then quarantine, type, size, checksum and scan state are recorded and download requires current authorisation.",
+        "negative: Given hidden data, When any projection runs, Then it is never returned.",
+        "prohibited: Given an unclean or failed-scan file, When it is used or downloaded, Then using it as evidence or downloading it is prohibited.",
+        "boundary: Given the exact size or type limit, When one unit over is uploaded, Then it is refused.",
+        "failure: Given a scanner outage or corrupted stored file, When accessed, Then it stays quarantined or unreadable and the case is flagged."
+      ],
+      "verificationMethod": "Upload/download/access/security tests",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "failureScenarios": [
+        "FAIL-08",
+        "FAIL-23"
+      ]
+    },
+    {
+      "id": "REQ-026",
+      "title": "Atomic audited commands",
+      "description": "Domain/tasks/audit/outbox/idempotency commit together with exact snapshots and no partial failure.",
+      "businessJustification": "Preserve integrity and attribution.",
+      "priority": "MUST",
+      "dependencies": [],
+      "modules": [
+        "tickets",
+        "service",
+        "returns",
+        "finance",
+        "tasks"
+      ],
+      "source": "DEV pp.7–13",
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "designSection": "LLD §7.1",
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "acceptanceCriteria": [
+        "positive: Given a valid command, When committed, Then domain, tasks, audit, outbox and idempotency commit together with exact snapshots.",
+        "negative: Given a denied business mutation, When attempted, Then accepted facts are unchanged.",
+        "prohibited: Given any command, When it commits, Then partial or torn multi-record writes are prohibited.",
+        "boundary: Given an identical retry with the same idempotency key, When replayed, Then the original effect stands and no second effect occurs.",
+        "failure: Given a deadlock or database outage mid-transaction, When recovered, Then rollback leaves no torn state."
+      ],
+      "verificationMethod": "DB rollback/idempotency and version race tests",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "failureScenarios": [
+        "FAIL-09",
+        "FAIL-10",
+        "FAIL-20",
+        "FAIL-21"
+      ]
+    },
+    {
+      "id": "REQ-027",
+      "title": "Accessible matched UI",
+      "description": "Preserve prototype visual language with production selectors, state feedback, keyboard and narrow identity fixes.",
+      "businessJustification": "Make the same workflows usable.",
+      "priority": "SHOULD",
+      "dependencies": [
+        "REQ-002"
+      ],
+      "modules": [
+        "web"
+      ],
+      "source": "DEV pp.4–5;12–13",
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "designSection": "LLD §3",
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "acceptanceCriteria": [
+        "positive: Given the approved screenshots, When the React UI is compared, Then visible structure and hierarchy match.",
+        "negative: Given 350px and 390px narrow viewports, When identity is displayed, Then it stays readable.",
+        "prohibited: Given the prototype source, When a build or refactor consumes it, Then executing or refactoring it as application code is prohibited.",
+        "boundary: Given dialogs, comboboxes, focus, error and draft flows, When exercised by keyboard, Then focus and errors behave accessibly.",
+        "failure: Given a missing approved screenshot for a screen, When visual parity is claimed, Then the claim is refused and the gap is recorded."
+      ],
+      "verificationMethod": "Component/browser and manual accessibility evidence",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "failureScenarios": []
+    },
+    {
+      "id": "REQ-028",
+      "title": "Recovery and capacity",
+      "description": "Agree volume/SLO/retention/RPO/RTO and rehearse DB/file/job restore before live use.",
+      "businessJustification": "Avoid untested reliability promises.",
+      "priority": "MUST",
+      "dependencies": [
+        "REQ-018",
+        "REQ-025",
+        "REQ-026"
+      ],
+      "modules": [
+        "platform"
+      ],
+      "source": "DEV pp.10–13;90–98",
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "designSection": "HLD §§8–10",
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "acceptanceCriteria": [
+        "positive: Given agreed volume, SLO, retention, RPO and RTO, When restore and replay are rehearsed, Then restored balances, files, audit and jobs reconcile.",
+        "negative: Given unratified targets, When performance is discussed, Then no commitment is claimed.",
+        "prohibited: Given a rehearsal with unrecovered gaps, When the gate is evaluated, Then passing the release gate is prohibited.",
+        "boundary: Given the approved load envelope, When tested at its exact limit, Then targets hold; one step over shows degradation, not silent failure.",
+        "failure: Given a partial database or object restore, When detected, Then the gap is reported and reconciliation runs before use."
+      ],
+      "verificationMethod": "Load/restore/release acceptance; targets still open",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "failureScenarios": [
+        "FAIL-10",
+        "FAIL-12",
+        "FAIL-13",
+        "FAIL-22"
+      ]
+    },
+    {
+      "dependencies": [
+        "REQ-028"
+      ],
+      "modules": [
+        "platform"
+      ],
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "id": "REQ-029",
+      "title": "Performance targets",
+      "description": "Response-time targets from HLD §9 (p95 normal save/search ≤2s, initial usable view ≤3s, due-work processing ≤60s after transition) are design targets to validate under the D-12 agreed envelope of 200 staff, 50k tickets, 100k attachments and peak 50 case events per hour; they are not customer SLAs.",
+      "businessJustification": "Avoid untested latency promises.",
+      "priority": "SHOULD",
+      "source": "HLD §9 (DEV p.10)",
+      "designSection": "HLD §9",
+      "acceptanceCriteria": [
+        "positive: Given ratified response-time targets, When measured at p95 under the agreed load, Then save/search and initial-view latency meet the ratified values.",
+        "negative: Given measurement above the ratified target, When reviewed, Then the release gate fails.",
+        "prohibited: Given unratified figures, When they are presented, Then presenting them as committed SLAs is prohibited.",
+        "boundary: Given exactly the ratified p95 threshold, When measured, Then it counts as met; one millisecond over fails.",
+        "failure: Given measurement-infrastructure failure during a load test, When the run completes, Then the result is invalid, not passing."
+      ],
+      "verificationMethod": "Load measurement against the HLD §9 p95 targets under the D-12 agreed load envelope",
+      "decisionRef": "D-12",
+      "failureScenarios": [
+        "FAIL-12"
+      ]
+    },
+    {
+      "dependencies": [
+        "REQ-028"
+      ],
+      "modules": [
+        "platform"
+      ],
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "id": "REQ-030",
+      "title": "Capacity envelope",
+      "description": "The D-12 agreed envelope is 200 staff, 50k tickets, 100k attachments (~50GB) and a peak of 50 case events per hour; capacity is sized against this envelope and forecast growth beyond it triggers capacity work before user impact.",
+      "businessJustification": "Size the platform against an agreed envelope, not a guess.",
+      "priority": "SHOULD",
+      "source": "HLD §9; Decisions D-12",
+      "designSection": "HLD §9",
+      "acceptanceCriteria": [
+        "positive: Given agreed users, records, attachments and peaks, When the system is sized, Then each dimension has a recorded envelope.",
+        "negative: Given growth beyond the envelope, When forecast, Then capacity work is triggered before user impact.",
+        "prohibited: Given no ratified envelope, When capacity is claimed, Then claiming proven capacity is prohibited.",
+        "boundary: Given exactly the agreed peak, When sustained, Then behaviour stays within the ratified availability and performance targets.",
+        "failure: Given storage, memory or connection exhaustion inside the envelope, When it occurs, Then it is treated as a defect against the capacity record."
+      ],
+      "verificationMethod": "Capacity model and headroom test against the agreed D-12 envelope",
+      "decisionRef": "D-12",
+      "failureScenarios": [
+        "FAIL-22"
+      ]
+    },
+    {
+      "dependencies": [
+        "REQ-028"
+      ],
+      "modules": [
+        "platform"
+      ],
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "id": "REQ-031",
+      "title": "Availability target",
+      "description": "D-12 sets 99.5% monthly uptime measured excluding the first Sunday 02:00–04:00 UTC maintenance window; HLD §9 records Multi-AZ and redundancy as subject to this target. Outages crossing the window boundary are attributed per the agreed convention.",
+      "businessJustification": "Make availability an explicit ratified commitment, not an assumption.",
+      "priority": "SHOULD",
+      "source": "HLD §9; Decisions D-12",
+      "designSection": "HLD §9",
+      "acceptanceCriteria": [
+        "positive: Given a ratified uptime target, When measured over the agreed window, Then actual availability meets it or an incident is recorded.",
+        "negative: Given unratified uptime, When communicated, Then it is described as a proposal, not a commitment.",
+        "prohibited: Given any measurement window, When availability is reported, Then silently excluding outages from it is prohibited.",
+        "boundary: Given the exact measurement-window boundary, When an outage crosses it, Then it is attributed per the agreed convention.",
+        "failure: Given a dependency outage, When it reduces availability, Then the impact is measured and reported."
+      ],
+      "verificationMethod": "Availability measurement over the monthly window with the agreed first-Sunday 02:00–04:00 UTC exclusion",
+      "decisionRef": "D-12",
+      "failureScenarios": [
+        "FAIL-10",
+        "FAIL-11"
+      ]
+    },
+    {
+      "dependencies": [
+        "REQ-028"
+      ],
+      "modules": [
+        "platform"
+      ],
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "id": "REQ-032",
+      "title": "Recovery objectives",
+      "description": "D-12 sets RPO 15min and RTO 4h; D-11 sets case-evidence retention of 7 years and audit-log retention of 2 years append-only. Rehearsal obligations exist (REQ-028); recovery capability is only claimed when a timed restore rehearsal meets these objectives.",
+      "businessJustification": "Recovery claims need ratified objectives and measured rehearsals.",
+      "priority": "SHOULD",
+      "source": "HLD §§8–9; Decisions D-11, D-12",
+      "designSection": "HLD §§8–9",
+      "acceptanceCriteria": [
+        "positive: Given ratified RPO/RTO and retention, When a restore is rehearsed, Then measured values meet them.",
+        "negative: Given a rehearsal miss, When measured, Then the gate fails until a successful re-rehearsal.",
+        "prohibited: Given unratified objectives, When recovery is claimed, Then claiming recovery capability is prohibited.",
+        "boundary: Given data at the exact RPO edge, When restored, Then the loss window equals the ratified tolerance, no more.",
+        "failure: Given a partial restore, When detected, Then the affected scope is quarantined and reconciled before use."
+      ],
+      "verificationMethod": "Timed restore rehearsal against the agreed RPO 15min / RTO 4h",
+      "decisionRef": "D-12",
+      "failureScenarios": [
+        "FAIL-13"
+      ]
+    },
+    {
+      "dependencies": [],
+      "modules": [
+        "platform"
+      ],
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "id": "REQ-033",
+      "title": "Security posture baseline",
+      "description": "D-03 records Google Workspace OIDC SSO for all staff with no local passwords, mandatory MFA for Super/Finance/privileged roles and optional for ordinary CS, single-use 24h emailed invitations, admin-assisted recovery with recorded identity evidence, 30min idle / 12h absolute sessions revoked on password or role change or admin action, and mail via Google Workspace SMTP; D-11 records masking of customer email, phone and attachment values in exports by default. HLD §8 MFA for privileged and finance roles is an approved control.",
+      "businessJustification": "Security controls must be ratified, not inferred from a proposal.",
+      "priority": "MUST",
+      "source": "HLD §8; Decisions D-03, D-11",
+      "designSection": "HLD §8",
+      "acceptanceCriteria": [
+        "positive: Given a ratified identity, MFA, session and privacy baseline, When staff authenticate, Then the ratified controls apply.",
+        "negative: Given a gap against the ratified baseline, When reviewed, Then it blocks release.",
+        "prohibited: Given unresolved identity or privacy decisions, When the affected behaviour is launched, Then launching the affected behaviour is prohibited.",
+        "boundary: Given privileged and finance roles versus ordinary roles, When the MFA policy applies, Then privileged/finance users are covered per the ratified proposal.",
+        "failure: Given a compromised dependency or CI action or a leaked secret, When detected, Then revocation, containment and review follow the security policy."
+      ],
+      "verificationMethod": "Control review against the recorded identity and privacy baseline (D-03, D-11)",
+      "decisionRef": "D-03",
+      "failureScenarios": [
+        "FAIL-15"
+      ]
+    },
+    {
+      "dependencies": [],
+      "modules": [
+        "platform"
+      ],
+      "design": [
+        "docs/Support_Desk_LLD.md",
+        "docs/Support_Desk_HLD.md",
+        "docs/Decisions.md"
+      ],
+      "securityPrivacy": "Apply current grants/scope, minimise sensitive data and preserve trustworthy history.",
+      "status": "DESIGNED",
+      "implementation": [],
+      "executedTests": [],
+      "releaseEvidence": [],
+      "id": "REQ-034",
+      "title": "Monthly budget ceiling",
+      "description": "D-12 records a USD 500/month ceiling with alerts at 80%, AWS as the deployment provider and eu-west-1 (Ireland) with EU data residency; spend is tracked against the recorded ceiling.",
+      "businessJustification": "Avoid unbounded or invented infrastructure spend.",
+      "priority": "COULD",
+      "source": "HLD §9; Decisions D-12",
+      "designSection": "HLD §9",
+      "acceptanceCriteria": [
+        "positive: Given a ratified monthly budget, When spend is tracked, Then actuals are compared against it.",
+        "negative: Given a forecast overrun, When detected, Then it is raised before the month closes.",
+        "prohibited: Given no ratified budget, When infrastructure is provisioned, Then provisioning paid infrastructure is prohibited.",
+        "boundary: Given spend at exactly the ratified ceiling, When reached, Then new capacity requires approval.",
+        "failure: Given a cost anomaly, When observed, Then it is investigated as an operational event."
+      ],
+      "verificationMethod": "Spend tracking against the agreed USD 500/month ceiling",
+      "decisionRef": "D-12",
+      "failureScenarios": []
+    }
+  ]
+}

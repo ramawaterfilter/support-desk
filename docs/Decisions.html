@@ -1,0 +1,261 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Support Desk — decisions and implementation gates</title><style>
+@page { size:A4; margin:17mm 13mm 18mm; }
+*{box-sizing:border-box}body{font:11pt/1.52 'Segoe UI',Arial,sans-serif;color:#18354b;background:white;margin:0}
+main{max-width:1080px;margin:auto;padding:30px}h1,h2,h3{line-height:1.2;color:#17364b;break-after:avoid}
+h1{font-size:30px;border-bottom:4px solid #007e83;padding-bottom:15px}h2{font-size:22px;margin:32px 0 13px}h3{font-size:17px;margin:23px 0 10px}
+p,li{orphans:3;widows:3}a{color:#006269;text-decoration:none}code{font:9pt/1.4 Consolas,monospace;overflow-wrap:anywhere;background:#f0f5f7;padding:1px 3px}
+pre{font:9pt/1.5 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;border:1px solid #dce6ec;background:#f5f8fa;padding:13px;border-radius:5px}
+pre code{background:none;padding:0}table{border-collapse:collapse;width:100%;margin:15px 0;font-size:9.1pt;table-layout:fixed}
+th{background:#e5f4ef;text-align:left;color:#17364b}td,th{border:1px solid #dce6ec;vertical-align:top;padding:7px 8px;overflow-wrap:anywhere}
+tr{break-inside:avoid}thead{display:table-header-group}table code{font-size:8.2pt}blockquote{margin:15px 0;border-left:4px solid #007e83;padding:10px 15px;background:#f2f6f8}
+.document-meta{font-size:10pt;color:#63798b;border-bottom:1px solid #dce6ec;padding-bottom:15px;margin-bottom:20px}.toc{background:#f2f6f8;border:1px solid #dce6ec;padding:14px 22px;margin:20px 0}
+.toc ul{margin:3px 0;padding-left:20px}.toc>ul{padding-left:16px}.mermaid{border:1px solid #dce6ec;background:#fafcfd;padding:14px;text-align:center;break-inside:avoid}
+.mermaid svg{width:100%;max-width:100%;height:auto;max-height:235mm}.status{color:#006269;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:10pt}
+.mermaid .edgeLabel rect{fill:#f8fbfc!important;stroke:none!important}.mermaid .edgeLabel text{fill:#18354b!important}
+@media print{body{font-size:9.2pt;line-height:1.43}main{padding:0;max-width:none}h1{font-size:25px}h2{font-size:19px;margin-top:23px}h3{font-size:14px}table{font-size:7.8pt}td,th{padding:5px 6px}table code{font-size:7pt}pre,pre code{font-size:7.8pt}.toc{font-size:8.5pt}.mermaid{padding:7px}}
+</style></head><body><main><div class="status">Support Desk V6 · Design handoff</div><div class="document-meta">31 October 2026 · Version 1.0 · Reviewable design; not an implementation certification</div><div class="toc">
+<ul>
+<li><a href="#confirmed-in-this-conversation">Confirmed in this conversation</a></li>
+<li><a href="#confirmed-2-november-2026">Confirmed 2 November 2026</a></li>
+<li><a href="#open-decisions">Open decisions</a></li>
+<li><a href="#source-differences-requiring-deliberate-treatment">Source differences requiring deliberate treatment</a></li>
+</ul>
+</div>
+<h1 id="support-desk-decisions-and-implementation-gates">Support Desk — decisions and implementation gates</h1>
+<p>31 October 2026. This register separates explicit user choices from recommendations and unresolved source-PDF policies. It does not require approval to read or revise the design documents.</p>
+<h2 id="confirmed-in-this-conversation">Confirmed in this conversation</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Decision</th>
+<th>Consequence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C-01</td>
+<td>Recreate as a production application</td>
+<td>Real authenticated identities, persistent records, files, jobs and audit</td>
+</tr>
+<tr>
+<td>C-02</td>
+<td>Full build handoff, using prototype and all local PDFs</td>
+<td>Preserve UI, logic, data and permissions with evidence/traceability</td>
+</tr>
+<tr>
+<td>C-03</td>
+<td>Review conflicting references with the user</td>
+<td>No silent source precedence for conflicting behavior</td>
+</tr>
+<tr>
+<td>C-04</td>
+<td>Match appearance with required fixes</td>
+<td>Retain design language; accessible searchable selectors and production feedback permitted</td>
+</tr>
+<tr>
+<td>C-05</td>
+<td>Manual launch</td>
+<td>No customer mail, commerce, warehouse, carrier or payment execution integration assumed</td>
+</tr>
+<tr>
+<td>C-06</td>
+<td>React/TypeScript + TypeScript API/worker + PostgreSQL</td>
+<td>Stack baseline; exact packages/versions pinned during implementation</td>
+</tr>
+<tr>
+<td>C-07</td>
+<td>AWS is a proposal</td>
+<td>No account, region, cost, provisioning or service sizing approved</td>
+</tr>
+<tr>
+<td>C-08</td>
+<td>Allow self-approval</td>
+<td>Eligible manager may decide own/materially edited service, waiver or refund request; retain actor identity/audit; correction still requires its own grant</td>
+</tr>
+<tr>
+<td>C-09</td>
+<td>Use demo deadlines for testing</td>
+<td>Review24h, resolution72h, ordinary next action24h, replacement delivery48h, reminder1h before; elapsed time only; production SLA not approved</td>
+</tr>
+<tr>
+<td>C-10</td>
+<td>One eligible manager approval remains baseline</td>
+<td>No invented second approver or monetary threshold</td>
+</tr>
+</tbody>
+</table>
+<h2 id="confirmed-2-november-2026">Confirmed 2 November 2026</h2>
+<p>Recorded from explicit user choices confirmed in session; the Decisions.md and Decisions.html edits were re-pinned in foundation.json after review of this change. These rows supersede the three rows removed from Open decisions below and the matching OPEN statements in HLD §9 and the LLD, which remain unchanged as design-time references.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Decision</th>
+<th>Consequence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D-03</td>
+<td>Staff sign-in via Google Workspace OIDC SSO for all staff, no local passwords; MFA mandatory for Super/Finance/privileged roles and optional for ordinary CS; invitation = emailed single-use link valid 24h (re-issue sends a fresh link); recovery = admin-assisted with recorded identity evidence, no self-service bypass; sessions idle-expire after 30min and expire absolutely after 12h, revoked on password or role change or admin action; invitations and recovery mail sent via Google Workspace SMTP</td>
+<td>Real login/invite/recovery design approved; implementation and provider configuration still require their own authorisation</td>
+</tr>
+<tr>
+<td>D-11</td>
+<td>Test and production share tables with an environment flag; archive = history tables, never silent delete; customer email, phone and attachment values masked in exports by default; the eight proposed stable JSON-history CSV schemas accepted as-is; export links expire after 24h and are capped server-side at 100k rows or 50MB; case evidence retained 7 years; audit log retained 2 years append-only, deleted only via a recorded legal-hold process</td>
+<td>Bulk export, retention and audit lifecycle design approved; customer-data erasure remains open (GOV-07)</td>
+</tr>
+<tr>
+<td>D-12</td>
+<td>200 staff, 50k tickets, 100k attachments (~50GB), peak 50 case events per hour; 99.5% monthly uptime excluding the first Sunday 02:00–04:00 UTC; RPO 15min and RTO 4h; AWS eu-west-1 (Ireland) with EU data residency; USD 500/month ceiling with alerts at 80%; AWS with the modular API+worker as proposed</td>
+<td>Capacity, availability, recovery, region and budget envelope approved; provisioning still requires authorisation and remains unexecuted</td>
+</tr>
+</tbody>
+</table>
+<h2 id="open-decisions">Open decisions</h2>
+<p>Recommendations below are proposals, not approved policy. Affected production actions remain disabled or fail with PolicyNotConfigured until the required policy is agreed. Unrelated work may proceed. References use DEV page numbers.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Question and proposed direction</th>
+<th>Affected launch gate / owner / source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D-01</td>
+<td>What are business-hour calendars, holidays, targets, pause/reopen clocks and allowed backdating? Retain demo values in test only</td>
+<td>Production SLA/reminders and retrospective corrections; Head/CM; pp.28,92,96–97</td>
+</tr>
+<tr>
+<td>D-02</td>
+<td>What are allowed countries/warehouse memberships and cross-country CS mutation rules? Preserve shared reads and legacy operational wildcard until explicit migration</td>
+<td>Scoped server writes and production account provisioning; Operations/Super; pp.68–70,92,97–98</td>
+</tr>
+<tr>
+<td>D-04</td>
+<td>Actual brand/store/order namespaces, currencies/exponents, order total/tax/shipping/discount caps, earlier refunds/credits and multi-ticket relinking? Keep manual verified evidence; no FX</td>
+<td>Live refund eligibility; CS/Finance; pp.51–55,93,96</td>
+</tr>
+<tr>
+<td>D-05</td>
+<td>Which real migration sources/files/fields/history depth, volume, ownership and cutover? Require masked samples and reconciliation</td>
+<td>Source-specific importer and cutover; data owner/CS/Finance; pp.11,18–20,92,97</td>
+</tr>
+<tr>
+<td>D-06</td>
+<td>Can delegated administrators grant Super or capabilities they lack? Prototype has no ceiling; do not silently ship privileged delegation</td>
+<td>Delegated production privilege changes; Super/security; pp.64–67,94–96</td>
+</tr>
+<tr>
+<td>D-07</td>
+<td>How long is Working now lease, expiry/takeover and draft retention? Proposed test120s lease/30s heartbeat, explicit takeover</td>
+<td>Production collaboration and retention; CS/technical; p.8</td>
+</tr>
+<tr>
+<td>D-08</td>
+<td>How to correct erroneous physical receipt, mistaken final waiver, final provider/payment result or closed dispute? Separate authorised adjustment/event; never overwrite</td>
+<td>Final-fact correction UI/API; Logistics/Finance/Head; pp.47,56–57,96</td>
+</tr>
+<tr>
+<td>D-09</td>
+<td>Dispute intake/provider identifiers, won/lost/withdrawn results, financial effects and reopen? Preserve baseline evidence tracking, do not infer bank effects</td>
+<td>New/imported dispute production workflow; Finance; pp.56–57,96</td>
+</tr>
+<tr>
+<td>D-10</td>
+<td>Catalogue identifier reuse, reference retirement, semantic type extension, capacity label vs structured unit, and country/warehouse archival? Preserve historical IDs/snapshots</td>
+<td>Reuse and destructive/meaning-changing master actions; Head/Super; pp.73–84,95–96</td>
+</tr>
+<tr>
+<td>D-13</td>
+<td>Customer confirmation/nonresponse windows and reviewed closure evidence? Never let nonresponse waive independent obligations</td>
+<td>Reviewed closure policy; Head/CM; pp.58–63,93</td>
+</tr>
+<tr>
+<td>D-14</td>
+<td>Keep Outreach/Purchase Stores reference-only? Proposed yes until operational mapping is specified</td>
+<td>Optional new intake/order fields, not basic master CRUD; Head; pp.80–82,94</td>
+</tr>
+<tr>
+<td>D-15</td>
+<td>Are partial/substitute/lost outbound shipments or additional replacement attempts launch scope? Proposed baseline one exact shipment per approved scope</td>
+<td>Expanded fulfilment; Logistics/Head; pp.44–46,96</td>
+</tr>
+<tr>
+<td>D-16</td>
+<td>Parcel reference uniqueness namespace and controlled wrong-match reversal? Propose warehouse+reference after source-system review</td>
+<td>Production parcel linking/correction; Logistics; pp.50–51</td>
+</tr>
+<tr>
+<td>D-17</td>
+<td>Idempotency-key retention and amount/provider-reference namespaces? Keep successful business uniqueness independent of short-lived request dedupe</td>
+<td>Command replay retention and finance/provider namespace; technical/Finance; pp.9,54,96</td>
+</tr>
+<tr>
+<td>D-18</td>
+<td>Historical-at-cutoff/event-based analytics needed? Preserve labelled current-created-cohort reports and first-miss task reports initially</td>
+<td>Any new historical SLA/CSAT/sentiment/report semantics; Head/management; pp.85–90,93,97</td>
+</tr>
+</tbody>
+</table>
+<h2 id="source-differences-requiring-deliberate-treatment">Source differences requiring deliberate treatment</h2>
+<table>
+<thead>
+<tr>
+<th>Reference behavior</th>
+<th>HLD/LLD treatment</th>
+<th>Classification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tab-local records, role selector, refresh reset and browser timers</td>
+<td>Authenticated API, durable store, production identity and scheduler</td>
+<td>Required production difference, not a conflict needing reapproval</td>
+</tr>
+<tr>
+<td>Native dropdowns</td>
+<td>Accessible searchable long-list controls</td>
+<td>Explicit DEV production requirement</td>
+</tr>
+<tr>
+<td>Receipt cumulative totals</td>
+<td>Append-only physical deltas/events with cumulative entry UI</td>
+<td>Explicit DEV production requirement</td>
+</tr>
+<tr>
+<td>Raw variable columns in six exports</td>
+<td>Versioned explicit schemas retaining nested history</td>
+<td>Explicit DEV production requirement; final field policy per confirmed D-11</td>
+</tr>
+<tr>
+<td>End-of-day23:59:59.000 cohort bound</td>
+<td>Half-open next-midnight bound includes fractional final second</td>
+<td>Explicit DEV production correction</td>
+</tr>
+<tr>
+<td>Task-only dispute closure guard</td>
+<td>Independent dispute-state check plus task check</td>
+<td>Explicit DEV production requirement</td>
+</tr>
+<tr>
+<td>Country strings double as warehouse/scope</td>
+<td>Stable distinct IDs with legacy wildcard compatibility until D-02</td>
+<td>Required normalisation, semantic change gated</td>
+</tr>
+<tr>
+<td>Mutable current actor/label strings</td>
+<td>Immutable IDs plus historical display snapshots</td>
+<td>Required production difference</td>
+</tr>
+<tr>
+<td>Reset verified but not sent</td>
+<td>Separate real provider delivery states; never infer Sent</td>
+<td>Required production difference; provider policy per confirmed D-03</td>
+</tr>
+</tbody>
+</table>
+<p>No additional contradictory live-vs-PDF rule is asserted from navigation-only inspection. Reconcile exact modal/state behavior during implementation UAT and add concrete conflicts here if discovered.</p></main></body></html>

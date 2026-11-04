@@ -1,0 +1,82 @@
+{
+  "status": "VERIFIED",
+  "scope": "Bounded local governance foundation checks only; not application, security certification or hosted availability verification.",
+  "executedAtUtc": "2026-11-04 10:38:28 UTC",
+  "runtime": "Node.js 24.16.0",
+  "commands": [
+    {
+      "command": "node --test scripts/governance/check-foundation.test.mjs",
+      "exitCode": 0,
+      "wallTimeSeconds": 0,
+      "output": "✔ workspace paths reject traversal, absolute, Windows and malformed forms (1.8845ms)\n✔ bounded reads reject oversized content and directories (8.7459ms)\n✔ symlink/junction components cannot escape bounded reads (3.6936ms)\n✔ Markdown links allow existing relative targets and ignore external/fenced examples (5.2835ms)\n✔ Markdown missing, encoded-escape and unsafe-protocol targets fail without disclosing data (1.466ms)\n✔ secret heuristic reports rule names rather than matched material (0.5531ms)\n✔ all thirty categories are covered with explicit gaps and justified runtime-AI exclusion (2.6331ms)\n✔ missing category, fabricated VERIFIED state and missing N/A explanation fail (2.3699ms)\n✔ requirements retain acceptance, source/design traceability and no invented application implementation (3.4098ms)\n✔ duplicate/cyclic requirements and unsupported implementation claims fail (1.604ms)\n✔ failure register distinguishes planned cases from verified evidence (1.8058ms)\n✔ malformed register records fail validation without throwing (2.2614ms)\n✔ workflow config requires reviewed full-SHA actions, actual commands and read-only token (2.4123ms)\n✔ managed documents must be referenced by another managed document (0.3327ms)\n✔ foundation detects future application files without executing them (3.9765ms)\n✔ full checker passes actual bounded workspace and catches changed protected references (550.6399ms)\n✔ valid execution record with matching live totals passes validation (0.4533ms)\n✔ stale totals, failed exit and missing commands in an execution record fail (0.2049ms)\n✔ evidence-path-only and governance-record self-evidence claims fail (7.8697ms)\n✔ verification claims outside the foundation allow-list and without execution fail (4.479ms)\n✔ a verification record claiming a non-claimed control fails (4.2074ms)\n✔ ownership pending assignment consistency is enforced (4.1215ms)\n✔ authorization records reject AI approvers, missing fields and bad sources (1.4145ms)\n✔ failure catalogue gaps and uncovered .gitattributes paths fail (5.6305ms)\n✔ instruction digests, forbidden phrases and review-gated paths are enforced (12.4485ms)\n✔ category-review rendering is deterministic and tracks the register (2.0566ms)\nℹ tests 26\nℹ suites 0\nℹ pass 26\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 720.3836\n"
+    },
+    {
+      "command": "node scripts/governance/check-foundation.mjs",
+      "exitCode": 0,
+      "wallTimeSeconds": 0,
+      "output": "CHECK Managed manifest: 46 paths; 349255 bytes\nCHECK Managed documents are referenced from other managed documents\nCHECK All 30 categories and requirement/failure schema, states, evidence and dependency links checked\nCHECK Preserved reference integrity: 45 SHA-256 entries\nCHECK Instruction/ignore/byte-preservation and limited CI configuration checks\nCHECK Verification record and control verification claims checked against the live workspace\nCHECK Generated category assessment compared with the authoritative control register\nCHECK Foundation-only phase: application roots apps, packages, tests, db/migrations and the top-level allowlist inspected without executing code\nPASS bounded governance foundation checks\nLIMIT No external-link/heading-anchor checks, full YAML parser, comprehensive secret detection, SAST or runtime security audit\nLIMIT Filesystem checks are for a trusted local workspace; not a race-safe sandbox for concurrently hostile filesystem changes\nLIMIT Hosted CI, application build/tests, dependency scanning, infrastructure and recovery are not verified by this checker\nLIMIT Instruction digests and review-gated path lists detect in-repository changes only; they cannot resist an editor who re-pins them, so hosted branch protection, required checks and CODEOWNERS remain required and are not configured\nLIMIT Verification records live in this repository; provenance beyond the recorded command output and exit codes requires hosted run logs or an external attestation\n"
+    }
+  ],
+  "counts": {
+    "validatorTestsPassed": 26,
+    "failed": 0,
+    "skipped": 0,
+    "governanceCategories": 30,
+    "seedRequirements": 34,
+    "failureScenarios": 23,
+    "managedPaths": 46,
+    "newFiles": 37,
+    "existingFilesUpdated": [
+      "docs/README.md"
+    ],
+    "protectedReferencesUnchanged": 45
+  },
+  "inventoryCheck": "Separate Python standard-library hash/file comparison confirmed all new paths declared, only previous docs/README.md changed and all other original artifacts unchanged.",
+  "applicationTestsExecuted": false,
+  "historicalPrototypeTestsRerun": false,
+  "hostedCiExecuted": false,
+  "packagesInstalled": false,
+  "gitInitialised": false,
+  "infrastructureChanged": false,
+  "captureLimit": "Recorded by .tmp/record_verification.mjs from direct child-process captures of the same two commands. Per-test timings vary per run; the recorded manifest byte total includes verification.json itself and was re-confirmed against a fresh checker run after the final write.",
+  "limits": [
+    "No external-link or heading-anchor checks or complete YAML parsing",
+    "Secret heuristic is limited; no comprehensive secret/SAST/dependency/container scan",
+    "No runtime auth/concurrency/payment/file/job/recovery control implemented or tested",
+    "Filesystem validator is not an OS sandbox against hostile concurrent filesystem changes",
+    "Recorded outputs are evidence of one execution; timings vary and the byte total self-references verification.json",
+    "No compliance certification, capacity guarantee or deployment claim"
+  ],
+  "verifiedControls": [
+    {
+      "id": "GOV-26",
+      "command": "node scripts/governance/check-foundation.mjs",
+      "record": "docs/governance/verification.json",
+      "executedAtUtc": "2026-11-04 10:38:28 UTC",
+      "exitCode": 0,
+      "evidence": [
+        "docs/governance/README.md",
+        "docs/governance/handoff.md"
+      ],
+      "expectedOutputMarkers": [
+        "Managed documents are referenced from other managed documents",
+        "Generated category assessment compared with the authoritative control register"
+      ]
+    },
+    {
+      "id": "GOV-27",
+      "command": "node scripts/governance/check-foundation.mjs",
+      "record": "docs/governance/verification.json",
+      "executedAtUtc": "2026-11-04 10:38:28 UTC",
+      "exitCode": 0,
+      "evidence": [
+        "scripts/governance/check-foundation.mjs",
+        "scripts/governance/check-foundation.test.mjs"
+      ],
+      "expectedOutputMarkers": [
+        "All 30 categories and requirement/failure schema, states, evidence and dependency links checked",
+        "Verification record and control verification claims checked against the live workspace"
+      ]
+    }
+  ]
+}

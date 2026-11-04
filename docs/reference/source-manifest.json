@@ -1,0 +1,17 @@
+[
+  {
+    "file": "Support_Desk_Final_Validation_Report.pdf",
+    "pages": 12,
+    "sha256": "4ea559703e265e3102527f8cc09e519754ee8b3fba613cf4ffe98b6c783e5dd4"
+  },
+  {
+    "file": "Support_Desk_V6_Development_Specification.pdf",
+    "pages": 100,
+    "sha256": "bae086a77cfdfd40f6ce90a8a53c4bc83803f1c66a197192ac1e126c46fbac04"
+  },
+  {
+    "file": "Support_Desk_V6_Proposed_AWS_Architecture.pdf",
+    "pages": 2,
+    "sha256": "65153568a1533941e377b44deb77298d71c7a2954beafeb702b8dbd52175477b"
+  }
+]

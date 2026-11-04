@@ -1,0 +1,62 @@
+[
+  {
+    "path": "styles.css",
+    "url": "https://cs-portal-guided-review.ramesh-s325387.chatgpt.site/styles.css?v=20261030",
+    "sha256": "d878d96651e2e3fc20cd0645c5aadf050e93fba41f5b24996bda7e715f0e17fe"
+  },
+  {
+    "path": "portal.js",
+    "url": "https://cs-portal-guided-review.ramesh-s325387.chatgpt.site/portal.js?v=20261030",
+    "sha256": "130f36d94c5ba009d90d947b599da49089b6744dd4b9790257abd9eede2f1f0c"
+  },
+  {
+    "path": "data.js",
+    "url": "https://cs-portal-guided-review.ramesh-s325387.chatgpt.site/data.js?v=20261030",
+    "sha256": "559ec91fd2374fe60b49b6ab6d711c77a0d74ff12936abd8157b4425f5477467"
+  },
+  {
+    "path": "workflow-access.js",
+    "url": "https://cs-portal-guided-review.ramesh-s325387.chatgpt.site/workflow-access.js?v=20261030",
+    "sha256": "04ba952337e292a672c0ef45b1e3180faea1993fdd291031aa38de8af8083702"
+  },
+  {
+    "path": "operations.js",
+    "url": "https://cs-portal-guided-review.ramesh-s325387.chatgpt.site/operations.js?v=20261030",
+    "sha256": "45ce59794bec01a4c2d5f5589c7ea4858db8275fb4ad2c7a024d56267dd7b6f2"
+  },
+  {
+    "path": "replacements.js",
+    "url": "https://cs-portal-guided-review.ramesh-s325387.chatgpt.site/replacements.js?v=20261030",
+    "sha256": "17a0e0fba0aec103f301b044988dab267cef8b290c94bc46b3e80b216054fe80"
+  },
+  {
+    "path": "rma-waivers.js",
+    "url": "https://cs-portal-guided-review.ramesh-s325387.chatgpt.site/rma-waivers.js?v=20261030",
+    "sha256": "49ebaf1a19381c5d5c14c90c4daebce394226ba27296fc86e6b8fdbc85af3d92"
+  },
+  {
+    "path": "cancellations.js",
+    "url": "https://cs-portal-guided-review.ramesh-s325387.chatgpt.site/cancellations.js?v=20261030",
+    "sha256": "fe9df771629ec02097c3c06a6e72a6314aa864f21cea0b3e7bb43647f8b0aa70"
+  },
+  {
+    "path": "finance.js",
+    "url": "https://cs-portal-guided-review.ramesh-s325387.chatgpt.site/finance.js?v=20261030",
+    "sha256": "1dd97085a57e1525cd0d9b170262594fa8e1fbe9dc01f87b3f1aa140d5abcbdd"
+  },
+  {
+    "path": "admin.js",
+    "url": "https://cs-portal-guided-review.ramesh-s325387.chatgpt.site/admin.js?v=20261030",
+    "sha256": "9fd2bd8b703d0277014c169fcb3f45c97d87da54fe82800a96969589b9899f72"
+  },
+  {
+    "path": "catalog.js",
+    "url": "https://cs-portal-guided-review.ramesh-s325387.chatgpt.site/catalog.js?v=20261030",
+    "sha256": "37989cc29b27d4e2d6de1f1cb242bedcd14cb30b794f54021d04d910a835e7ff"
+  },
+  {
+    "path": "cs-records.js",
+    "url": "https://cs-portal-guided-review.ramesh-s325387.chatgpt.site/cs-records.js?v=20261030",
+    "sha256": "229093ad6535a4f5d8748b1be560cbd3e5f8aee18691ddd712109819068d5c86"
+  }
+]

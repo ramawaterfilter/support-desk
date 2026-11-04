@@ -1,0 +1,445 @@
+{
+  "version": 1,
+  "classification": "Design failure scenarios, not confirmed vulnerabilities or executed tests.",
+  "scenarios": [
+    {
+      "id": "FAIL-01",
+      "failureCondition": "Unauthorised object/action/property access",
+      "impact": "Customer/financial data exposure or restricted mutation",
+      "detection": "Permission denials/access audit and direct-API tests",
+      "prevention": "Current server grant/scope/projection checks; reserved role authority",
+      "recovery": "Revoke affected access, investigate minimal evidence, repair policy and rerun denial cases",
+      "plannedTestCoverage": "Wrong market/no-read/inactive/custom managerial title/hidden search/download tests",
+      "residualRisk": "Auth provider, privacy and deployment controls not implemented",
+      "owner": "Relevant domain owner + technical/operations/security owner; individuals named in docs/governance/ownership.json",
+      "status": "PLANNED",
+      "verificationEvidence": []
+    },
+    {
+      "id": "FAIL-02",
+      "failureCondition": "Concurrent/stale refund attempts or amendment",
+      "impact": "Overpayment or lost reservation/history",
+      "detection": "Invariant monitor and ledger reconciliation",
+      "prevention": "Per-authority locks, unique refs/idempotency and exact immutable authority",
+      "recovery": "Freeze affected financial workflow; reconcile external outcome before authorised correction",
+      "plannedTestCoverage": "Final-available race, unknown72/fail72/retry, rejected amendment restore",
+      "residualRisk": "No automatic uncertain payment retry; final-fact correction policy open",
+      "owner": "Relevant domain owner + technical/operations/security owner; individuals named in docs/governance/ownership.json",
+      "status": "PLANNED",
+      "verificationEvidence": []
+    },
+    {
+      "id": "FAIL-03",
+      "failureCondition": "Receipt races waiver or inspection changes",
+      "impact": "Waived physical goods or lost receipt truth",
+      "detection": "Receipt version/scope conflict and balance/audit review",
+      "prevention": "RMA root lock, immutable physical events, stale waiver supersession",
+      "recovery": "Retain accepted order/history; fresh waiver against current balance; explicit reopen for late arrival",
+      "plannedTestCoverage": "Both race orders, partial/zero receipt, damaged and late received item",
+      "residualRisk": "Correction/inspection exception rules still owner decisions",
+      "owner": "Relevant domain owner + technical/operations/security owner; individuals named in docs/governance/ownership.json",
+      "status": "PLANNED",
+      "verificationEvidence": []
+    },
+    {
+      "id": "FAIL-04",
+      "failureCondition": "Closure races new/hidden obligation",
+      "impact": "Premature Resolved/Closed state",
+      "detection": "Domain closure blockers and reconciliation",
+      "prevention": "All writers lock ticket; independent domain-state plus task gates",
+      "recovery": "Reopen with authority and preserve previous resolution; fulfil actual obligations",
+      "plannedTestCoverage": "Each gate, missing dispute task, concurrent obligation create",
+      "residualRisk": "No implementation/race evidence yet",
+      "owner": "Relevant domain owner + technical/operations/security owner; individuals named in docs/governance/ownership.json",
+      "status": "PLANNED",
+      "verificationEvidence": []
+    },
+    {
+      "id": "FAIL-05",
+      "failureCondition": "Shared contact/alias ambiguity or competing correction",
+      "impact": "Wrong person history/order/PII association",
+      "detection": "Identity conflict cases and source/audit review",
+      "prevention": "Full canonical identity, deliberate person choice, collision locks/versions",
+      "recovery": "Hold ambiguous work; approved correction without deleting identities/history",
+      "plannedTestCoverage": "Household duplicates, suffix discovery, aliases and concurrent proposals",
+      "residualRisk": "Real merge disabled; source identity evidence may be incomplete",
+      "owner": "Relevant domain owner + technical/operations/security owner; individuals named in docs/governance/ownership.json",
+      "status": "PLANNED",
+      "verificationEvidence": []
+    },
+    {
+      "id": "FAIL-06",
+      "failureCondition": "Role change/new assignment strands work or final admin",
+      "impact": "Unserviceable obligations/privilege outage",
+      "detection": "Access impact preview, current eligibility and admin audit",
+      "prevention": "Shared/exclusive policy guard, last-admin and eligible handover checks",
+      "recovery": "Use authorised retained admin path; handover without resetting missed deadline",
+      "plannedTestCoverage": "Concurrent admins, grant union, wrong-scope and new-task race",
+      "residualRisk": "Delegated privilege policy/contact roster unapproved",
+      "owner": "Relevant domain owner + technical/operations/security owner; individuals named in docs/governance/ownership.json",
+      "status": "PLANNED",
+      "verificationEvidence": []
+    },
+    {
+      "id": "FAIL-07",
+      "failureCondition": "Export link or file access after revocation",
+      "impact": "Bulk confidential data disclosure",
+      "detection": "Download audit/expiry and access anomaly",
+      "prevention": "Reauthorise generation/download, stable snapshot/projection, private files",
+      "recovery": "Revoke tickets/objects as authorised; assess copies and privacy impact",
+      "plannedTestCoverage": "Lost scope before download, formula-safe Unicode full-set CSV",
+      "residualRisk": "Started transfers/copies cannot be recalled; retention policy open",
+      "owner": "Relevant domain owner + technical/operations/security owner; individuals named in docs/governance/ownership.json",
+      "status": "PLANNED",
+      "verificationEvidence": []
+    },
+    {
+      "id": "FAIL-08",
+      "failureCondition": "Unsafe upload/scanner outage",
+      "impact": "Malware or sensitive file exposure",
+      "detection": "Scan state/timeouts/checksum/type mismatch",
+      "prevention": "Quarantine until clean; server size/type/hash; least-privilege storage",
+      "recovery": "Keep object quarantined, retry bounded scan or reject; never bypass scanner",
+      "plannedTestCoverage": "Spoofed MIME/oversize/hash mismatch/failed scan download denial",
+      "residualRisk": "Actual scanner/limits/provider unselected",
+      "owner": "Relevant domain owner + technical/operations/security owner; individuals named in docs/governance/ownership.json",
+      "status": "PLANNED",
+      "verificationEvidence": []
+    },
+    {
+      "id": "FAIL-09",
+      "failureCondition": "Outbox/inbox/queue crash or duplicate event",
+      "impact": "Lost/duplicated task or delayed reminders",
+      "detection": "Outbox age, inbox/dedupe, job lag/DLQ",
+      "prevention": "Transactional source/outbox/task; idempotent consumer leases",
+      "recovery": "Reconcile accepted effect; replay same event safely; retain missed evidence",
+      "plannedTestCoverage": "Crash before/after send/mark/effect/ack and out-of-order stale revision",
+      "residualRisk": "No exactly-once network promise; runtime unimplemented",
+      "owner": "Relevant domain owner + technical/operations/security owner; individuals named in docs/governance/ownership.json",
+      "status": "PLANNED",
+      "verificationEvidence": []
+    },
+    {
+      "id": "FAIL-10",
+      "failureCondition": "Database outage/deadlock/connection exhaustion",
+      "impact": "Failed saves/blocked workflows",
+      "detection": "Dependency health, lock/pool metrics and error rates",
+      "prevention": "Bounded pools/timeouts, deterministic locks, idempotent transient retries",
+      "recovery": "Preserve draft, reconnect/retry same key when safe; investigate saturation",
+      "plannedTestCoverage": "Unavailable DB, deadlock retry budget, no partial transaction",
+      "residualRisk": "Availability/capacity targets open",
+      "owner": "Relevant domain owner + technical/operations/security owner; individuals named in docs/governance/ownership.json",
+      "status": "PLANNED",
+      "verificationEvidence": []
+    },
+    {
+      "id": "FAIL-11",
+      "failureCondition": "Identity provider failure/expired credentials/config error",
+      "impact": "Login/service access failures or unsafe fallback",
+      "detection": "Provider auth errors, expiry/config validation",
+      "prevention": "Fail closed; known session/current-user policy and safe config",
+      "recovery": "Recover approved provider/config/keys, revoke exposures; never bypass auth",
+      "plannedTestCoverage": "Expired/altered token, provider down, missing config and recovery reuse",
+      "residualRisk": "Provider/session/contact policy open",
+      "owner": "Relevant domain owner + technical/operations/security owner; individuals named in docs/governance/ownership.json",
+      "status": "PLANNED",
+      "verificationEvidence": []
+    },
+    {
+      "id": "FAIL-12",
+      "failureCondition": "Load/rate/resource exhaustion",
+      "impact": "Latency/outage/unbounded cost",
+      "detection": "Latency/errors/CPU/memory/disk/pool/queue/cost alerts",
+      "prevention": "Body/file/page bounds, backpressure and measured limits",
+      "recovery": "Shed optional heavy work per policy, scale only approved resources, reconcile jobs",
+      "plannedTestCoverage": "Bounded load/soak,429,queue flood,memory/disk pressure",
+      "residualRisk": "No production load profile or cost thresholds yet",
+      "owner": "Relevant domain owner + technical/operations/security owner; individuals named in docs/governance/ownership.json",
+      "status": "PLANNED",
+      "verificationEvidence": []
+    },
+    {
+      "id": "FAIL-13",
+      "failureCondition": "Partial database/object restore",
+      "impact": "Missing evidence or inconsistent balances/jobs",
+      "detection": "Restore reference/checksum/count/ledger reconciliation",
+      "prevention": "Coordinated DB/object backups, key recovery and isolated drill",
+      "recovery": "Stop live resumption; restore consistent point or approved forward repair",
+      "plannedTestCoverage": "Missing objects, audit/task/outbox mismatch and duplicate replay",
+      "residualRisk": "RPO/RTO/retention and infrastructure unapproved",
+      "owner": "Relevant domain owner + technical/operations/security owner; individuals named in docs/governance/ownership.json",
+      "status": "PLANNED",
+      "verificationEvidence": []
+    },
+    {
+      "id": "FAIL-14",
+      "failureCondition": "Stale/replayed import or missing historical facts",
+      "impact": "Duplicate records or overwrite newer work",
+      "detection": "Batch disposition/source mapping/count and finance reconciliation",
+      "prevention": "Source-ID dedupe, target versions, ambiguity quarantine and unknown coverage",
+      "recovery": "Hold conflicts; reconcile reviewed rows; no fabricated history/backfill",
+      "plannedTestCoverage": "Same/older batch after live edit, incomplete dates/actors/opening balances",
+      "residualRisk": "Actual legacy source not supplied",
+      "owner": "Relevant domain owner + technical/operations/security owner; individuals named in docs/governance/ownership.json",
+      "status": "PLANNED",
+      "verificationEvidence": []
+    },
+    {
+      "id": "FAIL-15",
+      "failureCondition": "Compromised dependency/CI action or leaked secret",
+      "impact": "Artifact/credential compromise",
+      "detection": "Reviewed lockfile/action provenance/scans and suspicious access",
+      "prevention": "Least privilege, full-SHA actions, secret store, no privileged PR jobs",
+      "recovery": "Stop promotion, revoke/rotate, trace source/artifacts, rebuild reviewed release",
+      "plannedTestCoverage": "Secret-pattern fixture and future scanner/provenance injection tests",
+      "residualRisk": "Heuristic is incomplete; hosted CI/supply-chain scanners absent",
+      "owner": "Relevant domain owner + technical/operations/security owner; individuals named in docs/governance/ownership.json",
+      "status": "PLANNED",
+      "verificationEvidence": []
+    },
+    {
+      "id": "FAIL-16",
+      "failureCondition": "Timezone/clock/backdate confusion",
+      "impact": "Wrong deadline/missed owner/metric cohort",
+      "detection": "Time coverage/invariant checks and clock telemetry",
+      "prevention": "UTC instants + explicit business zone, deterministic clocks, actual vs recorded",
+      "recovery": "Correct through audited authorised event; keep raw observation",
+      "plannedTestCoverage": "IST midnight fractional second, exact due equality, reschedule/backdated completion",
+      "residualRisk": "Production business calendar/backdating policy open",
+      "owner": "Relevant domain owner + technical/operations/security owner; individuals named in docs/governance/ownership.json",
+      "status": "PLANNED",
+      "verificationEvidence": []
+    },
+    {
+      "id": "FAIL-17",
+      "failureCondition": "Incompatible release/schema or interrupted deployment",
+      "impact": "Outage or corrupt reads/writes",
+      "detection": "Staging migration/smoke/version/health checks",
+      "prevention": "Expand-contract, immutable artifact, migration sequencing and abort gates",
+      "recovery": "Compatible artifact rollback or reviewed forward repair/restore; reconcile side effects",
+      "plannedTestCoverage": "Old/new versions overlap, partial migration and rollback drill",
+      "residualRisk": "No actual app/CI/runtime deployment exists",
+      "owner": "Relevant domain owner + technical/operations/security owner; individuals named in docs/governance/ownership.json",
+      "status": "PLANNED",
+      "verificationEvidence": []
+    },
+    {
+      "id": "FAIL-18",
+      "failureCondition": "Manager abuses allowed self-approval",
+      "impact": "Unchallenged but authorised consequential decision",
+      "detection": "Immutable requester/approver/scope/evidence audit and management review",
+      "prevention": "Keep exact authority/amount/quantity/version/assent and current-scope checks",
+      "recovery": "Investigate under approved management policy; do not rewrite historical decision",
+      "plannedTestCoverage": "Own-request eligible succeeds; ordinary CS/wrong-market remains blocked",
+      "residualRisk": "User explicitly accepts self-approval behavior; fraud/audit review policy may evolve",
+      "owner": "Relevant domain owner + technical/operations/security owner; individuals named in docs/governance/ownership.json",
+      "status": "PLANNED",
+      "verificationEvidence": []
+    },
+    {
+      "id": "FAIL-19",
+      "failureCondition": "New integration timeout/429/uncertain side effect",
+      "impact": "Lost/duplicate external action",
+      "detection": "Provider receipt/correlation/reconciliation and job alerts",
+      "prevention": "Separate phase, provider-specific signatures/idempotency/timeouts/limits",
+      "recovery": "Hold uncertain funds/action; query verified provider status before retry",
+      "plannedTestCoverage": "Future adapter isolated timeout/429/5xx/duplicate/conflicting event fixtures",
+      "residualRisk": "No external execution integration enabled at manual launch",
+      "owner": "Relevant domain owner + technical/operations/security owner; individuals named in docs/governance/ownership.json",
+      "status": "PLANNED",
+      "verificationEvidence": []
+    },
+    {
+      "id": "FAIL-20",
+      "failureCondition": "Invalid, malformed or oversized request reaches the business logic",
+      "impact": "A rejected write leaves a partial or forged business effect, or validation gaps become an authorisation bypass path",
+      "detection": "Per-endpoint rejected-request counts, schema validation failures and invariant monitors",
+      "prevention": "Schema/length/type allowlists at the trust boundary, discriminated commands and explicit error envelopes",
+      "recovery": "Reject the request, confirm no accepted effect exists, correct the contract and re-test the boundary",
+      "plannedTestCoverage": "Malformed, oversized, unknown-field and wrong-type payloads against every command and query",
+      "residualRisk": "No application boundary exists yet; request validation enforcement is NOT IMPLEMENTED",
+      "owner": "Relevant domain owner + technical/operations/security owner; individuals named in docs/governance/ownership.json",
+      "status": "PLANNED",
+      "verificationEvidence": []
+    },
+    {
+      "id": "FAIL-21",
+      "failureCondition": "Partial transaction or torn multi-record write",
+      "impact": "Business facts, audit history and task state disagree; money, receipt or waiver totals become unexplainable",
+      "detection": "Invariant monitors, row-count reconciliation and audit-to-ledger comparison",
+      "prevention": "One database transaction per command, no best-effort second write, outbox written with the business change",
+      "recovery": "Roll back or forward-repair the affected transaction, re-run reconciliation and replay only idempotent work",
+      "plannedTestCoverage": "Injected failure between writes, rollback assertions, restartability and post-recovery reconciliation",
+      "residualRisk": "Requires real PostgreSQL failure injection; no application or database exists",
+      "owner": "Relevant domain owner + technical/operations/security owner; individuals named in docs/governance/ownership.json",
+      "status": "PLANNED",
+      "verificationEvidence": []
+    },
+    {
+      "id": "FAIL-22",
+      "failureCondition": "Storage, memory or database connection exhaustion",
+      "impact": "Service degradation, stranded jobs or failed saves presented to users as business failures",
+      "detection": "Disk, memory and pool-saturation metrics, pool wait time, queue age and outbox lag alarms",
+      "prevention": "Bounded file, page, export and request sizes, pool budgets, backpressure and explicit shedding of optional work",
+      "recovery": "Extend approved capacity or shed explicitly, drain safely and resume without duplicate effects",
+      "plannedTestCoverage": "Disk near-full, memory pressure and pool exhaustion under a bounded load profile",
+      "residualRisk": "Capacity envelope and budget ceiling are recorded (D-12), but shedding thresholds and load tooling are not selected",
+      "owner": "Relevant domain owner + technical/operations/security owner; individuals named in docs/governance/ownership.json",
+      "status": "PLANNED",
+      "verificationEvidence": []
+    },
+    {
+      "id": "FAIL-23",
+      "failureCondition": "Corrupted, tampered or unreadable stored data",
+      "impact": "Wrong balances, histories or evidence are presented as trustworthy and drive incorrect decisions",
+      "detection": "Constraint and checksum verification, reconciliation, restore integrity checks and anomaly review",
+      "prevention": "Foreign keys, check constraints, append-only evidence, checksums for files and exports, controlled migrations",
+      "recovery": "Restore from a verified point or repair from immutable history, then re-reconcile balances and audit continuity",
+      "plannedTestCoverage": "Checksum mismatch, truncated record and tampered-row cases on seeded data",
+      "residualRisk": "Database-level tamper detection and privileged operator controls are not implemented",
+      "owner": "Relevant domain owner + technical/operations/security owner; individuals named in docs/governance/ownership.json",
+      "status": "PLANNED",
+      "verificationEvidence": []
+    }
+  ],
+  "catalogue": [
+    {
+      "scenario": "Invalid requests",
+      "ids": [
+        "FAIL-20"
+      ]
+    },
+    {
+      "scenario": "Missing data",
+      "ids": [
+        "FAIL-14"
+      ]
+    },
+    {
+      "scenario": "Duplicate events",
+      "ids": [
+        "FAIL-09"
+      ]
+    },
+    {
+      "scenario": "Concurrent writes",
+      "ids": [
+        "FAIL-02",
+        "FAIL-03",
+        "FAIL-04",
+        "FAIL-06",
+        "FAIL-11"
+      ]
+    },
+    {
+      "scenario": "Partial transactions",
+      "ids": [
+        "FAIL-21"
+      ]
+    },
+    {
+      "scenario": "Database outages",
+      "ids": [
+        "FAIL-10"
+      ]
+    },
+    {
+      "scenario": "External API outages",
+      "ids": [
+        "FAIL-19"
+      ]
+    },
+    {
+      "scenario": "Authentication provider failures",
+      "ids": [
+        "FAIL-11"
+      ]
+    },
+    {
+      "scenario": "Queue backlogs",
+      "ids": [
+        "FAIL-09",
+        "FAIL-12"
+      ]
+    },
+    {
+      "scenario": "Rate-limit exhaustion",
+      "ids": [
+        "FAIL-12"
+      ]
+    },
+    {
+      "scenario": "Expired credentials",
+      "ids": [
+        "FAIL-11"
+      ]
+    },
+    {
+      "scenario": "Disk exhaustion",
+      "ids": [
+        "FAIL-22"
+      ]
+    },
+    {
+      "scenario": "Memory pressure",
+      "ids": [
+        "FAIL-22"
+      ]
+    },
+    {
+      "scenario": "Configuration errors",
+      "ids": [
+        "FAIL-11"
+      ]
+    },
+    {
+      "scenario": "Deployment failures",
+      "ids": [
+        "FAIL-17"
+      ]
+    },
+    {
+      "scenario": "Interrupted background jobs",
+      "ids": [
+        "FAIL-09"
+      ]
+    },
+    {
+      "scenario": "Clock skew",
+      "ids": [
+        "FAIL-16"
+      ]
+    },
+    {
+      "scenario": "Time-zone errors",
+      "ids": [
+        "FAIL-16"
+      ]
+    },
+    {
+      "scenario": "Partial restores",
+      "ids": [
+        "FAIL-13"
+      ]
+    },
+    {
+      "scenario": "Corrupted data",
+      "ids": [
+        "FAIL-23"
+      ]
+    },
+    {
+      "scenario": "Incompatible schema changes",
+      "ids": [
+        "FAIL-17"
+      ]
+    },
+    {
+      "scenario": "Permission misconfiguration",
+      "ids": [
+        "FAIL-01",
+        "FAIL-06"
+      ]
+    }
+  ]
+}

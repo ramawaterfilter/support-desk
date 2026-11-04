@@ -1,0 +1,3264 @@
+{
+  "screens": [
+    {
+      "id": "dashboard",
+      "label": "◫\nMy work",
+      "title": "My work today",
+      "text": "My work today\n\nSaturday, 31 October 2026 · Shared team workspace\n\n+ New query\nOpen team tickets\n24\nAll executives can see the queue →\nMy next actions\n0\nAcross all ticket owners →\nOverdue follow-ups\n3\nOpen tasks past their deadline →\nPending decisions\n2\nAwaiting an eligible approver →\nRejected — action needed\n0\nCustomer update still outstanding →\nAll team tickets\nTickets assigned to me\nAll follow-ups\nContinue the conversation\nView matching tickets →\nTicket / customer\tSubject / category\tAssigned to\tStatus / next action\nDEMO-104\nMaya Rao\n\tTap leakage\nComplaint > Product > Tap leakage\n\tSupriya\nWorking now: Brinda\n\tWaiting for return\nReturn: Approved\nConfirm matched warehouse receipt\n\nDEMO-208\nOliver Reed\n\tReplace a damaged cartridge\nComplaint > Product > Damaged product\n\tRithika\nNo active worker\n\tPending review\nReplacement: Pending decision\nDecide replacement request\n\nDEMO-309\nZara Ali\n\tReturn has no first scan\nComplaint > Return > Return label issue\n\tRithika\nNo active worker\n\tWaiting for customer\nReturn: Need information\nProvide requested information\n\nDEMO-410\nDaniel Wells\n\tRefund not yet confirmed\nComplaint > Finance > Refund delay\n\tSupriya\nNo active worker\n\tWaiting for finance\nVerify refund provider outcome\n\nDEMO-520\nEmma Hart\n\tCancel order before dispatch\nComplaint > Order > Address mismatch\n\tBrinda\nNo active worker\n\tPending review\nCancellation: Pending decision\nDecide cancellation request\n\nDEMO-611\nOliver Reed\n\tDamaged filter received\nComplaint > Product > Damaged product\n\tRithika\nNo active worker\n\tWaiting for return\nReturn: Approved\nFollow up missing return items\n24 matching tickets · Showing up to 6\nMy upcoming actions\n\nNo open actions assigned to you.",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "+ New query",
+          "disabled": false,
+          "action": "new"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "submit",
+          "label": "Open team tickets\n24\nAll executives can see the queue →",
+          "disabled": false,
+          "action": "open-team"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "submit",
+          "label": "My next actions\n0\nAcross all ticket owners →",
+          "disabled": false,
+          "action": "task-view"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "submit",
+          "label": "Overdue follow-ups\n3\nOpen tasks past their deadline →",
+          "disabled": false,
+          "action": "task-view"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "submit",
+          "label": "Pending decisions\n2\nAwaiting an eligible approver →",
+          "disabled": false,
+          "action": "task-view"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "submit",
+          "label": "Rejected — action needed\n0\nCustomer update still outstanding →",
+          "disabled": false,
+          "action": "task-view"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "All team tickets",
+          "disabled": false,
+          "action": "work-tab"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Tickets assigned to me",
+          "disabled": false,
+          "action": "work-tab"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "All follow-ups",
+          "disabled": false,
+          "action": "task-view"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "View matching tickets →",
+          "disabled": false,
+          "action": "dashboard-all"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "DEMO-104",
+          "disabled": false,
+          "action": "ticket"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "DEMO-208",
+          "disabled": false,
+          "action": "ticket"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "DEMO-309",
+          "disabled": false,
+          "action": "ticket"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "DEMO-410",
+          "disabled": false,
+          "action": "ticket"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "DEMO-520",
+          "disabled": false,
+          "action": "ticket"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "DEMO-611",
+          "disabled": false,
+          "action": "ticket"
+        }
+      ],
+      "tabs": [
+        "All team tickets",
+        "Tickets assigned to me"
+      ]
+    },
+    {
+      "id": "customers",
+      "label": "◎\nCustomers",
+      "title": "Customers",
+      "text": "Customers\n\nOne shared directory · Historical tickets and new enquiries together.\n\nImport history\n+ New customer\nCustomer\tContact\tHistory\tActions\nMaya Rao\nCUS-104 · United Kingdom\n\tmaya.demo@example.com\n+44 7700 900001\n\t13 tickets\tView history →\nOliver Reed\nCUS-208 · United Kingdom\n\toliver.demo@example.com\n+44 7700 900002\n\t11 tickets\tView history →\nZara Ali\nCUS-309 · United States\n\tzara.demo@example.com\n+1 202 555 0103\n\t11 tickets\tView history →\nDaniel Wells\nCUS-410 · United States\n\tdaniel.demo@example.com\n+1 202 555 0104\n\t9 tickets\tView history →\nEmma Hart\nCUS-520 · United Kingdom\n\thousehold.demo@example.com\n+44 7700 900005\n\t9 tickets\tView history →\nNoah Hart\nCUS-521 · United Kingdom\n\thousehold.demo@example.com\n+44 7700 900005\n\t8 tickets\tView history →",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Import history",
+          "disabled": false,
+          "action": "import"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "+ New customer",
+          "disabled": false,
+          "action": "customer-add"
+        },
+        {
+          "tag": "INPUT",
+          "id": "customer-search",
+          "type": "text",
+          "label": "Search customers",
+          "required": false,
+          "disabled": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Maya Rao",
+          "disabled": false,
+          "action": "customer"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "View history →",
+          "disabled": false,
+          "action": "customer"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Oliver Reed",
+          "disabled": false,
+          "action": "customer"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "View history →",
+          "disabled": false,
+          "action": "customer"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Zara Ali",
+          "disabled": false,
+          "action": "customer"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "View history →",
+          "disabled": false,
+          "action": "customer"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Daniel Wells",
+          "disabled": false,
+          "action": "customer"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "View history →",
+          "disabled": false,
+          "action": "customer"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Emma Hart",
+          "disabled": false,
+          "action": "customer"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "View history →",
+          "disabled": false,
+          "action": "customer"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Noah Hart",
+          "disabled": false,
+          "action": "customer"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "View history →",
+          "disabled": false,
+          "action": "customer"
+        }
+      ],
+      "tabs": []
+    },
+    {
+      "id": "new",
+      "label": "＋\nNew Query",
+      "title": "New Query",
+      "text": "New Query\n\nCheck the customer’s history before recording a new issue.\n\n1\nCheck customer\n2\nSelect issue details\nFind the customer\nEmail ID or mobile number\nChecks automatically as you paste. Email case and phone spacing are ignored.\nCountry code · for a local mobile number\nNumber already includes country code\n+44 · United Kingdom\n+1 · USA / Canada\n+91 · India\n+33 · France\nPaste the customer’s email ID or mobile number to check their history.",
+      "controls": [
+        {
+          "tag": "INPUT",
+          "id": "intake-contact",
+          "type": "text",
+          "label": "Email ID or mobile number",
+          "required": false,
+          "disabled": false
+        },
+        {
+          "tag": "SELECT",
+          "id": "intake-phone-code",
+          "type": "select-one",
+          "label": "Country code · for a local mobile number",
+          "required": false,
+          "disabled": false,
+          "options": [
+            {
+              "value": "auto",
+              "label": "Number already includes country code"
+            },
+            {
+              "value": "44",
+              "label": "+44 · United Kingdom"
+            },
+            {
+              "value": "1",
+              "label": "+1 · USA / Canada"
+            },
+            {
+              "value": "91",
+              "label": "+91 · India"
+            },
+            {
+              "value": "33",
+              "label": "+33 · France"
+            }
+          ]
+        }
+      ],
+      "tabs": []
+    },
+    {
+      "id": "tickets",
+      "label": "▤\nAll Tickets",
+      "title": "All Tickets",
+      "text": "All Tickets\n\nSearch across every team member, customer and linked reference.\n\n+ New query\nAll statuses\nOpen\nIn progress\nWaiting for customer\nWaiting for return\nWaiting for finance\nPending review\nResolved\nClosed\nClear filters\nExport all matches\nTicket / customer\tSubject / category\tAssigned to\tStatus / next action\nDEMO-850\nZara Ali\n\tDimensions\nEnquiry > Product > Dimensions\n\tSupriya\nNo active worker\n\tClosed\nNo open follow-up — review resolution\n61 matching tickets · Page 7 of 7\nPrevious\nNext",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "+ New query",
+          "disabled": false,
+          "action": "new"
+        },
+        {
+          "tag": "INPUT",
+          "id": "ticket-search",
+          "type": "text",
+          "label": "Search tickets",
+          "required": false,
+          "disabled": false
+        },
+        {
+          "tag": "SELECT",
+          "id": "ticket-status",
+          "type": "select-one",
+          "label": "Filter by status",
+          "required": false,
+          "disabled": false,
+          "options": [
+            {
+              "value": "All statuses",
+              "label": "All statuses"
+            },
+            {
+              "value": "Open",
+              "label": "Open"
+            },
+            {
+              "value": "In progress",
+              "label": "In progress"
+            },
+            {
+              "value": "Waiting for customer",
+              "label": "Waiting for customer"
+            },
+            {
+              "value": "Waiting for return",
+              "label": "Waiting for return"
+            },
+            {
+              "value": "Waiting for finance",
+              "label": "Waiting for finance"
+            },
+            {
+              "value": "Pending review",
+              "label": "Pending review"
+            },
+            {
+              "value": "Resolved",
+              "label": "Resolved"
+            },
+            {
+              "value": "Closed",
+              "label": "Closed"
+            }
+          ]
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Clear filters",
+          "disabled": false,
+          "action": "clear-filters"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Export all matches",
+          "disabled": false,
+          "action": "export-filter"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "DEMO-850",
+          "disabled": false,
+          "action": "ticket"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "submit",
+          "label": "Previous",
+          "disabled": false,
+          "action": "prev-page"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "submit",
+          "label": "Next",
+          "disabled": true,
+          "action": "next-page"
+        }
+      ],
+      "tabs": []
+    },
+    {
+      "id": "requests",
+      "label": "✓\nTicket Requests",
+      "title": "Ticket Requests",
+      "text": "Ticket Requests\n\nProtected corrections and service approvals keep separate decision records.\n\nService approvals\nReturn waivers\nProtected corrections\nRequest / ticket\tAction / scope\tDecision state\tNext owner\tReview\nReturn approval · Revision 1\nApproval request AR-104\nDEMO-104\n\tReturn\n1 × Gravity unit / 8 litres (SKU-1) + 1 × Replacement tap (SKU-4)\n\tApproved\nWarehouse receipt required\n\tDemo logistics\n01 Nov 2026, 06:42 am IST\n\tOpen request\nReplacement approval · Revision 1\nApproval request AR-208\nDEMO-208\n\tReplacement\nReturn: 1 × Carbon cartridge set (SKU-2)\nDispatch: 1 × Carbon cartridge set (SKU-2)\n\tPending decision\nReturn first, then replace\n\tNaveen\n31 Oct 2026, 10:42 am IST\n\tOpen request\nCancellation approval · Revision 1\nApproval request AR-520\nDEMO-520\n\tCancellation\n1 × Gravity unit / 8 litres (SKU-1)\n\tPending decision\nConfirm warehouse stop\n\tNaveen\n31 Oct 2026, 11:42 am IST\n\tOpen request\nReturn approval · Revision 1\nApproval request AR-309\nDEMO-309\n\tReturn\n1 × Gravity unit / 8 litres (SKU-1)\n\tNeed information\nWarehouse receipt required\n\tRithika\n01 Nov 2026, 06:42 am IST\n\tOpen request\nReturn approval · Revision 1\nApproval request AR-611\nDEMO-611\n\tReturn\n1 × Gravity unit / 8 litres (SKU-1) + 1 × Replacement tap (SKU-4)\n\tApproved\nWarehouse receipt required\n\tDemo logistics\n01 Nov 2026, 06:42 am IST\n\tOpen request",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Service approvals",
+          "disabled": false,
+          "action": "tab"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Return waivers",
+          "disabled": false,
+          "action": "tab"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Protected corrections",
+          "disabled": false,
+          "action": "tab"
+        },
+        {
+          "tag": "INPUT",
+          "id": "queue-search",
+          "type": "text",
+          "label": "Search this section",
+          "required": false,
+          "disabled": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "DEMO-104",
+          "disabled": false,
+          "action": "ticket"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Open request",
+          "disabled": false,
+          "action": "approval"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "DEMO-208",
+          "disabled": false,
+          "action": "ticket"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Open request",
+          "disabled": false,
+          "action": "approval"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "DEMO-520",
+          "disabled": false,
+          "action": "ticket"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Open request",
+          "disabled": false,
+          "action": "approval"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "DEMO-309",
+          "disabled": false,
+          "action": "ticket"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Open request",
+          "disabled": false,
+          "action": "approval"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "DEMO-611",
+          "disabled": false,
+          "action": "ticket"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Open request",
+          "disabled": false,
+          "action": "approval"
+        }
+      ],
+      "tabs": [
+        "Service approvals",
+        "Return waivers",
+        "Protected corrections"
+      ]
+    },
+    {
+      "id": "tasks",
+      "label": "◷\nFollow-ups",
+      "title": "Follow-ups",
+      "text": "Follow-ups\n\nOne task record connects the ticket, service action, reminders and reporting.\n\nExport matching tasks\nOpen\nMine\nOverdue\nDecisions\nRejected\nHistory\nAll responsible people\nRamesh · Super Admin\nRithika · CS Executive\nBrinda · CS Executive\nNaveen · Country Manager + CS Executive\nDivya · Head of CS + CS Executive\nDemo logistics · Logistics\nVijaykumar · Finance\nAll\nticket\nrequest\nreturn\nwaiver\nrefund\ndispute\nparcel\nTicket / task\tNext action\tCurrent owner / missed owner\tDeadline (IST)\tState / action\nDEMO-803\nTASK-27 · ticket\n\tSample: promised refund progress update\nSAMPLE-OVERDUE · Missed: 31 Oct 2026, 08:12 am IST\n\tRithika\nAt missed deadline: Rithika\n\t31 Oct 2026, 08:12 am IST\n177 minutes overdue\n\tOverdue\nView task\n\nDEMO-208\nTASK-1 · request\n\tDecide replacement request\nAR-208 · Missed: 31 Oct 2026, 10:42 am IST\n\tNaveen\nAt missed deadline: Naveen\n\t31 Oct 2026, 10:42 am IST\n27 minutes overdue\n\tOverdue\nView task\n\nDEMO-800\nTASK-26 · ticket\n\tSample: customer follow-up due shortly\nSAMPLE-DUE-SOON · Missed: 31 Oct 2026, 10:42 am IST\n\tRithika\nAt missed deadline: Rithika\n\t31 Oct 2026, 10:42 am IST\n27 minutes overdue\n\tOverdue\nView task\n\nDEMO-520\nTASK-2 · request\n\tDecide cancellation request\nAR-520\n\tNaveen\t31 Oct 2026, 11:42 am IST\tOpen\nView task\n\nDEMO-410\nTASK-6 · refund\n\tVerify refund provider outcome\nRF-410\n\tVijaykumar\t31 Oct 2026, 11:42 am IST\tOpen\nView task\n\nDEMO-309\nTASK-3 · request\n\tProvide requested information\nAR-309\n\tRithika\t01 Nov 2026, 06:42 am IST\tOpen\nView task\n\nDEMO-104\nTASK-4 · return\n\tConfirm matched warehouse receipt\nRET-104\n\tDemo logistics\t01 Nov 2026, 06:42 am IST\tOpen\nView task\n\nDEMO-611\nTASK-5 · return\n\tFollow up missing return items\nRET-611\n\tDemo logistics\t01 Nov 2026, 06:42 am IST\tOpen\nView task\n\nDEMO-800\nTASK-8 · ticket\n\tReview customer update\nDEMO-800\n\tRithika\t01 Nov 2026, 06:42 am IST\tOpen\nView task\n\nDEMO-803\nTASK-9 · ticket\n\tReview customer update\nDEMO-803\n\tRithika\t01 Nov 2026, 06:42 am IST\tOpen\nView task\n26 matching tasks · Page 1 of 3\nPrevious\nNext\n\nReminders run in this open review tab. Background tabs may show them late. Refresh resets demo changes.",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Export matching tasks",
+          "disabled": false,
+          "action": "tasks-export"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Open",
+          "disabled": false,
+          "action": "task-view"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Mine",
+          "disabled": false,
+          "action": "task-view"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Overdue",
+          "disabled": false,
+          "action": "task-view"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Decisions",
+          "disabled": false,
+          "action": "task-view"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Rejected",
+          "disabled": false,
+          "action": "task-view"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "History",
+          "disabled": false,
+          "action": "task-view"
+        },
+        {
+          "tag": "INPUT",
+          "id": "task-search",
+          "type": "text",
+          "label": "Search follow-ups",
+          "required": false,
+          "disabled": false
+        },
+        {
+          "tag": "SELECT",
+          "id": "task-owner",
+          "type": "select-one",
+          "label": "Filter task owner",
+          "required": false,
+          "disabled": false,
+          "options": [
+            {
+              "value": "All",
+              "label": "All responsible people"
+            },
+            {
+              "value": "U1",
+              "label": "Ramesh · Super Admin"
+            },
+            {
+              "value": "U2",
+              "label": "Rithika · CS Executive"
+            },
+            {
+              "value": "U3",
+              "label": "Brinda · CS Executive"
+            },
+            {
+              "value": "U4",
+              "label": "Naveen · Country Manager + CS Executive"
+            },
+            {
+              "value": "U5",
+              "label": "Divya · Head of CS + CS Executive"
+            },
+            {
+              "value": "U6",
+              "label": "Demo logistics · Logistics"
+            },
+            {
+              "value": "U7",
+              "label": "Vijaykumar · Finance"
+            }
+          ]
+        },
+        {
+          "tag": "SELECT",
+          "id": "task-source",
+          "type": "select-one",
+          "label": "Filter task type",
+          "required": false,
+          "disabled": false,
+          "options": [
+            {
+              "value": "All",
+              "label": "All"
+            },
+            {
+              "value": "ticket",
+              "label": "ticket"
+            },
+            {
+              "value": "request",
+              "label": "request"
+            },
+            {
+              "value": "return",
+              "label": "return"
+            },
+            {
+              "value": "waiver",
+              "label": "waiver"
+            },
+            {
+              "value": "refund",
+              "label": "refund"
+            },
+            {
+              "value": "dispute",
+              "label": "dispute"
+            },
+            {
+              "value": "parcel",
+              "label": "parcel"
+            }
+          ]
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "DEMO-803",
+          "disabled": false,
+          "action": "ticket"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "View task",
+          "disabled": false,
+          "action": "task-open"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "DEMO-208",
+          "disabled": false,
+          "action": "ticket"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "View task",
+          "disabled": false,
+          "action": "task-open"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "DEMO-800",
+          "disabled": false,
+          "action": "ticket"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "View task",
+          "disabled": false,
+          "action": "task-open"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "DEMO-520",
+          "disabled": false,
+          "action": "ticket"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "View task",
+          "disabled": false,
+          "action": "task-open"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "DEMO-410",
+          "disabled": false,
+          "action": "ticket"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "View task",
+          "disabled": false,
+          "action": "task-open"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "DEMO-309",
+          "disabled": false,
+          "action": "ticket"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "View task",
+          "disabled": false,
+          "action": "task-open"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "DEMO-104",
+          "disabled": false,
+          "action": "ticket"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "View task",
+          "disabled": false,
+          "action": "task-open"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "DEMO-611",
+          "disabled": false,
+          "action": "ticket"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "View task",
+          "disabled": false,
+          "action": "task-open"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "DEMO-800",
+          "disabled": false,
+          "action": "ticket"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "View task",
+          "disabled": false,
+          "action": "task-open"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "DEMO-803",
+          "disabled": false,
+          "action": "ticket"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "View task",
+          "disabled": false,
+          "action": "task-open"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "submit",
+          "label": "Previous",
+          "disabled": true,
+          "action": "task-prev"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "submit",
+          "label": "Next",
+          "disabled": false,
+          "action": "task-next"
+        }
+      ],
+      "tabs": [
+        "Open",
+        "Mine",
+        "Overdue",
+        "Decisions",
+        "Rejected",
+        "History"
+      ]
+    },
+    {
+      "id": "logistics",
+      "label": "↗\nLogistics",
+      "title": "Logistics",
+      "text": "Logistics\n\nRMA available at every warehouse · External actions are recorded manually.\n\nReturns\nReturn waivers\nReplacements\nRefunds\nDisputes\nUnmatched parcels (0)\nRecord unmatched parcel\nReturn / ticket\tWarehouse / tracking\tReceipt\tOwner / due\tAction\nRMA-7001\nDEMO-104\n\tUnited Kingdom\nDEMO-TRACK-104\n\tDelivered; receipt unmatched\n0 of 2 physically received · 0 waived · 2 still due\n\tDemo logistics · 01 Nov 2026, 06:42 am IST\tOpen return\nRMA-7003\nDEMO-611\n\tUnited Kingdom\nDEMO-TRACK-611\n\tPartial receipt\n1 of 2 physically received · 0 waived · 1 still due\n\tDemo logistics · 01 Nov 2026, 06:42 am IST\tOpen return",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Returns",
+          "disabled": false,
+          "action": "tab"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Return waivers",
+          "disabled": false,
+          "action": "tab"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Replacements",
+          "disabled": false,
+          "action": "tab"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Refunds",
+          "disabled": false,
+          "action": "tab"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Disputes",
+          "disabled": false,
+          "action": "tab"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Unmatched parcels (0)",
+          "disabled": false,
+          "action": "unmatched-list"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Record unmatched parcel",
+          "disabled": false,
+          "action": "unmatched"
+        },
+        {
+          "tag": "INPUT",
+          "id": "queue-search",
+          "type": "text",
+          "label": "Search this section",
+          "required": false,
+          "disabled": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "DEMO-104",
+          "disabled": false,
+          "action": "ticket"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Open return",
+          "disabled": false,
+          "action": "return"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "DEMO-611",
+          "disabled": false,
+          "action": "ticket"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Open return",
+          "disabled": false,
+          "action": "return"
+        }
+      ],
+      "tabs": [
+        "Returns",
+        "Return waivers",
+        "Replacements",
+        "Refunds",
+        "Disputes"
+      ]
+    },
+    {
+      "id": "insights",
+      "label": "▥\nInsights",
+      "title": "Voice of the Customer",
+      "text": "Voice of the Customer\n\nTop complaints, friction and resolution performance — with ticket-level evidence.\n\nCompare dates\nExport this cohort\n2026-10-01 to 2026-10-30 · 30 inclusive days\nCompare 2026-09-01 to 2026-09-30\nAll brands\nBrand A\nBrand B\nAll countries\nUnited Kingdom\nUnited States\nCanada\nFrance\nIndia\nTickets created\n32\n+3 vs comparison\nCustomer complaints\n26\n+4 vs comparison\nLate resolutions\n10\nWithin this created-date cohort\nResolved on time\n41.2%\n-23.8 percentage points vs comparison\nTop 10 · last 7 days\n1\nTap leakage\n3\n2\nDamaged product\n2\n3\nFilter fitting issue\n2\n4\nWrong item\n1\n5\nReturn label issue\n1\n9 complaints · 2026-10-24 to 2026-10-30\nEach ticket counted once; primary category.\nTop 10 · last 30 days\n1\nDamaged product\n4\n2\nRefund delay\n3\n3\nAddress mismatch\n3\n4\nTap leakage\n3\n5\nReturn label issue\n3\n6\nDelivery delay\n2\n7\nMissing item\n2\n8\nWrong item\n2\n9\nFilter fitting issue\n2\n10\nReplacement delay\n2\n26 complaints · 2026-10-01 to 2026-10-30\nEach ticket counted once; primary category.\nTop 10 · last 60 days\n1\nDelivery delay\n6\n2\nDamaged product\n6\n3\nRefund delay\n5\n4\nAddress mismatch\n5\n5\nTap leakage\n5\n6\nReturn label issue\n5\n7\nMissing item\n4\n8\nWrong item\n4\n9\nFilter fitting issue\n4\n10\nReplacement delay\n4\n48 complaints · 2026-09-01 to 2026-10-30\nEach ticket counted once; primary category.\nSelected period · complaint mix\nComplaint > Product > Damaged product\n4\nComplaint > Finance > Refund delay\n3\nComplaint > Order > Address mismatch\n3\nComplaint > Product > Tap leakage\n3\nComplaint > Return > Return label issue\n3\nComplaint > Delivery > Delivery delay\n2\nComplaint > Order > Missing item\n2\nComplaint > Order > Wrong item\n2\nComplaint > Product > Filter fitting issue\n2\nComplaint > Replacement > Replacement delay\n2\nResolution & friction\n36.0 hours · median resolution time\n\n17 valid resolved tickets. Current recorded outcomes for the selected created-date cohort.\n\n9 open tickets past their resolution target\n\nMeasured now, in IST.\n\n6 enquiries · 0 need classification\n\nUnclassified records stay in the total. Tests are excluded.\n\nData coverage\n\n100% have created and received timestamps. Historical status-at-cutoff reporting is not simulated.\n\nDefaults use complete days ending yesterday, IST. The three rankings use separate overlapping windows; date comparison changes the selected-period analysis below them. Currency amounts are never combined across currencies.\nMissed follow-ups\n\nFirst missed deadline between 2026-10-01 and 2026-10-30, IST. Each task is counted once, even after it is rescheduled or completed late. Ticket creation date does not limit this report.\n\nAll responsible people at missed deadline\nRamesh · Super Admin\nRithika · CS Executive\nBrinda · CS Executive\nNaveen · Country Manager + CS Executive\nDivya · Head of CS + CS Executive\nDemo logistics · Logistics\nVijaykumar · Finance\nAll\nticket\nrequest\nreturn\nwaiver\nrefund\ndispute\nparcel\nMissed in selected period\n1\nNew vs preceding equal period\nCompleted after a miss\n1\nHistorical breaches remain visible\nOverdue now\n3\nOpen tasks at the current time\nLinked tickets\n1\nSeparate from the task count\nView all missed tasks\nExport missed follow-ups\nTicket / task\tNext action\tCurrent owner / missed owner\tDeadline (IST)\tState / action\nDEMO-086\nTASK-25 · ticket\n\tSample: send cartridge compatibility guide\nDEMO-086 · Missed: 29 Oct 2026, 10:12 am IST\n\tRithika\nAt missed deadline: Rithika\n\t29 Oct 2026, 10:12 am IST\tCompleted\nView task\n\n1 matching tasks; showing up to 5. 24 imported sample tasks lack earlier history and are excluded from historical totals. They remain in current operational queues.",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Compare dates",
+          "disabled": false,
+          "action": "date-range"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Export this cohort",
+          "disabled": false,
+          "action": "insight-export"
+        },
+        {
+          "tag": "SELECT",
+          "id": "insight-brand",
+          "type": "select-one",
+          "label": "Insights brand",
+          "required": false,
+          "disabled": false,
+          "options": [
+            {
+              "value": "All brands",
+              "label": "All brands"
+            },
+            {
+              "value": "Brand A",
+              "label": "Brand A"
+            },
+            {
+              "value": "Brand B",
+              "label": "Brand B"
+            }
+          ]
+        },
+        {
+          "tag": "SELECT",
+          "id": "insight-country",
+          "type": "select-one",
+          "label": "Insights country",
+          "required": false,
+          "disabled": false,
+          "options": [
+            {
+              "value": "All countries",
+              "label": "All countries"
+            },
+            {
+              "value": "United Kingdom",
+              "label": "United Kingdom"
+            },
+            {
+              "value": "United States",
+              "label": "United States"
+            },
+            {
+              "value": "Canada",
+              "label": "Canada"
+            },
+            {
+              "value": "France",
+              "label": "France"
+            },
+            {
+              "value": "India",
+              "label": "India"
+            }
+          ]
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Tap leakage",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Damaged product",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Filter fitting issue",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Wrong item",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Return label issue",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Damaged product",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Refund delay",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Address mismatch",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Tap leakage",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Return label issue",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delivery delay",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Missing item",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Wrong item",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Filter fitting issue",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Replacement delay",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delivery delay",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Damaged product",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Refund delay",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Address mismatch",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Tap leakage",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Return label issue",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Missing item",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Wrong item",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Filter fitting issue",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Replacement delay",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Complaint > Product > Damaged product",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Complaint > Finance > Refund delay",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Complaint > Order > Address mismatch",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Complaint > Product > Tap leakage",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Complaint > Return > Return label issue",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Complaint > Delivery > Delivery delay",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Complaint > Order > Missing item",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Complaint > Order > Wrong item",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Complaint > Product > Filter fitting issue",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Complaint > Replacement > Replacement delay",
+          "disabled": false,
+          "action": "rank"
+        },
+        {
+          "tag": "SELECT",
+          "id": "report-owner",
+          "type": "select-one",
+          "label": "Follow-up report responsible person",
+          "required": false,
+          "disabled": false,
+          "options": [
+            {
+              "value": "All",
+              "label": "All responsible people at missed deadline"
+            },
+            {
+              "value": "U1",
+              "label": "Ramesh · Super Admin"
+            },
+            {
+              "value": "U2",
+              "label": "Rithika · CS Executive"
+            },
+            {
+              "value": "U3",
+              "label": "Brinda · CS Executive"
+            },
+            {
+              "value": "U4",
+              "label": "Naveen · Country Manager + CS Executive"
+            },
+            {
+              "value": "U5",
+              "label": "Divya · Head of CS + CS Executive"
+            },
+            {
+              "value": "U6",
+              "label": "Demo logistics · Logistics"
+            },
+            {
+              "value": "U7",
+              "label": "Vijaykumar · Finance"
+            }
+          ]
+        },
+        {
+          "tag": "SELECT",
+          "id": "report-source",
+          "type": "select-one",
+          "label": "Follow-up report task type",
+          "required": false,
+          "disabled": false,
+          "options": [
+            {
+              "value": "All",
+              "label": "All"
+            },
+            {
+              "value": "ticket",
+              "label": "ticket"
+            },
+            {
+              "value": "request",
+              "label": "request"
+            },
+            {
+              "value": "return",
+              "label": "return"
+            },
+            {
+              "value": "waiver",
+              "label": "waiver"
+            },
+            {
+              "value": "refund",
+              "label": "refund"
+            },
+            {
+              "value": "dispute",
+              "label": "dispute"
+            },
+            {
+              "value": "parcel",
+              "label": "parcel"
+            }
+          ]
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "View all missed tasks",
+          "disabled": false,
+          "action": "task-view"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Export missed follow-ups",
+          "disabled": false,
+          "action": "report-export"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "DEMO-086",
+          "disabled": false,
+          "action": "ticket"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "View task",
+          "disabled": false,
+          "action": "task-open"
+        }
+      ],
+      "tabs": []
+    },
+    {
+      "id": "exports",
+      "label": "↓\nExports",
+      "title": "Exports",
+      "text": "Exports\n\nDownload complete matching datasets with linked IDs. Each export records its row count.\n\nChoose a dataset\nDataset\nTickets\nCustomers\nActivities\nService requests\nReturns\nReturn waivers\nRefunds\nFollow-ups\nSearch all attributes (optional)\nCSV files open in Excel. Tickets are one row per ticket; activities are one row per event. Test tickets are excluded. Dates include their time-zone offsets.\nDownload all matching rows\nDownloads in this tab\nDataset\tRows\tRequested by\tTime\tFile\nNo matching records. Change the search or filters.",
+      "controls": [
+        {
+          "tag": "SELECT",
+          "id": "dataset",
+          "type": "select-one",
+          "label": "Dataset",
+          "required": false,
+          "disabled": false,
+          "options": [
+            {
+              "value": "Tickets",
+              "label": "Tickets"
+            },
+            {
+              "value": "Customers",
+              "label": "Customers"
+            },
+            {
+              "value": "Activities",
+              "label": "Activities"
+            },
+            {
+              "value": "Service requests",
+              "label": "Service requests"
+            },
+            {
+              "value": "Returns",
+              "label": "Returns"
+            },
+            {
+              "value": "Return waivers",
+              "label": "Return waivers"
+            },
+            {
+              "value": "Refunds",
+              "label": "Refunds"
+            },
+            {
+              "value": "Follow-ups",
+              "label": "Follow-ups"
+            }
+          ]
+        },
+        {
+          "tag": "INPUT",
+          "id": "q",
+          "type": "text",
+          "label": "Search all attributes (optional)",
+          "required": false,
+          "disabled": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "submit",
+          "label": "Download all matching rows",
+          "disabled": false
+        }
+      ],
+      "tabs": []
+    },
+    {
+      "id": "masters",
+      "label": "≡\nMaster data",
+      "title": "Category Management",
+      "text": "Category Management\n\nCreate main categories and child categories. Keep agent choices consistent.\n\nCategories\nProducts\nQuery Channels\nQuery Types\nQuery Filters\nCustomer Outreach\nPurchase Stores\nCountries\nQuery Statuses\n+ Main category\n+ Child category\nAgents cannot create categories while raising tickets. Query type → main category → child category uses these approved choices.\nCategory hierarchy\tAvailability / usage\tManage\n\n▸\nProduct\nComplaint · Main category · 3 children\n\tActive\n15 linked tickets (includes children)\n\t\n+ Child\nEdit\nArchive\nDelete\n\n\n↳\nTap leakage\nComplaint · Child category\n\tActive\n5 linked tickets\n\t\nEdit\nArchive\nDelete\n\n\n↳\nDamaged product\nComplaint · Child category\n\tActive\n6 linked tickets\n\t\nEdit\nArchive\nDelete\n\n\n↳\nFilter fitting issue\nComplaint · Child category\n\tActive\n4 linked tickets\n\t\nEdit\nArchive\nDelete\n\n\n▸\nDelivery\nComplaint · Main category · 1 child\n\tActive\n6 linked tickets (includes children)\n\t\n+ Child\nEdit\nArchive\nDelete\n\n\n↳\nDelivery delay\nComplaint · Child category\n\tActive\n6 linked tickets\n\t\nEdit\nArchive\nDelete\n\n\n▸\nOrder\nComplaint · Main category · 3 children\n\tActive\n13 linked tickets (includes children)\n\t\n+ Child\nEdit\nArchive\nDelete\n\n\n↳\nMissing item\nComplaint · Child category\n\tActive\n4 linked tickets\n\t\nEdit\nArchive\nDelete\n\n\n↳\nWrong item\nComplaint · Child category\n\tActive\n4 linked tickets\n\t\nEdit\nArchive\nDelete\n\n\n↳\nAddress mismatch\nComplaint · Child category\n\tActive\n5 linked tickets\n\t\nEdit\nArchive\nDelete\n\n\n▸\nFinance\nComplaint · Main category · 1 child\n\tActive\n5 linked tickets (includes children)\n\t\n+ Child\nEdit\nArchive\nDelete\n\n\n↳\nRefund delay\nComplaint · Child category\n\tActive\n5 linked tickets\n\t\nEdit\nArchive\nDelete\n\n\n▸\nReplacement\nComplaint · Main category · 1 child\n\tActive\n4 linked tickets (includes children)\n\t\n+ Child\nEdit\nArchive\nDelete\n\n\n↳\nReplacement delay\nComplaint · Child category\n\tActive\n4 linked tickets\n\t\nEdit\nArchive\nDelete\n\n\n▸\nReturn\nComplaint · Main category · 1 child\n\tActive\n5 linked tickets (includes children)\n\t\n+ Child\nEdit\nArchive\nDelete\n\n\n↳\nReturn label issue\nComplaint · Child category\n\tActive\n5 linked tickets\n\t\nEdit\nArchive\nDelete\n\n\n▸\nProduct\nEnquiry · Main category · 2 children\n\tActive\n10 linked tickets (includes children)\n\t\n+ Child\nEdit\nArchive\nDelete\n\n\n↳\nCompatibility\nEnquiry · Child category\n\tActive\n5 linked tickets\n\t\nEdit\nArchive\nDelete\n\n\n↳\nDimensions\nEnquiry · Child category\n\tActive\n5 linked tickets\n\t\nEdit\nArchive\nDelete\n\n\n▸\nOrder\nEnquiry · Main category · 1 child\n\tActive\n4 linked tickets (includes children)\n\t\n+ Child\nEdit\nArchive\nDelete\n\n\n↳\nAvailability\nEnquiry · Child category\n\tActive\n4 linked tickets\n\t\nEdit\nArchive\nDelete\n\n\n▸\nFollow-up\nCommunication · Main category\n\tActive\n0 linked tickets (includes children)\n\t\n+ Child\nEdit\nArchive\nDelete\nDelete unused categories. If a category or its children are already used in tickets, archive them to remove them from new queries while preserving history. “Needs classification” remains an approved fallback for supervisor review.",
+      "controls": [
+        {
+          "tag": "SELECT",
+          "id": "master-select",
+          "type": "select-one",
+          "label": "Master data section",
+          "required": false,
+          "disabled": false,
+          "options": [
+            {
+              "value": "Categories",
+              "label": "Categories"
+            },
+            {
+              "value": "Products",
+              "label": "Products"
+            },
+            {
+              "value": "Query Channels",
+              "label": "Query Channels"
+            },
+            {
+              "value": "Query Types",
+              "label": "Query Types"
+            },
+            {
+              "value": "Query Filters",
+              "label": "Query Filters"
+            },
+            {
+              "value": "Customer Outreach",
+              "label": "Customer Outreach"
+            },
+            {
+              "value": "Purchase Stores",
+              "label": "Purchase Stores"
+            },
+            {
+              "value": "Countries",
+              "label": "Countries"
+            },
+            {
+              "value": "Query Statuses",
+              "label": "Query Statuses"
+            }
+          ]
+        },
+        {
+          "tag": "INPUT",
+          "id": "master-search",
+          "type": "text",
+          "label": "Search master data",
+          "required": false,
+          "disabled": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "+ Main category",
+          "disabled": false,
+          "action": "category-add-main"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "+ Child category",
+          "disabled": false,
+          "action": "category-add-child"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "+ Child",
+          "disabled": false,
+          "action": "category-add-child"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "+ Child",
+          "disabled": false,
+          "action": "category-add-child"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "+ Child",
+          "disabled": false,
+          "action": "category-add-child"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "+ Child",
+          "disabled": false,
+          "action": "category-add-child"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "+ Child",
+          "disabled": false,
+          "action": "category-add-child"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "+ Child",
+          "disabled": false,
+          "action": "category-add-child"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "+ Child",
+          "disabled": false,
+          "action": "category-add-child"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "+ Child",
+          "disabled": false,
+          "action": "category-add-child"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "+ Child",
+          "disabled": false,
+          "action": "category-add-child"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        }
+      ],
+      "tabs": []
+    },
+    {
+      "id": "category-shortcut",
+      "label": "▸\nCategory Management",
+      "title": "Category Management",
+      "text": "Category Management\n\nCreate main categories and child categories. Keep agent choices consistent.\n\nCategories\nProducts\nQuery Channels\nQuery Types\nQuery Filters\nCustomer Outreach\nPurchase Stores\nCountries\nQuery Statuses\n+ Main category\n+ Child category\nAgents cannot create categories while raising tickets. Query type → main category → child category uses these approved choices.\nCategory hierarchy\tAvailability / usage\tManage\n\n▸\nProduct\nComplaint · Main category · 3 children\n\tActive\n15 linked tickets (includes children)\n\t\n+ Child\nEdit\nArchive\nDelete\n\n\n↳\nTap leakage\nComplaint · Child category\n\tActive\n5 linked tickets\n\t\nEdit\nArchive\nDelete\n\n\n↳\nDamaged product\nComplaint · Child category\n\tActive\n6 linked tickets\n\t\nEdit\nArchive\nDelete\n\n\n↳\nFilter fitting issue\nComplaint · Child category\n\tActive\n4 linked tickets\n\t\nEdit\nArchive\nDelete\n\n\n▸\nDelivery\nComplaint · Main category · 1 child\n\tActive\n6 linked tickets (includes children)\n\t\n+ Child\nEdit\nArchive\nDelete\n\n\n↳\nDelivery delay\nComplaint · Child category\n\tActive\n6 linked tickets\n\t\nEdit\nArchive\nDelete\n\n\n▸\nOrder\nComplaint · Main category · 3 children\n\tActive\n13 linked tickets (includes children)\n\t\n+ Child\nEdit\nArchive\nDelete\n\n\n↳\nMissing item\nComplaint · Child category\n\tActive\n4 linked tickets\n\t\nEdit\nArchive\nDelete\n\n\n↳\nWrong item\nComplaint · Child category\n\tActive\n4 linked tickets\n\t\nEdit\nArchive\nDelete\n\n\n↳\nAddress mismatch\nComplaint · Child category\n\tActive\n5 linked tickets\n\t\nEdit\nArchive\nDelete\n\n\n▸\nFinance\nComplaint · Main category · 1 child\n\tActive\n5 linked tickets (includes children)\n\t\n+ Child\nEdit\nArchive\nDelete\n\n\n↳\nRefund delay\nComplaint · Child category\n\tActive\n5 linked tickets\n\t\nEdit\nArchive\nDelete\n\n\n▸\nReplacement\nComplaint · Main category · 1 child\n\tActive\n4 linked tickets (includes children)\n\t\n+ Child\nEdit\nArchive\nDelete\n\n\n↳\nReplacement delay\nComplaint · Child category\n\tActive\n4 linked tickets\n\t\nEdit\nArchive\nDelete\n\n\n▸\nReturn\nComplaint · Main category · 1 child\n\tActive\n5 linked tickets (includes children)\n\t\n+ Child\nEdit\nArchive\nDelete\n\n\n↳\nReturn label issue\nComplaint · Child category\n\tActive\n5 linked tickets\n\t\nEdit\nArchive\nDelete\n\n\n▸\nProduct\nEnquiry · Main category · 2 children\n\tActive\n10 linked tickets (includes children)\n\t\n+ Child\nEdit\nArchive\nDelete\n\n\n↳\nCompatibility\nEnquiry · Child category\n\tActive\n5 linked tickets\n\t\nEdit\nArchive\nDelete\n\n\n↳\nDimensions\nEnquiry · Child category\n\tActive\n5 linked tickets\n\t\nEdit\nArchive\nDelete\n\n\n▸\nOrder\nEnquiry · Main category · 1 child\n\tActive\n4 linked tickets (includes children)\n\t\n+ Child\nEdit\nArchive\nDelete\n\n\n↳\nAvailability\nEnquiry · Child category\n\tActive\n4 linked tickets\n\t\nEdit\nArchive\nDelete\n\n\n▸\nFollow-up\nCommunication · Main category\n\tActive\n0 linked tickets (includes children)\n\t\n+ Child\nEdit\nArchive\nDelete\nDelete unused categories. If a category or its children are already used in tickets, archive them to remove them from new queries while preserving history. “Needs classification” remains an approved fallback for supervisor review.",
+      "controls": [
+        {
+          "tag": "SELECT",
+          "id": "master-select",
+          "type": "select-one",
+          "label": "Master data section",
+          "required": false,
+          "disabled": false,
+          "options": [
+            {
+              "value": "Categories",
+              "label": "Categories"
+            },
+            {
+              "value": "Products",
+              "label": "Products"
+            },
+            {
+              "value": "Query Channels",
+              "label": "Query Channels"
+            },
+            {
+              "value": "Query Types",
+              "label": "Query Types"
+            },
+            {
+              "value": "Query Filters",
+              "label": "Query Filters"
+            },
+            {
+              "value": "Customer Outreach",
+              "label": "Customer Outreach"
+            },
+            {
+              "value": "Purchase Stores",
+              "label": "Purchase Stores"
+            },
+            {
+              "value": "Countries",
+              "label": "Countries"
+            },
+            {
+              "value": "Query Statuses",
+              "label": "Query Statuses"
+            }
+          ]
+        },
+        {
+          "tag": "INPUT",
+          "id": "master-search",
+          "type": "text",
+          "label": "Search master data",
+          "required": false,
+          "disabled": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "+ Main category",
+          "disabled": false,
+          "action": "category-add-main"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "+ Child category",
+          "disabled": false,
+          "action": "category-add-child"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "+ Child",
+          "disabled": false,
+          "action": "category-add-child"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "+ Child",
+          "disabled": false,
+          "action": "category-add-child"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "+ Child",
+          "disabled": false,
+          "action": "category-add-child"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "+ Child",
+          "disabled": false,
+          "action": "category-add-child"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "+ Child",
+          "disabled": false,
+          "action": "category-add-child"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "+ Child",
+          "disabled": false,
+          "action": "category-add-child"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "+ Child",
+          "disabled": false,
+          "action": "category-add-child"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "+ Child",
+          "disabled": false,
+          "action": "category-add-child"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "+ Child",
+          "disabled": false,
+          "action": "category-add-child"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "category-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "category-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "category-delete"
+        }
+      ],
+      "tabs": []
+    },
+    {
+      "id": "product-shortcut",
+      "label": "▦\nProduct Management",
+      "title": "Product Management",
+      "text": "Product Management\n\nMaintain approved products. Agents select a product instead of typing its name.\n\nCategories\nProducts\nQuery Channels\nQuery Types\nQuery Filters\nCustomer Outreach\nPurchase Stores\nCountries\nQuery Statuses\n+ Create product\nProduct / SKU\tBrand / capacity\tStatus\tManage\nGravity unit / 8 litres\nSKU-1\n\tBoth brands\n8 litres\n\tActive\t\nEdit\nArchive\nDelete\n\nCarbon cartridge set\nSKU-2\n\tBoth brands\nNo fixed capacity\n\tActive\t\nEdit\nArchive\nDelete\n\nGravity unit / 6 litres\nSKU-3\n\tBoth brands\n6 litres\n\tActive\t\nEdit\nArchive\nDelete\n\nReplacement tap\nSKU-4\n\tBoth brands\nNo fixed capacity\n\tActive\t\nEdit\nArchive\nDelete\nProduct creation requires a unique SKU, a name and a brand choice. New products appear in New Query for the selected brand. Historical ticket snapshots remain readable after renaming or archiving.",
+      "controls": [
+        {
+          "tag": "SELECT",
+          "id": "master-select",
+          "type": "select-one",
+          "label": "Master data section",
+          "required": false,
+          "disabled": false,
+          "options": [
+            {
+              "value": "Categories",
+              "label": "Categories"
+            },
+            {
+              "value": "Products",
+              "label": "Products"
+            },
+            {
+              "value": "Query Channels",
+              "label": "Query Channels"
+            },
+            {
+              "value": "Query Types",
+              "label": "Query Types"
+            },
+            {
+              "value": "Query Filters",
+              "label": "Query Filters"
+            },
+            {
+              "value": "Customer Outreach",
+              "label": "Customer Outreach"
+            },
+            {
+              "value": "Purchase Stores",
+              "label": "Purchase Stores"
+            },
+            {
+              "value": "Countries",
+              "label": "Countries"
+            },
+            {
+              "value": "Query Statuses",
+              "label": "Query Statuses"
+            }
+          ]
+        },
+        {
+          "tag": "INPUT",
+          "id": "master-search",
+          "type": "text",
+          "label": "Search master data",
+          "required": false,
+          "disabled": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "+ Create product",
+          "disabled": false,
+          "action": "product-add"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "product-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "product-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "product-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "product-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "product-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "product-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "product-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "product-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "product-delete"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Edit",
+          "disabled": false,
+          "action": "product-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Archive",
+          "disabled": false,
+          "action": "product-toggle"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Delete",
+          "disabled": false,
+          "action": "product-delete"
+        }
+      ],
+      "tabs": []
+    },
+    {
+      "id": "users",
+      "label": "♙\nUser Management",
+      "title": "User Management",
+      "text": "User Management\n\nAssign each person their roles and operational scope. Review effective permissions.\n\n+ Create user\n+ Create role\nUsers\nRoles & permissions\nAdmin activity\nUser / email\tAssigned roles\tScope\tStatus\tActions\nRamesh\nramesh.demo@example.com\n\tSuper Admin\tAll markets\tActive\tRoles & access\nRithika\nrithika.demo@example.com\n\tCS Executive\tAll markets\tActive\tRoles & access\nBrinda\nbrinda.demo@example.com\n\tCS Executive\tAll markets\tActive\tRoles & access\nNaveen\nnaveen.demo@example.com\n\tCountry Manager + CS Executive\tUnited Kingdom\tActive\tRoles & access\nDivya\ndivya.demo@example.com\n\tHead of CS + CS Executive\tAll markets\tActive\tRoles & access\nDemo logistics\nlogistics.demo@example.com\n\tLogistics\tAll warehouses\tActive\tRoles & access\nVijaykumar\nfinance.demo@example.com\n\tFinance\tAll markets\tActive\tRoles & access",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "+ Create user",
+          "disabled": false,
+          "action": "user-add"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "+ Create role",
+          "disabled": false,
+          "action": "role-add"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Users",
+          "disabled": false,
+          "action": "tab"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Roles & permissions",
+          "disabled": false,
+          "action": "tab"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Admin activity",
+          "disabled": false,
+          "action": "tab"
+        },
+        {
+          "tag": "INPUT",
+          "id": "admin-search",
+          "type": "text",
+          "label": "Search administration",
+          "required": false,
+          "disabled": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Roles & access",
+          "disabled": false,
+          "action": "user-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Roles & access",
+          "disabled": false,
+          "action": "user-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Roles & access",
+          "disabled": false,
+          "action": "user-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Roles & access",
+          "disabled": false,
+          "action": "user-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Roles & access",
+          "disabled": false,
+          "action": "user-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Roles & access",
+          "disabled": false,
+          "action": "user-edit"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Roles & access",
+          "disabled": false,
+          "action": "user-edit"
+        }
+      ],
+      "tabs": [
+        "Users",
+        "Roles & permissions",
+        "Admin activity"
+      ]
+    },
+    {
+      "id": "resets",
+      "label": "⌑\nUser Profile Requests",
+      "title": "User Profile Requests",
+      "text": "User Profile Requests\n\nLegacy password-reset queue · Invitation and reset results remain explicit.\n\nRequest\tAccount\tState\tAction\nRESET-101\tbrinda.demo@example.com\tExpired\tReview reset\nRESET-102\tunknown.demo@example.com\tNot found\tReview reset\nThis prototype does not send reset links, store passwords or authenticate users. Review the proposed handling through each request.",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Review reset",
+          "disabled": false,
+          "action": "reset-account"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Review reset",
+          "disabled": false,
+          "action": "reset-account"
+        }
+      ],
+      "tabs": []
+    },
+    {
+      "id": "profile",
+      "label": "◇\nProfile & Security",
+      "title": "Profile & Security",
+      "text": "Profile & Security\n\nYour demo identity and display preferences.\n\nMy profile\nName\nRamesh\nEmail\nramesh.demo@example.com\nAssigned roles\nSuper Admin\nTime zone\nIndia Standard Time · UTC +05:30\nAccess scope\nAll markets\nAccount security\nThe role menu is a review aid. Production sign-in, session controls and permission enforcement require the application backend.\nRequest password reset\nView my permissions\n\nRefresh clears all prototype changes. Do not enter real customer information or passwords.",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "Request password reset",
+          "disabled": false,
+          "action": "my-reset"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "type": "button",
+          "label": "View my permissions",
+          "disabled": false,
+          "action": "my-permissions"
+        }
+      ],
+      "tabs": []
+    }
+  ],
+  "tokens": {
+    "viewport": {
+      "width": 1536,
+      "height": 720
+    },
+    "bodyFont": "\"DM Sans\", Arial, sans-serif",
+    "bodySize": "16px",
+    "rootVariables": {
+      "--teal-dark": "#006269",
+      "--muted": "#63798b",
+      "--navy": "#17364b",
+      "--red": "#af493e",
+      "--line": "#dce6ec",
+      "--pale": "#e5f4ef",
+      "--ink": "#18354b",
+      "--bg": "#f2f6f8",
+      "--amber": "#fff2d7",
+      "--shadow": "0 16px 48px #19364b12",
+      "--teal": "#007e83"
+    },
+    "sidebarWidth": 226
+  }
+}

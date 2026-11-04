@@ -1,0 +1,387 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Support Desk V6 — High-Level Design</title><style>
+@page { size:A4; margin:17mm 13mm 18mm; }
+*{box-sizing:border-box}body{font:11pt/1.52 'Segoe UI',Arial,sans-serif;color:#18354b;background:white;margin:0}
+main{max-width:1080px;margin:auto;padding:30px}h1,h2,h3{line-height:1.2;color:#17364b;break-after:avoid}
+h1{font-size:30px;border-bottom:4px solid #007e83;padding-bottom:15px}h2{font-size:22px;margin:32px 0 13px}h3{font-size:17px;margin:23px 0 10px}
+p,li{orphans:3;widows:3}a{color:#006269;text-decoration:none}code{font:9pt/1.4 Consolas,monospace;overflow-wrap:anywhere;background:#f0f5f7;padding:1px 3px}
+pre{font:9pt/1.5 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;border:1px solid #dce6ec;background:#f5f8fa;padding:13px;border-radius:5px}
+pre code{background:none;padding:0}table{border-collapse:collapse;width:100%;margin:15px 0;font-size:9.1pt;table-layout:fixed}
+th{background:#e5f4ef;text-align:left;color:#17364b}td,th{border:1px solid #dce6ec;vertical-align:top;padding:7px 8px;overflow-wrap:anywhere}
+tr{break-inside:avoid}thead{display:table-header-group}table code{font-size:8.2pt}blockquote{margin:15px 0;border-left:4px solid #007e83;padding:10px 15px;background:#f2f6f8}
+.document-meta{font-size:10pt;color:#63798b;border-bottom:1px solid #dce6ec;padding-bottom:15px;margin-bottom:20px}.toc{background:#f2f6f8;border:1px solid #dce6ec;padding:14px 22px;margin:20px 0}
+.toc ul{margin:3px 0;padding-left:20px}.toc>ul{padding-left:16px}.mermaid{border:1px solid #dce6ec;background:#fafcfd;padding:14px;text-align:center;break-inside:avoid}
+.mermaid svg{width:100%;max-width:100%;height:auto;max-height:235mm}.status{color:#006269;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:10pt}
+.mermaid .edgeLabel rect{fill:#f8fbfc!important;stroke:none!important}.mermaid .edgeLabel text{fill:#18354b!important}
+@media print{body{font-size:9.2pt;line-height:1.43}main{padding:0;max-width:none}h1{font-size:25px}h2{font-size:19px;margin-top:23px}h3{font-size:14px}table{font-size:7.8pt}td,th{padding:5px 6px}table code{font-size:7pt}pre,pre code{font-size:7.8pt}.toc{font-size:8.5pt}.mermaid{padding:7px}}
+</style></head><body><main><div class="status">Support Desk V6 · Design handoff</div><div class="document-meta">31 October 2026 · Version 1.0 · Reviewable design; not an implementation certification</div><div class="toc">
+<ul>
+<li><a href="#1-purpose-and-source-authority">1. Purpose and source authority</a></li>
+<li><a href="#2-confirmed-scope-and-exclusions">2. Confirmed scope and exclusions</a></li>
+<li><a href="#3-users-visibility-and-authority">3. Users, visibility and authority</a></li>
+<li><a href="#4-system-architecture">4. System architecture</a></li>
+<li><a href="#5-uiux-architecture">5. UI/UX architecture</a></li>
+<li><a href="#6-data-and-consistency-architecture">6. Data and consistency architecture</a></li>
+<li><a href="#7-main-operating-flows">7. Main operating flows</a></li>
+<li><a href="#8-security-files-and-operations">8. Security, files and operations</a></li>
+<li><a href="#9-deployment-proposal-and-service-targets">9. Deployment proposal and service targets</a></li>
+<li><a href="#10-delivery-and-acceptance">10. Delivery and acceptance</a></li>
+</ul>
+</div>
+<h1 id="support-desk-v6-high-level-design">Support Desk V6 — High-Level Design</h1>
+<p>Version 1.0 · 31 October 2026 · Reviewable production design</p>
+<h2 id="1-purpose-and-source-authority">1. Purpose and source authority</h2>
+<p>Recreate the reviewed Support Desk application as a persistent, authenticated, multi-user support portal. Preserve its shared workspace, fast controlled intake and guided checks for consequential actions. Match the prototype's visual language while replacing simulation with dependable services.</p>
+<p>This HLD and the <a href="Support_Desk_LLD.html">LLD</a> use:</p>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Identity and use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DEV</td>
+<td><code>Support_Desk_V6_Development_Specification.pdf</code>, 100 pages; functional, production and acceptance requirements</td>
+</tr>
+<tr>
+<td>VAL</td>
+<td><code>Support_Desk_Final_Validation_Report.pdf</code>, 12 pages; historical correction/regression evidence</td>
+</tr>
+<tr>
+<td>AWS</td>
+<td><code>Support_Desk_V6_Proposed_AWS_Architecture.pdf</code>, 2 pages; candidate deployment topology</td>
+</tr>
+<tr>
+<td>LIVE</td>
+<td>Signed-in review at <code>https://cs-portal-guided-review.ramesh-s325387.chatgpt.site/</code>; captured screens and delivered source</td>
+</tr>
+<tr>
+<td>USER</td>
+<td>Current conversation decisions; these override conflicting older proposals</td>
+</tr>
+</tbody>
+</table>
+<p>Keep observed behavior, production requirements and design proposals separate. Where documents and live behavior disagree, record the conflict and ask the product owner; do not silently prefer either. Source hashes are in <a href="reference/source-manifest.json">the manifest</a>. Live source capture is a separate identity, not verified repository provenance.</p>
+<h2 id="2-confirmed-scope-and-exclusions">2. Confirmed scope and exclusions</h2>
+<h3 id="21-confirmed-decisions">2.1 Confirmed decisions</h3>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>Confirmed direction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Target</td>
+<td>Production application, with real identity, durable records and multi-user access</td>
+</tr>
+<tr>
+<td>UI</td>
+<td>Preserve layout, wording and styling; apply required accessibility and production corrections</td>
+</tr>
+<tr>
+<td>Technology</td>
+<td>React/TypeScript frontend; TypeScript modular API and worker; PostgreSQL</td>
+</tr>
+<tr>
+<td>Launch</td>
+<td>Manual customer communications, order verification, shipments and payment-result evidence</td>
+</tr>
+<tr>
+<td>Approval</td>
+<td>One eligible manager decision; <strong>self-approval is allowed</strong>, including materially edited requests, subject to ordinary authority/scope/state checks</td>
+</tr>
+<tr>
+<td>Test deadlines</td>
+<td>Retain demo elapsed-hour defaults for testing; production SLA targets remain unapproved</td>
+</tr>
+<tr>
+<td>Deployment</td>
+<td>AWS remains a candidate; no cloud provisioning or cost commitment is approved</td>
+</tr>
+</tbody>
+</table>
+<h3 id="22-functional-scope">2.2 Functional scope</h3>
+<p>Deliver one shared customer directory across brands, shared ticket/history visibility, controlled intake, ticket collaboration, revisioned service approvals, returns/inspection/waivers, replacements/cancellation, refund authorisation/reconciliation, dispute tracking, follow-ups/reminders, Insights, eight export datasets and administration/master data.</p>
+<p>Real migration preview/publishing is required, but source-specific mappings and cutover need actual legacy data. Keep duplicate review and keep-separate decisions. Irreversible customer merge is a separately gated future operation.</p>
+<p>Actual email ingestion/sending, Shopify/order verification, carrier booking/tracking, WMS feeds and payment initiation are later integrations. A saved portal record must never claim that one of these external actions occurred without independently recorded evidence. Identity-provider invitations/recovery are account-security operations and are distinct from customer communication integrations. Their provider and delivery policy remain open. (DEV pp.4, 11, 18–20, 94–98.)</p>
+<h2 id="3-users-visibility-and-authority">3. Users, visibility and authority</h2>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Main responsibility</th>
+<th>Important boundary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CS Executive</td>
+<td>Lookup/intake, customer/ticket work, communications, follow-ups</td>
+<td>No final service/refund/waiver approval from CS role alone; no default export</td>
+</tr>
+<tr>
+<td>Country Manager</td>
+<td>Service decisions within assigned country; CS work when granted</td>
+<td>Global shared reads do not imply global decisions</td>
+</tr>
+<tr>
+<td>Head of CS</td>
+<td>Cross-market manager decisions and oversight</td>
+<td>Logistics, finance and correction grants are not implied</td>
+</tr>
+<tr>
+<td>Logistics</td>
+<td>RMA, parcel matching, physical receipt, cancellation checks, replacement dispatch</td>
+<td>Receipt is separate from carrier-delivered status and payment</td>
+</tr>
+<tr>
+<td>Finance</td>
+<td>External refund attempt outcomes and reconciliation; dispute work when granted</td>
+<td>Finance grant does not confer manager approval authority</td>
+</tr>
+<tr>
+<td>Data Steward</td>
+<td>Protected corrections, import and duplicate review</td>
+<td>No default ticket work or real merge execution</td>
+</tr>
+<tr>
+<td>Super Admin</td>
+<td>Full administration and operational controls</td>
+<td>Cannot erase audit or bypass business invariants; last active administrator protected</td>
+</tr>
+</tbody>
+</table>
+<p>Grants are a union across roles. Reserved role identities <code>super</code>, <code>head</code>, <code>cm</code> confer manager authority under explicit scope checks; editable role names do not. There is no generic <code>approve</code> grant. Self-approval is allowed, but its requester/approver identity must remain visible in audit. Preserve separate account, action, market and stage eligibility checks. (DEV pp.5–8, 64–70; user decision.)</p>
+<h2 id="4-system-architecture">4. System architecture</h2>
+<p>Use a <strong>modular monolith</strong>: one application API, one independently deployed worker from the same domain code, one relational database and private object storage. This keeps approvals, receipt quantities, funds and closure within transactional boundaries. Do not start with independently deployed domain microservices.</p>
+<pre class="mermaid" data-processed="true"><svg id="mermaid-1793425632763" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="flowchart" style="max-width: 889.328125px;" viewBox="0 0 889.328125 783.6570434570312" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#mermaid-1793425632763{font-family:Segoe UI,Arial;font-size:16px;fill:#18354b;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#mermaid-1793425632763 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#mermaid-1793425632763 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#mermaid-1793425632763 .error-icon{fill:hsl(340, 40.5405405405%, 97.7450980392%);}#mermaid-1793425632763 .error-text{fill:rgb(3.4189189189, 8.0810810811, 6.5270270271);stroke:rgb(3.4189189189, 8.0810810811, 6.5270270271);}#mermaid-1793425632763 .edge-thickness-normal{stroke-width:1px;}#mermaid-1793425632763 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-1793425632763 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-1793425632763 .edge-thickness-invisible{stroke-width:0;fill:none;}#mermaid-1793425632763 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-1793425632763 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-1793425632763 .marker{fill:#63798b;stroke:#63798b;}#mermaid-1793425632763 .marker.cross{stroke:#63798b;}#mermaid-1793425632763 svg{font-family:Segoe UI,Arial;font-size:16px;}#mermaid-1793425632763 p{margin:0;}#mermaid-1793425632763 .label{font-family:Segoe UI,Arial;color:#18354b;}#mermaid-1793425632763 .cluster-label text{fill:rgb(3.4189189189, 8.0810810811, 6.5270270271);}#mermaid-1793425632763 .cluster-label span{color:rgb(3.4189189189, 8.0810810811, 6.5270270271);}#mermaid-1793425632763 .cluster-label span p{background-color:transparent;}#mermaid-1793425632763 .label text,#mermaid-1793425632763 span{fill:#18354b;color:#18354b;}#mermaid-1793425632763 .node rect,#mermaid-1793425632763 .node circle,#mermaid-1793425632763 .node ellipse,#mermaid-1793425632763 .node polygon,#mermaid-1793425632763 .node path{fill:#e5f4ef;stroke:#007e83;stroke-width:1px;}#mermaid-1793425632763 .rough-node .label text,#mermaid-1793425632763 .node .label text,#mermaid-1793425632763 .image-shape .label,#mermaid-1793425632763 .icon-shape .label{text-anchor:middle;}#mermaid-1793425632763 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-1793425632763 .rough-node .label,#mermaid-1793425632763 .node .label,#mermaid-1793425632763 .image-shape .label,#mermaid-1793425632763 .icon-shape .label{text-align:center;}#mermaid-1793425632763 .node.clickable{cursor:pointer;}#mermaid-1793425632763 .root .anchor path{fill:#63798b!important;stroke-width:0;stroke:#63798b;}#mermaid-1793425632763 .arrowheadPath{fill:#0b0b0b;}#mermaid-1793425632763 .edgePath .path{stroke:#63798b;stroke-width:2.0px;}#mermaid-1793425632763 .flowchart-link{stroke:#63798b;fill:none;}#mermaid-1793425632763 .edgeLabel{background-color:hsl(40, 40.5405405405%, 92.7450980392%);text-align:center;}#mermaid-1793425632763 .edgeLabel p{background-color:hsl(40, 40.5405405405%, 92.7450980392%);}#mermaid-1793425632763 .edgeLabel rect{opacity:0.5;background-color:hsl(40, 40.5405405405%, 92.7450980392%);fill:hsl(40, 40.5405405405%, 92.7450980392%);}#mermaid-1793425632763 .labelBkg{background-color:rgba(244, 239, 229, 0.5);}#mermaid-1793425632763 .cluster rect{fill:hsl(340, 40.5405405405%, 97.7450980392%);stroke:hsl(340, 0.5405405405%, 87.7450980392%);stroke-width:1px;}#mermaid-1793425632763 .cluster text{fill:rgb(3.4189189189, 8.0810810811, 6.5270270271);}#mermaid-1793425632763 .cluster span{color:rgb(3.4189189189, 8.0810810811, 6.5270270271);}#mermaid-1793425632763 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:Segoe UI,Arial;font-size:12px;background:hsl(340, 40.5405405405%, 97.7450980392%);border:1px solid hsl(340, 0.5405405405%, 87.7450980392%);border-radius:2px;pointer-events:none;z-index:100;}#mermaid-1793425632763 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#18354b;}#mermaid-1793425632763 rect.text{fill:none;stroke-width:0;}#mermaid-1793425632763 .icon-shape,#mermaid-1793425632763 .image-shape{background-color:hsl(40, 40.5405405405%, 92.7450980392%);text-align:center;}#mermaid-1793425632763 .icon-shape p,#mermaid-1793425632763 .image-shape p{background-color:hsl(40, 40.5405405405%, 92.7450980392%);padding:2px;}#mermaid-1793425632763 .icon-shape rect,#mermaid-1793425632763 .image-shape rect{opacity:0.5;background-color:hsl(40, 40.5405405405%, 92.7450980392%);fill:hsl(40, 40.5405405405%, 92.7450980392%);}#mermaid-1793425632763 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#mermaid-1793425632763 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#mermaid-1793425632763 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g><marker id="mermaid-1793425632763_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="mermaid-1793425632763_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="mermaid-1793425632763_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="mermaid-1793425632763_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="mermaid-1793425632763_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="mermaid-1793425632763_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path d="M320.047,62L320.047,66.167C320.047,70.333,320.047,78.667,320.047,86.333C320.047,94,320.047,101,320.047,104.5L320.047,108" id="L_Staff_UI_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Staff_UI_0" data-points="W3sieCI6MzIwLjA0Njg3NSwieSI6NjJ9LHsieCI6MzIwLjA0Njg3NSwieSI6ODd9LHsieCI6MzIwLjA0Njg3NSwieSI6MTEyfV0=" marker-end="url(#mermaid-1793425632763_flowchart-v2-pointEnd)"></path><path d="M247.849,166L236.708,170.167C225.566,174.333,203.283,182.667,192.142,190.333C181,198,181,205,181,208.5L181,212" id="L_UI_IDP_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_UI_IDP_0" data-points="W3sieCI6MjQ3Ljg0OTQ1OTEzNDYxNTQsInkiOjE2Nn0seyJ4IjoxODEsInkiOjE5MX0seyJ4IjoxODEsInkiOjIxNn1d" marker-end="url(#mermaid-1793425632763_flowchart-v2-pointEnd)"></path><path d="M392.244,166L403.386,170.167C414.527,174.333,436.811,182.667,447.952,190.333C459.094,198,459.094,205,459.094,208.5L459.094,212" id="L_UI_API_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_UI_API_0" data-points="W3sieCI6MzkyLjI0NDI5MDg2NTM4NDY0LCJ5IjoxNjZ9LHsieCI6NDU5LjA5Mzc1LCJ5IjoxOTF9LHsieCI6NDU5LjA5Mzc1LCJ5IjoyMTZ9XQ==" marker-end="url(#mermaid-1793425632763_flowchart-v2-pointEnd)"></path><path d="M337.375,262.712L304.146,268.093C270.917,273.475,204.458,284.237,171.229,293.119C138,302,138,309,138,312.5L138,316" id="L_API_Policy_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_API_Policy_0" data-points="W3sieCI6MzM3LjM3NSwieSI6MjYyLjcxMTkyMjE0MTExOTJ9LHsieCI6MTM4LCJ5IjoyOTV9LHsieCI6MTM4LCJ5IjozMjB9XQ==" marker-end="url(#mermaid-1793425632763_flowchart-v2-pointEnd)"></path><path d="M138,398L138,402.167C138,406.333,138,414.667,138,422.333C138,430,138,437,138,440.5L138,444" id="L_Policy_DB_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Policy_DB_0" data-points="W3sieCI6MTM4LCJ5IjozOTh9LHsieCI6MTM4LCJ5Ijo0MjN9LHsieCI6MTM4LCJ5Ijo0NDh9XQ==" marker-end="url(#mermaid-1793425632763_flowchart-v2-pointEnd)"></path><path d="M459.094,270L459.094,274.167C459.094,278.333,459.094,286.667,459.094,301.5C459.094,316.333,459.094,337.667,459.094,359C459.094,380.333,459.094,401.667,459.094,422.471C459.094,443.276,459.094,463.552,459.094,483.829C459.094,504.105,459.094,524.381,459.094,545.186C459.094,565.99,459.094,587.324,459.094,608.657C459.094,629.99,459.094,651.324,460.197,665.521C461.3,679.718,463.507,686.778,464.61,690.309L465.713,693.839" id="L_API_Files_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_API_Files_0" data-points="W3sieCI6NDU5LjA5Mzc1LCJ5IjoyNzB9LHsieCI6NDU5LjA5Mzc1LCJ5IjoyOTV9LHsieCI6NDU5LjA5Mzc1LCJ5IjozNTl9LHsieCI6NDU5LjA5Mzc1LCJ5Ijo0MjN9LHsieCI6NDU5LjA5Mzc1LCJ5Ijo0ODMuODI4NTEwMjg0NDIzOH0seyJ4Ijo0NTkuMDkzNzUsInkiOjU0NC42NTcwMjA1Njg4NDc3fSx7IngiOjQ1OS4wOTM3NSwieSI6NjA4LjY1NzAyMDU2ODg0Nzd9LHsieCI6NDU5LjA5Mzc1LCJ5Ijo2NzIuNjU3MDIwNTY4ODQ3N30seyJ4Ijo0NjYuOTA2MjUsInkiOjY5Ny42NTcwMjA1Njg4NDc3fV0=" marker-end="url(#mermaid-1793425632763_flowchart-v2-pointEnd)"></path><path d="M126.22,519.327L124.85,523.549C123.48,527.77,120.74,536.214,121.361,544.019C121.981,551.825,125.962,558.992,127.953,562.576L129.943,566.16" id="L_DB_Worker_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_DB_Worker_0" data-points="W3sieCI6MTI2LjIxOTgyOTc3NDkyMTA4LCJ5Ijo1MTkuMzI2OTQ1NDIwOTY0NX0seyJ4IjoxMTgsInkiOjU0NC42NTcwMjA1Njg4NDc3fSx7IngiOjEzMS44ODU0OTgwNDY4NzUsInkiOjU2OS42NTcwMjA1Njg4NDc3fV0=" marker-end="url(#mermaid-1793425632763_flowchart-v2-pointEnd)"></path><path d="M289.966,510.829L281.575,516.467C273.184,522.105,256.403,533.381,242.943,542.788C229.483,552.195,219.346,559.733,214.277,563.501L209.208,567.27" id="L_Scheduler_Worker_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Scheduler_Worker_0" data-points="W3sieCI6Mjg5Ljk2NTk5MjI5NzU1ODY3LCJ5Ijo1MTAuODI4NTEwMjg0NDIzOH0seyJ4IjoyMzkuNjIxMDkzNzUsInkiOjU0NC42NTcwMjA1Njg4NDc3fSx7IngiOjIwNS45OTgzNTIwNTA3ODEyNSwieSI6NTY5LjY1NzAyMDU2ODg0Nzd9XQ==" marker-end="url(#mermaid-1793425632763_flowchart-v2-pointEnd)"></path><path d="M141.359,647.657L140.057,651.824C138.755,655.99,136.151,664.324,135.397,671.998C134.643,679.673,135.739,686.689,136.287,690.197L136.836,693.705" id="L_Worker_Queue_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Worker_Queue_0" data-points="W3sieCI6MTQxLjM1OTM3NSwieSI6NjQ3LjY1NzAyMDU2ODg0Nzd9LHsieCI6MTMzLjU0Njg3NSwieSI6NjcyLjY1NzAyMDU2ODg0Nzd9LHsieCI6MTM3LjQ1MzEyNSwieSI6Njk3LjY1NzAyMDU2ODg0Nzd9XQ==" marker-end="url(#mermaid-1793425632763_flowchart-v2-pointEnd)"></path><path d="M149.641,697.657L150.292,693.49C150.943,689.324,152.245,680.99,152.896,673.324C153.547,665.657,153.547,658.657,153.547,655.157L153.547,651.657" id="L_Queue_Worker_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Queue_Worker_0" data-points="W3sieCI6MTQ5LjY0MDYyNSwieSI6Njk3LjY1NzAyMDU2ODg0Nzd9LHsieCI6MTUzLjU0Njg3NSwieSI6NjcyLjY1NzAyMDU2ODg0Nzd9LHsieCI6MTUzLjU0Njg3NSwieSI6NjQ3LjY1NzAyMDU2ODg0Nzd9XQ==" marker-end="url(#mermaid-1793425632763_flowchart-v2-pointEnd)"></path><path d="M245.286,569.657L255.088,565.49C264.889,561.324,284.491,552.99,275.27,541.857C266.049,530.724,228.004,516.791,208.982,509.824L189.959,502.858" id="L_Worker_DB_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Worker_DB_0" data-points="W3sieCI6MjQ1LjI4NjM3Njk1MzEyNSwieSI6NTY5LjY1NzAyMDU2ODg0Nzd9LHsieCI6MzA0LjA5Mzc1LCJ5Ijo1NDQuNjU3MDIwNTY4ODQ3N30seyJ4IjoxODYuMjAzMTI1LCJ5Ijo1MDEuNDgxOTM5NjU2NzE0M31d" marker-end="url(#mermaid-1793425632763_flowchart-v2-pointEnd)"></path><path d="M283.547,627.101L337.064,634.693C390.582,642.286,497.617,657.472,543.554,668.928C589.491,680.385,574.331,688.113,566.75,691.977L559.17,695.841" id="L_Worker_Files_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Worker_Files_0" data-points="W3sieCI6MjgzLjU0Njg3NSwieSI6NjI3LjEwMDYwMTAwOTI1ODh9LHsieCI6NjA0LjY1MjM0Mzc1LCJ5Ijo2NzIuNjU3MDIwNTY4ODQ3N30seyJ4Ijo1NTUuNjA2MDE4MDY2NDA2MiwieSI6Njk3LjY1NzAyMDU2ODg0Nzd9XQ==" marker-end="url(#mermaid-1793425632763_flowchart-v2-pointEnd)"></path><path d="M283.547,626.318L340.398,634.041C397.249,641.764,510.951,657.211,581.216,670.832C651.482,684.454,678.312,696.25,691.727,702.149L705.142,708.047" id="L_Worker_Monitor_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Worker_Monitor_0" data-points="W3sieCI6MjgzLjU0Njg3NSwieSI6NjI2LjMxNzYwOTQ0MzA4Nzl9LHsieCI6NjI0LjY1MjM0Mzc1LCJ5Ijo2NzIuNjU3MDIwNTY4ODQ3N30seyJ4Ijo3MDguODAzNDA1NzYxNzE4OCwieSI6NzA5LjY1NzAyMDU2ODg0Nzd9XQ==" marker-end="url(#mermaid-1793425632763_flowchart-v2-pointEnd)"></path><path d="M580.813,263.344L612.379,268.62C643.945,273.896,707.078,284.448,738.645,300.391C770.211,316.333,770.211,337.667,770.211,359C770.211,380.333,770.211,401.667,770.211,422.471C770.211,443.276,770.211,463.552,770.211,483.829C770.211,504.105,770.211,524.381,770.211,545.186C770.211,565.99,770.211,587.324,770.211,608.657C770.211,629.99,770.211,651.324,770.211,667.49C770.211,683.657,770.211,694.657,770.211,700.157L770.211,705.657" id="L_API_Monitor_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_API_Monitor_0" data-points="W3sieCI6NTgwLjgxMjUsInkiOjI2My4zNDQwMjIyOTg2NzE2M30seyJ4Ijo3NzAuMjEwOTM3NSwieSI6Mjk1fSx7IngiOjc3MC4yMTA5Mzc1LCJ5IjozNTl9LHsieCI6NzcwLjIxMDkzNzUsInkiOjQyM30seyJ4Ijo3NzAuMjEwOTM3NSwieSI6NDgzLjgyODUxMDI4NDQyMzh9LHsieCI6NzcwLjIxMDkzNzUsInkiOjU0NC42NTcwMjA1Njg4NDc3fSx7IngiOjc3MC4yMTA5Mzc1LCJ5Ijo2MDguNjU3MDIwNTY4ODQ3N30seyJ4Ijo3NzAuMjEwOTM3NSwieSI6NjcyLjY1NzAyMDU2ODg0Nzd9LHsieCI6NzcwLjIxMDkzNzUsInkiOjcwOS42NTcwMjA1Njg4NDc3fV0=" marker-end="url(#mermaid-1793425632763_flowchart-v2-pointEnd)"></path></g><g class="edgeLabels"><g><rect class="background" style="stroke: none"></rect></g><g><rect class="background" style="stroke: none"></rect></g><g><rect class="background" style="stroke: none"></rect></g><g><rect class="background" style="stroke: none"></rect></g><g><rect class="background" style="stroke: none"></rect></g><g><rect class="background" style="stroke: none"></rect></g><g><rect class="background" style="stroke: none"></rect></g><g><rect class="background" style="stroke: none"></rect></g><g><rect class="background" style="stroke: none"></rect></g><g><rect class="background" style="stroke: none"></rect></g><g><rect class="background" style="stroke: none"></rect></g><g><rect class="background" style="stroke: none"></rect></g><g><rect class="background" style="stroke: none"></rect></g><g><rect class="background" style="stroke: none"></rect></g><g class="edgeLabel"><g class="label" data-id="L_Staff_UI_0" transform="translate(0, 0)"><text y="-10.1"><tspan class="text-outer-tspan" x="0" y="-0.1em" dy="1.1em"></tspan></text></g></g><g class="edgeLabel"><g class="label" data-id="L_UI_IDP_0" transform="translate(0, 0)"><text y="-10.1"><tspan class="text-outer-tspan" x="0" y="-0.1em" dy="1.1em"></tspan></text></g></g><g class="edgeLabel"><g class="label" data-id="L_UI_API_0" transform="translate(0, 0)"><text y="-10.1"><tspan class="text-outer-tspan" x="0" y="-0.1em" dy="1.1em"></tspan></text></g></g><g class="edgeLabel"><g class="label" data-id="L_API_Policy_0" transform="translate(0, 0)"><text y="-10.1"><tspan class="text-outer-tspan" x="0" y="-0.1em" dy="1.1em"></tspan></text></g></g><g class="edgeLabel"><g class="label" data-id="L_Policy_DB_0" transform="translate(0, 0)"><text y="-10.1"><tspan class="text-outer-tspan" x="0" y="-0.1em" dy="1.1em"></tspan></text></g></g><g class="edgeLabel"><g class="label" data-id="L_API_Files_0" transform="translate(0, 0)"><text y="-10.1"><tspan class="text-outer-tspan" x="0" y="-0.1em" dy="1.1em"></tspan></text></g></g><g class="edgeLabel"><g class="label" data-id="L_DB_Worker_0" transform="translate(0, 0)"><text y="-10.1"><tspan class="text-outer-tspan" x="0" y="-0.1em" dy="1.1em"></tspan></text></g></g><g class="edgeLabel"><g class="label" data-id="L_Scheduler_Worker_0" transform="translate(0, 0)"><text y="-10.1"><tspan class="text-outer-tspan" x="0" y="-0.1em" dy="1.1em"></tspan></text></g></g><g class="edgeLabel"><g class="label" data-id="L_Worker_Queue_0" transform="translate(0, 0)"><text y="-10.1"><tspan class="text-outer-tspan" x="0" y="-0.1em" dy="1.1em"></tspan></text></g></g><g class="edgeLabel"><g class="label" data-id="L_Queue_Worker_0" transform="translate(0, 0)"><text y="-10.1"><tspan class="text-outer-tspan" x="0" y="-0.1em" dy="1.1em"></tspan></text></g></g><g class="edgeLabel"><g class="label" data-id="L_Worker_DB_0" transform="translate(0, 0)"><text y="-10.1"><tspan class="text-outer-tspan" x="0" y="-0.1em" dy="1.1em"></tspan></text></g></g><g class="edgeLabel"><g class="label" data-id="L_Worker_Files_0" transform="translate(0, 0)"><text y="-10.1"><tspan class="text-outer-tspan" x="0" y="-0.1em" dy="1.1em"></tspan></text></g></g><g class="edgeLabel"><g class="label" data-id="L_Worker_Monitor_0" transform="translate(0, 0)"><text y="-10.1"><tspan class="text-outer-tspan" x="0" y="-0.1em" dy="1.1em"></tspan></text></g></g><g class="edgeLabel"><g class="label" data-id="L_API_Monitor_0" transform="translate(0, 0)"><text y="-10.1"><tspan class="text-outer-tspan" x="0" y="-0.1em" dy="1.1em"></tspan></text></g></g></g><g class="nodes"><g class="node default" id="flowchart-Staff-0" transform="translate(320.046875, 35)"><rect class="basic label-container" style="" x="-76.2890625" y="-27" width="152.578125" height="54"></rect><g class="label" style="" transform="translate(-46.2890625, -12)"><rect></rect><foreignObject width="92.578125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Staff browser</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-UI-1" transform="translate(320.046875, 139)"><rect class="basic label-container" style="" x="-113.3046875" y="-27" width="226.609375" height="54"></rect><g class="label" style="" transform="translate(-83.3046875, -12)"><rect></rect><foreignObject width="166.609375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>React and TypeScript UI</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-IDP-3" transform="translate(181, 243)"><rect class="basic label-container" style="" x="-106.375" y="-27" width="212.75" height="54"></rect><g class="label" style="" transform="translate(-76.375, -12)"><rect></rect><foreignObject width="152.75" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Staff identity provider</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-API-5" transform="translate(459.09375, 243)"><rect class="basic label-container" style="" x="-121.71875" y="-27" width="243.4375" height="54"></rect><g class="label" style="" transform="translate(-91.71875, -12)"><rect></rect><foreignObject width="183.4375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>TypeScript application API</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-Policy-7" transform="translate(138, 359)"><rect class="basic label-container" style="" x="-130" y="-39" width="260" height="78"></rect><g class="label" style="" transform="translate(-100, -24)"><rect></rect><foreignObject width="200" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>Shared policy and domain modules</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-DB-9" transform="translate(138, 483.8285102844238)"><path d="M0,10.885673959068455 a48.203125,10.885673959068455 0,0,0 96.40625,0 a48.203125,10.885673959068455 0,0,0 -96.40625,0 l0,49.885673959068455 a48.203125,10.885673959068455 0,0,0 96.40625,0 l0,-49.885673959068455" class="basic label-container" style="" transform="translate(-48.203125, -35.82851093860268)"></path><g class="label" style="" transform="translate(-40.703125, -2)"><rect></rect><foreignObject width="81.40625" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>PostgreSQL</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-Files-11" transform="translate(479.09375, 736.6570205688477)"><rect class="basic label-container" style="" x="-130" y="-39" width="260" height="78"></rect><g class="label" style="" transform="translate(-100, -24)"><rect></rect><foreignObject width="200" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>Private evidence and export storage</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-Worker-13" transform="translate(153.546875, 608.6570205688477)"><rect class="basic label-container" style="" x="-130" y="-39" width="260" height="78"></rect><g class="label" style="" transform="translate(-100, -24)"><rect></rect><foreignObject width="200" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>Outbox publisher and background worker</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-Scheduler-14" transform="translate(330.1484375, 483.8285102844238)"><rect class="basic label-container" style="" x="-93.9453125" y="-27" width="187.890625" height="54"></rect><g class="label" style="" transform="translate(-63.9453125, -12)"><rect></rect><foreignObject width="127.890625" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Durable scheduler</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-Queue-17" transform="translate(143.546875, 736.6570205688477)"><rect class="basic label-container" style="" x="-130" y="-39" width="260" height="78"></rect><g class="label" style="" transform="translate(-100, -24)"><rect></rect><foreignObject width="200" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>Job queue and dead-letter queue</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-Monitor-25" transform="translate(770.2109375, 736.6570205688477)"><rect class="basic label-container" style="" x="-111.1171875" y="-27" width="222.234375" height="54"></rect><g class="label" style="" transform="translate(-81.1171875, -12)"><rect></rect><foreignObject width="162.234375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Logs metrics and alerts</p></span></div></foreignObject></g></g></g></g></g></svg></pre>
+<p>Diagram arrows show dependencies and work flow; all traffic uses authenticated/authorised boundaries. Object storage is not public. External customer/commerce/payment adapters are deliberately absent from the launch execution path.</p>
+<h3 id="41-components">4.1 Components</h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Responsibility</th>
+<th>Boundary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Web UI</td>
+<td>Shared shell, navigation, forms, drafts, guided confirmations, reports</td>
+<td>No authoritative balance or permission decisions in browser</td>
+</tr>
+<tr>
+<td>API</td>
+<td>Identity validation, authorised projections, queries, commands, transactions</td>
+<td>Never trust client actor/role, approval status or computed balances</td>
+</tr>
+<tr>
+<td>Domain modules</td>
+<td>Policy, workflow validation, balance and closure evaluation</td>
+<td>Shared by API and worker, not copied into each route</td>
+</tr>
+<tr>
+<td>PostgreSQL</td>
+<td>Transactional records, immutable revisions/events, task state, outbox, idempotency</td>
+<td>Source of truth for workflow decisions</td>
+</tr>
+<tr>
+<td>Worker</td>
+<td>Due scans, reminders, escalation, exports, malware-scan coordination, import processing</td>
+<td>Durable retries; no autonomous payment initiation or business approval</td>
+</tr>
+<tr>
+<td>Object storage</td>
+<td>Quarantined evidence, approved files, generated exports</td>
+<td>Metadata and access checks in API; short-lived access, never public URLs</td>
+</tr>
+<tr>
+<td>Identity provider</td>
+<td>Staff login and identity lifecycle</td>
+<td>Business roles/scope remain server-owned</td>
+</tr>
+</tbody>
+</table>
+<p>Choose Fastify for the proposed TypeScript HTTP layer, SQL migrations with the PostgreSQL driver, and shared schema validation. These are DESIGN defaults, not claims about the prototype. Pin supported dependency versions during implementation. Avoid introducing a search engine, Redis, reporting warehouse or event-sourcing platform until measured need justifies one.</p>
+<h3 id="42-domain-decomposition">4.2 Domain decomposition</h3>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Owns</th>
+<th>Key dependencies</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Access</td>
+<td>Users, roles, grants, scopes, eligible-owner evaluation</td>
+<td>Every command; user/role change impact analysis</td>
+</tr>
+<tr>
+<td>Customer identity</td>
+<td>Shared customers, contacts/aliases, identity review and corrections</td>
+<td>Ticket intake, search, migration</td>
+</tr>
+<tr>
+<td>Catalogue</td>
+<td>Brands, type semantics, category tree, products, countries/warehouses, reference lists</td>
+<td>Intake, scope, service lines</td>
+</tr>
+<tr>
+<td>Ticketing</td>
+<td>Ticket context, classification, claims, timeline, resolution episodes</td>
+<td>Customers, tasks and all closure obligations</td>
+</tr>
+<tr>
+<td>Service</td>
+<td>Return/replacement/cancellation requests, revisions, approvals</td>
+<td>Verified order context, catalogue, task routing</td>
+</tr>
+<tr>
+<td>Returns</td>
+<td>RMA, physical receipt ledger, inspection, collection waivers, parcels</td>
+<td>Service scope, Logistics and manager authority</td>
+</tr>
+<tr>
+<td>Fulfilment</td>
+<td>Replacement shipment/delivery and cancellation/fallback evidence</td>
+<td>Approved scope, returns and refund treatment</td>
+</tr>
+<tr>
+<td>Finance</td>
+<td>Authorisations, amount amendments, attempts, reserved/paid balance</td>
+<td>Verified order identity, service revision and evidence</td>
+</tr>
+<tr>
+<td>Disputes</td>
+<td>Provider deadlines, evidence versions, submission/outcome</td>
+<td>Dispute grant, tasks and closure</td>
+</tr>
+<tr>
+<td>Tasks</td>
+<td>Independent obligations, ownership, deadlines, reminders and miss history</td>
+<td>Source-specific domain transitions</td>
+</tr>
+<tr>
+<td>Reporting/data transfer</td>
+<td>Canonical filters, metrics, exports, staged imports</td>
+<td>Authorised projections, source provenance</td>
+</tr>
+</tbody>
+</table>
+<h2 id="5-uiux-architecture">5. UI/UX architecture</h2>
+<p>Preserve the sidebar groups WORK / REPORTS / SETTINGS, top global search, current identity/role/scope, reminder entry and card/table layout. Replace the demo role selector with actual identity. Remove reset-demo controls from production; keep sample journeys in a synthetic training environment only.</p>
+<p>Navigation comprises My work, Customers, New Query, All Tickets, Ticket Requests, Follow-ups, Logistics, Insights, Exports, Master data, Category Management, Product Management, User Management, User Profile Requests and Profile &amp; Security. Category/Product shortcuts reference the same master entities. Full subviews and field behavior are in LLD §3.</p>
+<p>Preserve distinctions in language and styling: Assigned to / Working now / task owner; lifecycle status / approval state / shipment state / payment outcome; expected / physically received / waived / still due. Show exact revision/item/quantity/amount at consequential confirmations. A copied reply is never a sent reply.</p>
+<p>Long controlled lists become searchable, keyboard-operable selectors. Filters never create new master values. Required production UI states include loading, empty, forbidden, failed save, disconnected claim, stale version and recoverable draft. Preserve identity/role/scope on narrow layouts; tables have deliberate horizontal scrolling. Evaluate 350px, 390px, tablet and desktop widths and WCAG 2.2 AA criteria; this document is not an accessibility certification. (DEV pp.4–5, 21–30; VAL UI-01.)</p>
+<h2 id="6-data-and-consistency-architecture">6. Data and consistency architecture</h2>
+<p>Use immutable IDs and separate display references. Link customers across brands; represent order identity with source namespace + brand + external order reference. Record explicit manual verification rather than treating customer history as order ownership proof. Preserve historical label/actor snapshots alongside current IDs.</p>
+<p>Approved service scope, receipts, waiver decisions, payment evidence, audit and resolution history are immutable records. Current operational state is derived from those records and validated projections. This is a transactional relational application with append-only histories, not full event sourcing.</p>
+<p>Every accepted business command commits domain changes, audit, applicable tasks and outbox records in one transaction. Rejected validation changes none of those business records; sensitive denials may be recorded separately as security events. Use optimistic versions plus aggregate locking where quantities, funds or cross-record gates are at risk.</p>
+<p>An outbox makes database-to-queue handoff recoverable; consumers deduplicate because delivery may repeat. This follows the <a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/transactional-outbox.html">AWS transactional outbox guidance</a>. The worker never uses a reporting projection as approval or closure authority.</p>
+<h3 id="61-invariants-that-must-hold">6.1 Invariants that must hold</h3>
+<ol>
+<li>Shared contact details may belong to different people; no automatic merge or phone-suffix identity selection.</li>
+<li>Only the exact current approved revision permits execution; master renames do not rewrite approval snapshots.</li>
+<li>Waiver approval changes collection obligation, never physical receipt or refund authority.</li>
+<li>Advance replacement keeps inbound and outbound obligations independent.</li>
+<li>Pending/unknown refund attempts reserve authority; final failed/succeeded attempts cannot be overwritten.</li>
+<li>Reassignment, rescheduling or snooze cannot erase first-miss attribution.</li>
+<li>Resolve and Close re-evaluate every current domain obligation and open task, not a browser status flag.</li>
+<li>Access changes cannot strand open work or remove the final active Super Admin.</li>
+</ol>
+<h2 id="7-main-operating-flows">7. Main operating flows</h2>
+<h3 id="intake-to-ordinary-resolution">Intake to ordinary resolution</h3>
+<p>Lookup exact contact → choose person if ambiguous → inspect history → select controlled issue details → create ticket and owned task → claim work → record actual updates/follow-ups → resolve when all gates pass → reviewed closure. Unclassified intake creates eligible-manager classification work; generic completion cannot bypass it.</p>
+<h3 id="service-to-fulfilment">Service to fulfilment</h3>
+<p>CS submits verified order/item scope → manager reviews exact revision and decides → Logistics records real external execution → CS confirms exact remedy and customer notices → closure gates recheck returns, inspections, finance, disputes and tasks. Need information cycles do not create a scope revision. Material scope changes do and require a fresh decision.</p>
+<h3 id="refund-to-reconciliation">Refund to reconciliation</h3>
+<p>CS/Finance requests exact authorisation → eligible manager decides → Finance records an external attempt → unknown/pending amount remains reserved → reconcile to immutable success/failure → retry a failed amount only as a distinct attempt → CS records customer notice. Portal actions record evidence; they do not send funds.</p>
+<h3 id="late-arrivalreopening">Late arrival/reopening</h3>
+<p>Explicit authorised reopen → preserve previous resolution and all prior approvals → record late physical receipt/inspection → reduce effective waiver balance without rewriting its original decision → complete reopened work → re-evaluate resolution and closure.</p>
+<h2 id="8-security-files-and-operations">8. Security, files and operations</h2>
+<p>Use invite-only staff identity and server-owned permissions. Provider choice, MFA/session/recovery settings remain decisions; recommend MFA for privileged and finance users. Validate tokens rather than merely decoding them; the <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html">Cognito verification guide</a> describes the checks if Cognito is selected. Current account/grant state is checked after identity validation, so a still-valid token does not preserve removed business access.</p>
+<p>Use authorised search projections and explicit field whitelists. Enforce export generation and download separately. Exclude credentials, tokens and unnecessary customer/payment content from logs. Ordinary application roles, including Super Admin, cannot modify audit history.</p>
+<p>Uploads pass size/type/checksum checks, quarantine and malware scanning before being usable as evidence. Download requests check current permissions. Record export query/snapshot/schema/checksum/row count, expiry and download audit. Retention periods, jurisdictional rules and file limits remain explicit decisions.</p>
+<p>Observe request latency/errors, lock conflicts, stale commands, outbox age, job lag, DLQ count, overdue work, stranded-task eligibility, failed exports/scans and failed identity operations. Keep business audit distinct from infrastructure audit. Rehearse database restoration, object recovery, worker replay and release rollback.</p>
+<h2 id="9-deployment-proposal-and-service-targets">9. Deployment proposal and service targets</h2>
+<p>The logical design can run on another approved platform without changing business semantics. If AWS is selected, map the components as follows; region, sizing and spend remain open.</p>
+<table>
+<thead>
+<tr>
+<th>Logical component</th>
+<th>Proposed AWS service</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HTTPS entry / static frontend</td>
+<td>Route 53, ACM, CloudFront + WAF, private S3 UI bucket</td>
+</tr>
+<tr>
+<td>API / worker</td>
+<td>ALB to ECS Fargate API; separately scalable Fargate worker</td>
+</tr>
+<tr>
+<td>Transactional store</td>
+<td>Private RDS PostgreSQL; Multi-AZ subject to agreed availability target</td>
+</tr>
+<tr>
+<td>Identity</td>
+<td>Cognito or federated organisational identity</td>
+</tr>
+<tr>
+<td>Jobs / scheduling</td>
+<td>SQS + DLQ, EventBridge Scheduler</td>
+</tr>
+<tr>
+<td>Evidence / exports</td>
+<td>Separate private S3 storage, KMS, quarantine/scan path</td>
+</tr>
+<tr>
+<td>Operations</td>
+<td>IAM task roles, Secrets Manager, CloudWatch, CloudTrail, ECR and infrastructure as code</td>
+</tr>
+</tbody>
+</table>
+<p>API/worker/database use private subnets. Public entry is restricted to HTTPS; constrain origin access and validate CloudFront-to-origin traffic. Do not cache authenticated API responses in a shared CDN cache. Separate development, staging and production accounts/resources and secrets. (AWS pp.1–2.)</p>
+<p>Proposed, unratified targets from DEV p.10: p95 normal save/search ≤2 seconds; initial usable view ≤3 seconds; due-work processing ≤60 seconds after transition. Validate against agreed users, records, files and event rates. Uptime, RPO/RTO, retention, load envelope and monthly budget are <strong>OPEN</strong>, not promises.</p>
+<h2 id="10-delivery-and-acceptance">10. Delivery and acceptance</h2>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Deliverable</th>
+<th>Exit evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Identity/access, shared catalogue/customer data, intake, tickets, search, audit</td>
+<td>Multi-role direct-API checks, draft/identity/classification and concurrent-edit tests</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Complete approval-to-closure service/returns/waivers/fulfilment/finance/dispute paths and durable tasks</td>
+<td>End-to-end operational cases, race tests, no bypass/overpayment/history loss</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Insights, eight stable exports, actual import preview/publish, administration hardening</td>
+<td>Metric boundary/reconciliation tests, parsed downloads, migration replay/stale conflict tests</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Migration rehearsal, usability/security/recovery/load verification</td>
+<td>Signed UAT, restore/replay evidence, accessibility review and release rollback exercise</td>
+</tr>
+</tbody>
+</table>
+<p>Adapt the supplied acceptance criteria and 17 corrected-issue regressions; do not claim the historical test counts certify the new implementation. Explicitly test direct API denial, stale/revoked roles, wrong market, concurrent receipt/waiver, refund attempts, scope revision/dispatch, closure/new obligation and last-admin removal. Business owners sign off CS intake/closure, Logistics physical controls, Finance balances and technical operations separately.</p>
+<p>The <a href="Decisions.html">decision register</a> lists release gates. There is no approved silent fallback for an unresolved monetary, SLA, privacy or identity policy. Safe unrelated modules can proceed while affected actions remain gated.</p></main><div class="mermaidTooltip" style="opacity: 0;"></div></body></html>

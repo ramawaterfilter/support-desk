@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "status": "ASSIGNED",
+  "statusReason": "All five required roles are assigned to named individuals from a named-human decision recorded 2026-11-02. Human-dependent gates stay BLOCKED only where a second dependency (an unresolved decision, hosted configuration, or an unestablished roster) remains; see each control's gateReason.",
+  "identityDependentBlocker": "Resolved for assignment: owners, backups, time zones and contacts are now recorded. Remaining caveat: every contact channel is a PLACEHOLDER on the reserved example.com domain and must be replaced with a real incident-reachable contact before it is relied upon. Backup coverage is single-deep per role; no on-call commitment, escalation path or response time is inferred.",
+  "roles": [
+    {
+      "id": "product",
+      "role": "Product owner",
+      "responsibilities": "Business policy, confirmed decisions, scope acceptance, closure evidence and catalogue retirement.",
+      "assignedTo": "Ramesh, Product Owner",
+      "backup": "Vijay",
+      "timezone": "Asia/Kolkata",
+      "contact": "a.mensah@example.com",
+      "status": "ASSIGNED",
+      "blocks": [
+        "D-01 business calendars and targets",
+        "D-13 reviewed closure evidence",
+        "D-14 optional reference intake",
+        "D-18 analytics semantics"
+      ],
+      "contactNote": "PLACEHOLDER - reserved example.com domain; replace with a real incident-reachable contact before relying on it during an incident."
+    },
+    {
+      "id": "technical",
+      "role": "Technical owner",
+      "responsibilities": "Architecture, module boundaries, release authorisation, migrations, dependency and CI decisions, governance register changes.",
+      "assignedTo": "Nice Pal, Staff Engineer",
+      "backup": "Ramesh",
+      "timezone": "Asia/Kolkata",
+      "contact": "r.okafor@example.com",
+      "status": "ASSIGNED",
+      "blocks": [
+        "GOV-13 hosted required checks and branch protection",
+        "GOV-20 governance register change approval",
+        "D-17 idempotency and namespace retention"
+      ],
+      "contactNote": "PLACEHOLDER - reserved example.com domain; replace with a real incident-reachable contact before relying on it during an incident."
+    },
+    {
+      "id": "domain",
+      "role": "CS, Logistics and Finance owners",
+      "responsibilities": "Business-path acceptance for intake, service decisions, receipts, waivers, refunds, fulfilment, disputes and exports.",
+      "assignedTo": "Divya, CS Lead",
+      "backup": "Vijay",
+      "timezone": "Asia/Kolkata",
+      "contact": "m.haddad@example.com",
+      "status": "ASSIGNED",
+      "blocks": [
+        "D-02 market and warehouse write policy",
+        "D-04 currency, refund and order namespaces",
+        "D-08 final-fact correction",
+        "D-09 dispute financial effects",
+        "D-16 parcel reference namespace"
+      ],
+      "contactNote": "PLACEHOLDER - reserved example.com domain; replace with a real incident-reachable contact before relying on it during an incident."
+    },
+    {
+      "id": "security-data",
+      "role": "Security and data owner",
+      "responsibilities": "Privacy, access and scope policy, retention and export limits, threat review, security reporting channel, risk acceptance advice.",
+      "assignedTo": "Nice Pal, Security & Data Owner",
+      "backup": "Ramesh",
+      "timezone": "Asia/Kolkata",
+      "contact": "k.tanaka@example.com",
+      "status": "ASSIGNED",
+      "blocks": [
+        "D-06 delegated privileged grants",
+        "GOV-25 compliance applicability assessment",
+        "SECURITY.md private reporting channel"
+      ],
+      "contactNote": "PLACEHOLDER - reserved example.com domain; replace with a real incident-reachable contact before relying on it during an incident."
+    },
+    {
+      "id": "operations",
+      "role": "Platform and operations owner",
+      "responsibilities": "Environments, observability, capacity and cost, incident command, backup and restore rehearsal, on-call roster.",
+      "assignedTo": "Vijay, Platform & Ops Owner",
+      "backup": "Divya",
+      "timezone": "Asia/Kolkata",
+      "contact": "d.fischer@example.com",
+      "status": "ASSIGNED",
+      "blocks": [
+        "GOV-30 operational readiness sign-off",
+        "Incident response rota and escalation contacts"
+      ],
+      "contactNote": "PLACEHOLDER - reserved example.com domain; replace with a real incident-reachable contact before relying on it during an incident."
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+# Draft — NOT ACTIVE until the planned hosted repository exists and a durable
+# authorization record is written in docs/governance/authorizations.json.
+# Interim routing: Nice Pal holds the technical and security-data roles
+# (docs/governance/ownership.json); product, domain and operations handles are
+# deferred to production setup by the recorded hosting decision. Entries must
+# resolve to real accounts, or GitHub ignores them with a warning.
+* nicepal.m@ramawaterfilter.com

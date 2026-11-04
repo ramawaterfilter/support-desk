@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-31",
+  "documents": [
+    {
+      "file": "Support_Desk_HLD",
+      "pages": 7,
+      "diagrams": 1,
+      "textCharacters": 18138,
+      "sha256": "4d6c58c391efdda536aae77b28c5b9619740d147aed60fbe8f1b085f6879f49c",
+      "outOfPageTextBlocks": 0
+    },
+    {
+      "file": "Support_Desk_LLD",
+      "pages": 24,
+      "diagrams": 3,
+      "textCharacters": 75278,
+      "sha256": "fb7d6db4394409c20700dad51f44079e0b5c9a89f4bb94624e48085305372f99",
+      "outOfPageTextBlocks": 0
+    },
+    {
+      "file": "Decisions",
+      "pages": 3,
+      "diagrams": 0,
+      "textCharacters": 7923,
+      "sha256": "7920cd16659f91a16dd30104ae5e573b2100069b55c87c132158f8e2f1f23f4a",
+      "outOfPageTextBlocks": 0
+    }
+  ],
+  "checks": [
+    "local document links exist",
+    "all 3 supplied PDF hashes verified",
+    "all 12 captured source hashes verified",
+    "15 navigation screenshots present",
+    "all 4 Mermaid diagrams rendered",
+    "all generated PDFs contain extractable text",
+    "no out-of-page PDF text blocks"
+  ],
+  "limits": [
+    "No new production application or API was implemented or tested",
+    "Navigation capture is not exhaustive modal/role/workflow runtime validation",
+    "Historical 87 tests and 113 cases were not rerun"
+  ]
+}

@@ -1,0 +1,28 @@
+# Local working outputs, dependencies and caches
+.tmp/
+node_modules/
+.cache/
+coverage/
+dist/
+build/
+playwright-report/
+test-results/
+*.log
+.venv/
+__pycache__/
+
+# Credentials and local environment files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+.aws/
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+
+# Reference PDFs, approved source captures and screenshots are intentionally retained.
