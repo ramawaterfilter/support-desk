@@ -1,0 +1,22 @@
+{
+  "name": "support-desk-api",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Support Desk API (Express)",
+  "main": "dist/apps/api/src/index.js",
+  "scripts": {
+    "build": "tsc -p ../../tsconfig.build.json",
+    "start": "node ../../dist/apps/api/src/index.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "express-async-errors": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^26.6.6"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  }
+}

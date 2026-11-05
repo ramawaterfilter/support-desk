@@ -34,6 +34,38 @@ export const failureCatalogue = [
   'Clock skew', 'Time-zone errors', 'Partial restores', 'Permission misconfiguration',
 ];
 export const requiredOwnerRoles = ['product', 'technical', 'domain', 'security-data', 'operations'];
+
+// Application-phase stage controls (delivery.md "Application gate activation" step 5):
+// the checker gates application roots by required package scripts, a lockfile and recorded
+// typecheck evidence instead of executing application code or merely allowing files.
+export function validateApplicationStage(config, verification, pkg, applicationFiles, lockfilePresent) {
+  const errors = [];
+  const gate = config?.applicationGate;
+  if (!gate || !meaningful(gate.typecheckCommand) || !meaningful(gate.lockfile) ||
+      !Array.isArray(gate.requiredScripts) || !gate.requiredScripts.length) {
+    return ['Application stage: foundation.json applicationGate is incomplete'];
+  }
+  if (!Array.isArray(applicationFiles) || !applicationFiles.length) {
+    errors.push('Application stage: application roots are empty; stage controls have nothing to gate');
+  }
+  for (const script of gate.requiredScripts) {
+    const value = pkg?.scripts?.[script];
+    if (!meaningful(value)) errors.push(`Application stage: package.json is missing the ${script} script`);
+    else if (/echo|placeholder/i.test(value)) errors.push(`Application stage: the ${script} script is a placeholder, not a real gate`);
+  }
+  if (!lockfilePresent) errors.push(`Application stage: lockfile ${gate.lockfile} is missing`);
+  const entry = verification?.commands?.find(item => item?.command === gate.typecheckCommand);
+  if (!entry) {
+    errors.push(`Application stage: ${gate.typecheckCommand} is not recorded in the verification record`);
+  } else {
+    if (entry.exitCode !== 0) errors.push(`Application stage: ${gate.typecheckCommand} recorded a failing exit code`);
+    if (meaningful(entry.output) && /error TS\d+/.test(entry.output)) {
+      errors.push(`Application stage: recorded typecheck output contains TypeScript errors`);
+    }
+  }
+  return errors;
+}
+
 const authorizationSources = new Set(['SIGNED_CHANGE', 'APPROVED_TICKET', 'EMAIL_CONFIRMATION', 'OTHER_DOCUMENTED']);
 const executionOutcomes = new Set(['NOT_EXECUTED', 'EXECUTED', 'PARTIALLY_EXECUTED', 'FAILED', 'ROLLED_BACK']);
 const agentIdentity = /(?:\bai\b|agent|assistant|chatgpt|claude|codex|copilot|bot\b|\bllm\b|self-review|self approved)/i;
@@ -264,8 +296,8 @@ export function validateVerificationClaims(controls, record, config) {
     if (entry.exitCode !== control.verification.exitCode) errors.push(`${control.id}: verification exit code disagrees with the execution record`);
     if (JSON.stringify(entry.evidence) !== JSON.stringify(control.verification.evidence)) errors.push(`${control.id}: verification evidence disagrees with the execution record`);
     if (JSON.stringify(entry.expectedOutputMarkers) !== JSON.stringify(control.verification.expectedOutputMarkers)) errors.push(`${control.id}: verification markers disagree with the execution record`);
-    if (config?.projectPhase === 'foundation' && !allowlist.includes(control.id)) {
-      errors.push(`${control.id}: VERIFIED is not permitted in the foundation phase; add it to foundation.json verification.foundationVerifiableControls only when its check actually executes`);
+    if (!allowlist.includes(control.id)) {
+      errors.push(`${control.id}: VERIFIED is not permitted without an allow-listed check; add it to foundation.json verification.foundationVerifiableControls only when its check actually executes`);
     }
     const command = record?.commands?.find(item => item?.command === control.verification.command);
     if (!command) errors.push(`${control.id}: verification command was not executed in the recorded run`);
@@ -564,7 +596,7 @@ export async function checkFoundation(root, options = {}) {
   const texts = new Map();
   try {
     config = JSON.parse((await readWorkspaceFile(root, 'docs/governance/foundation.json')).toString('utf8'));
-    if (config.schemaVersion !== 1 || config.projectPhase !== 'foundation') throw new Error('Unsupported phase; reviewed application-gate activation required');
+    if (config.schemaVersion !== 1 || !['foundation', 'application'].includes(config.projectPhase)) throw new Error('Unsupported phase; reviewed application-gate activation required');
     if (!Number.isSafeInteger(config.maxManagedFileBytes) || config.maxManagedFileBytes < 1 || config.maxManagedFileBytes > 1_000_000) throw new Error('Invalid managed file budget');
     if (!Number.isSafeInteger(config.maxManagedTotalBytes) || config.maxManagedTotalBytes < 1 || config.maxManagedTotalBytes > 10_000_000) throw new Error('Invalid total budget');
     const manifest = JSON.parse((await readWorkspaceFile(root, config.manifest)).toString('utf8'));
@@ -652,17 +684,25 @@ export async function checkFoundation(root, options = {}) {
     checks.push('Generated category assessment compared with the authoritative control register');
     if (!options.skipApplicationScan) {
       const applicationFiles = await findApplicationFiles(root, config.applicationRoots);
-      if (applicationFiles.length) errors.push('Application files found during foundation phase; activate reviewed real application gates first');
+      if (config.projectPhase === 'foundation') {
+        if (applicationFiles.length) errors.push('Application files found during foundation phase; activate reviewed real application gates first');
+        checks.push(`Foundation-only phase: application roots ${config.applicationRoots.join(', ')} inspected without executing code`);
+      } else {
+        const pkg = JSON.parse((await readWorkspaceFile(root, 'package.json')).toString('utf8'));
+        let lockfilePresent = true;
+        try { await readWorkspaceFile(root, config.applicationGate?.lockfile ?? 'package-lock.json'); }
+        catch { lockfilePresent = false; }
+        add(validateApplicationStage(config, verification, pkg, applicationFiles, lockfilePresent));
+        checks.push(`Application stage controls: required package scripts, lockfile and recorded typecheck evidence checked without executing application code`);
+      }
       const allowed = new Set(config.foundationPhaseAllowedTopLevel ?? []);
       if (allowed.size) {
         for (const entry of await readdir(root, { withFileTypes: true })) {
           if (entry.isSymbolicLink()) continue;
           const relative = entry.name;
-          if (!allowed.has(relative)) errors.push(`Unexpected top-level path during foundation phase: ${relative}`);
+          if (!allowed.has(relative)) errors.push(`Unexpected top-level path: ${relative}`);
         }
-        checks.push(`Foundation-only phase: application roots ${config.applicationRoots.join(', ')} and the top-level allowlist inspected without executing code`);
-      } else {
-        checks.push('Foundation-only phase: future application roots inspected without executing code');
+        checks.push(`Top-level allowlist inspected: ${allowed.size} permitted entries; application roots ${config.applicationRoots.join(', ')} gated by ${config.projectPhase} phase controls`);
       }
     }
   } catch (error) {

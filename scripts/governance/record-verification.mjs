@@ -46,6 +46,22 @@ const requirements = await readJson('docs/governance/requirements.json');
 const failures = await readJson('docs/governance/failures.json');
 const manifest = await readJson('docs/governance/files.json');
 const config = await readJson('docs/governance/foundation.json');
+const TYPECHECK = config.applicationGate?.typecheckCommand ?? 'npm run typecheck';
+
+// The application stage control: executed for real through the shell (the configured command
+// is an npm script, not an executable) so the record carries genuine typecheck output,
+// never a fabricated pass.
+async function runTypecheck() {
+  const started = process.hrtime.bigint();
+  try {
+    const { stdout, stderr } = await exec(TYPECHECK, { cwd: root, maxBuffer: 20_000_000, shell: true });
+    return { exitCode: 0, wallTimeSeconds: Number((Number(process.hrtime.bigint() - started) / 1e9).toFixed(6)), output: `${stdout}${stderr}` };
+  } catch (error) {
+    // error.code is an exit number for a failed run but a string (e.g. ENOENT) when the
+    // command itself could not start; only numbers are honest exit codes.
+    return { exitCode: typeof error.code === 'number' ? error.code : 1, wallTimeSeconds: Number((Number(process.hrtime.bigint() - started) / 1e9).toFixed(6)), output: `${error.stdout ?? ''}${error.stderr ?? ''}` };
+  }
+}
 
 // Sum managed bytes exactly as the checker does, excluding the record and its generated review
 // so the total is not self-referential.
@@ -81,16 +97,17 @@ async function writeRecord(record) {
   await writeFile(path.join(root, 'docs/governance/category-review.md'), renderCategoryReview(controls.controls, record), 'utf8');
 }
 
-function buildRecord(testExit, testOut, checkExit, checkOut, executedAtUtc) {
+function buildRecord(testExit, testOut, checkExit, checkOut, typecheck, executedAtUtc) {
   return {
     ...existing,
     status: 'VERIFIED',
-    scope: 'Bounded local governance foundation checks only; not application, security certification or hosted availability verification.',
+    scope: 'Bounded local governance foundation checks plus local application typecheck evidence only; not application runtime behaviour, security certification or hosted availability verification.',
     executedAtUtc,
     runtime: `Node.js ${process.versions.node}`,
     commands: [
       { command: TEST, exitCode: testExit, wallTimeSeconds: 0, output: testOut },
       { command: CHECK, exitCode: checkExit, wallTimeSeconds: 0, output: checkOut },
+      { command: TYPECHECK, exitCode: typecheck.exitCode, wallTimeSeconds: typecheck.wallTimeSeconds, output: typecheck.output },
     ],
     counts: countsFor({ output: testOut }, executedAtUtc),
     verifiedControls: verifiedControlsFor(executedAtUtc),
@@ -109,7 +126,8 @@ const kept = probe.output.split(/\r?\n/).filter(line => /^(CHECK|LIMIT) /.test(l
 const checkOut = `${[...kept.slice(0, 2), 'PASS bounded governance foundation checks', ...kept.slice(2)].join('\n')}\n`
   .replace(/(CHECK Managed manifest: \d+ paths; )\d+( bytes)/, `$1${total}$2`);
 const firstTest = await run(['--test', 'scripts/governance/check-foundation.test.mjs']);
-await writeRecord(buildRecord(0, firstTest.output, 0, checkOut, stamp()));
+const bootstrapTypecheck = await runTypecheck();
+await writeRecord(buildRecord(0, firstTest.output, 0, checkOut, bootstrapTypecheck, stamp()));
 
 // Phase 1: capture. The record is now consistent, so re-run both commands for real and store
 // their true exit codes, timings and output. Success is reported only once a fresh checker run
@@ -117,7 +135,8 @@ await writeRecord(buildRecord(0, firstTest.output, 0, checkOut, stamp()));
 for (let attempt = 1; attempt <= 6; attempt += 1) {
   const testRun = await run(['--test', 'scripts/governance/check-foundation.test.mjs']);
   const checkRun = await run(['scripts/governance/check-foundation.mjs']);
-  const record = buildRecord(testRun.exitCode, testRun.output, checkRun.exitCode, checkRun.output, stamp());
+  const typecheckRun = await runTypecheck();
+  const record = buildRecord(testRun.exitCode, testRun.output, checkRun.exitCode, checkRun.output, typecheckRun, stamp());
   await writeRecord(record);
   const confirm = await run(['scripts/governance/check-foundation.mjs']);
   if (testRun.exitCode === 0 && confirm.exitCode === 0) {

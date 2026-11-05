@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "projectPhase": "foundation",
+  "projectPhase": "application",
   "runtime": "24.16.0",
   "manifest": "docs/governance/files.json",
   "registers": [
@@ -73,21 +73,35 @@
   ],
   "foundationPhaseAllowedTopLevel": [
     ".editorconfig",
+    ".git",
     ".gitattributes",
     ".github",
     ".gitignore",
+    ".prettierrc",
     ".tmp",
     "AGENTS.md",
     "CONTRIBUTING.md",
+    "apps",
     "docs",
+    "eslint.config.mjs",
     "MASTER PROMPT AI Software Engineering Governance System.md",
-    "README.md",
+    "node_modules",
+    "dist",
+    "package.json",
+    "package-lock.json",
+    "packages",
+    "REPAIR_PLAN.md",
     "scripts",
     "SECURITY.md",
+    "systemPrompt.md",
     "Support_Desk_Design_Handoff.zip",
     "Support_Desk_Final_Validation_Report.pdf",
     "Support_Desk_V6_Development_Specification.pdf",
-    "Support_Desk_V6_Proposed_AWS_Architecture.pdf"
+    "Support_Desk_V6_Proposed_AWS_Architecture.pdf",
+    "tsconfig.build.json",
+    "tsconfig.json",
+    "vitest.config.ts",
+    "README.md"
   ],
   "reviewGatedPaths": [
     ".editorconfig",
@@ -179,6 +193,16 @@
     ]
   },
   "applicationGateActivation": "docs/governance/delivery.md",
+  "applicationGate": {
+    "requiredScripts": [
+      "typecheck",
+      "build",
+      "start:api",
+      "dev"
+    ],
+    "typecheckCommand": "npm run typecheck",
+    "lockfile": "package-lock.json"
+  },
   "commands": [
     "node --test scripts/governance/check-foundation.test.mjs",
     "node scripts/governance/check-foundation.mjs"

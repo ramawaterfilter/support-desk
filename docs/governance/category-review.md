@@ -57,7 +57,7 @@ Generated from [controls.json](controls.json) by `scripts/governance/render-cate
 - Existing state: Master prompt supplied; no root instructions existed.
 - Work completed: Root instructions, risk-based tools and change/evidence protocol configured.
 - Policy state: DOCUMENTED; automated control state: CONFIGURED. Bounded local foundation checker/configuration only; no runtime or hosted enforcement claim.
-- Verification: node --test scripts/governance/check-foundation.test.mjs; node scripts/governance/check-foundation.mjs — configuration-shape checks executed 2026-11-04 10:38:28 UTC, exit 0; record: docs/governance/verification.json. Category-specific runtime enforcement remains NOT IMPLEMENTED.
+- Verification: node --test scripts/governance/check-foundation.test.mjs; node scripts/governance/check-foundation.mjs — configuration-shape checks executed 2026-11-05 06:58:49 UTC, exit 0; record: docs/governance/verification.json. Category-specific runtime enforcement remains NOT IMPLEMENTED.
 - Remaining gaps: Instruction following is not an OS/IAM permission boundary.
 - Risks/approval: No production risk accepted by foundation setup. See docs/Decisions.md; eligible manager self-approval is expressly allowed.
 - Accountable owner: Technical owner plus relevant CS/Logistics/Finance/security/data/platform owner; individuals named in docs/governance/ownership.json. (ASSIGNED)
@@ -117,7 +117,7 @@ Generated from [controls.json](controls.json) by `scripts/governance/render-cate
 - Existing state: No application lint/type/build config.
 - Work completed: Editor settings and explicit TypeScript coding/tool-selection policy.
 - Policy state: DOCUMENTED; automated control state: CONFIGURED. Bounded local foundation checker/configuration only; no runtime or hosted enforcement claim.
-- Verification: node --test scripts/governance/check-foundation.test.mjs; node scripts/governance/check-foundation.mjs — configuration-shape checks executed 2026-11-04 10:38:28 UTC, exit 0; record: docs/governance/verification.json. Category-specific runtime enforcement remains NOT IMPLEMENTED.
+- Verification: node --test scripts/governance/check-foundation.test.mjs; node scripts/governance/check-foundation.mjs — configuration-shape checks executed 2026-11-05 06:58:49 UTC, exit 0; record: docs/governance/verification.json. Category-specific runtime enforcement remains NOT IMPLEMENTED.
 - Remaining gaps: Configure strict types/ESLint/format/build with manifests and real checks.
 - Risks/approval: No production risk accepted by foundation setup. See docs/Decisions.md; eligible manager self-approval is expressly allowed.
 - Accountable owner: Technical owner plus relevant CS/Logistics/Finance/security/data/platform owner; individuals named in docs/governance/ownership.json. (ASSIGNED)
@@ -141,7 +141,7 @@ Generated from [controls.json](controls.json) by `scripts/governance/render-cate
 - Existing state: No CI/release artifacts.
 - Work completed: Minimal CI action SHAs pinned from official tag resolution; provenance/SBOM rules.
 - Policy state: DOCUMENTED; automated control state: CONFIGURED. Bounded local foundation checker/configuration only; no runtime or hosted enforcement claim.
-- Verification: node --test scripts/governance/check-foundation.test.mjs; node scripts/governance/check-foundation.mjs — configuration-shape checks executed 2026-11-04 10:38:28 UTC, exit 0; record: docs/governance/verification.json. Category-specific runtime enforcement remains NOT IMPLEMENTED.
+- Verification: node --test scripts/governance/check-foundation.test.mjs; node scripts/governance/check-foundation.mjs — configuration-shape checks executed 2026-11-05 06:58:49 UTC, exit 0; record: docs/governance/verification.json. Category-specific runtime enforcement remains NOT IMPLEMENTED.
 - Remaining gaps: Hosted workflow/action review, dependency/image SBOM and release provenance unverified.
 - Risks/approval: No production risk accepted by foundation setup. See docs/Decisions.md; eligible manager self-approval is expressly allowed.
 - Accountable owner: Technical owner plus relevant CS/Logistics/Finance/security/data/platform owner; individuals named in docs/governance/ownership.json. (ASSIGNED)
@@ -153,7 +153,7 @@ Generated from [controls.json](controls.json) by `scripts/governance/render-cate
 - Existing state: No Git repository or hosted workflow.
 - Work completed: Read-only, timeout-bounded foundation CI configuration and activation sequence.
 - Policy state: DOCUMENTED; automated control state: CONFIGURED. Bounded local foundation checker/configuration only; no runtime or hosted enforcement claim.
-- Verification: node --test scripts/governance/check-foundation.test.mjs; node scripts/governance/check-foundation.mjs — configuration-shape checks executed 2026-11-04 10:38:28 UTC, exit 0; record: docs/governance/verification.json. Category-specific runtime enforcement remains NOT IMPLEMENTED.
+- Verification: node --test scripts/governance/check-foundation.test.mjs; node scripts/governance/check-foundation.mjs — configuration-shape checks executed 2026-11-05 06:58:49 UTC, exit 0; record: docs/governance/verification.json. Category-specific runtime enforcement remains NOT IMPLEMENTED.
 - Remaining gaps: Hosted run/required checks/reviewers/environments/deployment pipeline not configured.
 - Risks/approval: No production risk accepted by foundation setup. See docs/Decisions.md; eligible manager self-approval is expressly allowed.
 - Accountable owner: Technical owner plus relevant CS/Logistics/Finance/security/data/platform owner; individuals named in docs/governance/ownership.json. (ASSIGNED)
@@ -237,7 +237,7 @@ Generated from [controls.json](controls.json) by `scripts/governance/render-cate
 - Existing state: No Git/PR process.
 - Work completed: Review/ADR/requirement traceability, PR/work-item templates and rollback policy.
 - Policy state: DOCUMENTED; automated control state: CONFIGURED. Bounded local foundation checker/configuration only; no runtime or hosted enforcement claim.
-- Verification: node --test scripts/governance/check-foundation.test.mjs; node scripts/governance/check-foundation.mjs — configuration-shape checks executed 2026-11-04 10:38:28 UTC, exit 0; record: docs/governance/verification.json. Category-specific runtime enforcement remains NOT IMPLEMENTED.
+- Verification: node --test scripts/governance/check-foundation.test.mjs; node scripts/governance/check-foundation.mjs — configuration-shape checks executed 2026-11-05 06:58:49 UTC, exit 0; record: docs/governance/verification.json. Category-specific runtime enforcement remains NOT IMPLEMENTED.
 - Remaining gaps: Hosted branch controls, team identities and independent review evidence pending.
 - Risks/approval: No production risk accepted by foundation setup. See docs/Decisions.md; eligible manager self-approval is expressly allowed.
 - Accountable owner: Technical owner plus relevant CS/Logistics/Finance/security/data/platform owner; individuals named in docs/governance/ownership.json. (ASSIGNED)
@@ -309,7 +309,7 @@ Generated from [controls.json](controls.json) by `scripts/governance/render-cate
 - Existing state: Existing design/docs/source manifests.
 - Work completed: Authoritative index, policies/templates/registers and bounded link/hash checks.
 - Policy state: DOCUMENTED; automated control state: VERIFIED. Bounded local foundation checker/configuration only; no runtime or hosted enforcement claim.
-- Verification: node scripts/governance/check-foundation.mjs executed 2026-11-04 10:38:28 UTC, exit 0; record: docs/governance/verification.json.
+- Verification: node scripts/governance/check-foundation.mjs executed 2026-11-05 06:58:49 UTC, exit 0; record: docs/governance/verification.json.
 - Remaining gaps: Checks do not establish semantic correctness or full screen-state coverage.
 - Risks/approval: No production risk accepted by foundation setup. See docs/Decisions.md; eligible manager self-approval is expressly allowed.
 - Accountable owner: Technical owner plus relevant CS/Logistics/Finance/security/data/platform owner; individuals named in docs/governance/ownership.json. (ASSIGNED)
@@ -321,7 +321,7 @@ Generated from [controls.json](controls.json) by `scripts/governance/render-cate
 - Existing state: No automated foundation pipeline before setup.
 - Work completed: Dependency-free validator/tests and CI template with explicit activation guard.
 - Policy state: DOCUMENTED; automated control state: VERIFIED. Bounded local foundation checker/configuration only; no runtime or hosted enforcement claim.
-- Verification: node scripts/governance/check-foundation.mjs executed 2026-11-04 10:38:28 UTC, exit 0; record: docs/governance/verification.json.
+- Verification: node scripts/governance/check-foundation.mjs executed 2026-11-05 06:58:49 UTC, exit 0; record: docs/governance/verification.json.
 - Remaining gaps: Only foundation checks local; app/security/hosted gates remain pending.
 - Risks/approval: No production risk accepted by foundation setup. See docs/Decisions.md; eligible manager self-approval is expressly allowed.
 - Accountable owner: Technical owner plus relevant CS/Logistics/Finance/security/data/platform owner; individuals named in docs/governance/ownership.json. (ASSIGNED)

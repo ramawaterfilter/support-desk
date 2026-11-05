@@ -1,0 +1,95 @@
+[
+  {
+    "id": "TICKET-001",
+    "title": "RO membrane replacement question",
+    "description": "Customer asks when to replace the reverse-osmosis membrane on their under-sink unit.",
+    "status": "open",
+    "priority": "medium",
+    "creatorId": "STAFF-001",
+    "createdAt": "2026-11-03T09:15:00.000Z",
+    "updatedAt": "2026-11-03T09:15:00.000Z",
+    "revision": 1
+  },
+  {
+    "id": "TICKET-002",
+    "title": "Filter cartridge shipment delay",
+    "description": "Replacement cartridge order was due two days ago and tracking has not updated.",
+    "status": "in-progress",
+    "priority": "high",
+    "assigneeId": "STAFF-005",
+    "creatorId": "STAFF-001",
+    "createdAt": "2026-11-02T14:40:00.000Z",
+    "updatedAt": "2026-11-04T08:05:00.000Z",
+    "revision": 2
+  },
+  {
+    "id": "TICKET-003",
+    "title": "Leak under sink after filter change",
+    "description": "Customer reports pooling water after a DIY cartridge swap; possible O-ring misalignment.",
+    "status": "open",
+    "priority": "critical",
+    "creatorId": "STAFF-002",
+    "createdAt": "2026-11-04T07:55:00.000Z",
+    "updatedAt": "2026-11-04T07:55:00.000Z",
+    "revision": 1
+  },
+  {
+    "id": "TICKET-004",
+    "title": "Warranty registration request",
+    "description": "Customer wants to register a new 7-stage RO unit purchased last week.",
+    "status": "resolved",
+    "priority": "low",
+    "assigneeId": "STAFF-003",
+    "creatorId": "STAFF-001",
+    "createdAt": "2026-10-28T11:20:00.000Z",
+    "updatedAt": "2026-10-30T16:10:00.000Z",
+    "revision": 3
+  },
+  {
+    "id": "TICKET-005",
+    "title": "Invoice copy for bulk order",
+    "description": "Reseller requests a VAT invoice for a 40-unit cartridge bulk order.",
+    "status": "closed",
+    "priority": "medium",
+    "assigneeId": "STAFF-002",
+    "creatorId": "STAFF-004",
+    "createdAt": "2026-10-25T10:00:00.000Z",
+    "updatedAt": "2026-10-27T09:30:00.000Z",
+    "revision": 2
+  },
+  {
+    "id": "TICKET-006",
+    "title": "TDS reading high after cartridge replacement",
+    "description": "Post-filter TDS dropped only slightly; possible seating issue or defective stage.",
+    "status": "in-progress",
+    "priority": "medium",
+    "assigneeId": "STAFF-005",
+    "creatorId": "STAFF-001",
+    "createdAt": "2026-11-01T13:45:00.000Z",
+    "updatedAt": "2026-11-03T15:25:00.000Z",
+    "revision": 2
+  },
+  {
+    "id": "TICKET-007",
+    "title": "Change delivery address for subscription",
+    "description": "Customer moved; update the shipping address for the next subscription dispatch.",
+    "status": "open",
+    "priority": "low",
+    "creatorId": "STAFF-002",
+    "createdAt": "2026-11-04T16:30:00.000Z",
+    "updatedAt": "2026-11-04T16:30:00.000Z",
+    "revision": 1
+  },
+  {
+    "id": "TICKET-008",
+    "title": "Whole-house filter bypass valve broken",
+    "description": "Bypass valve cracked during installation; water shut off pending site visit.",
+    "status": "in-progress",
+    "priority": "critical",
+    "assigneeId": "STAFF-003",
+    "creatorId": "STAFF-004",
+    "createdAt": "2026-11-05T06:10:00.000Z",
+    "updatedAt": "2026-11-05T07:45:00.000Z",
+    "revision": 1
+  }
+]

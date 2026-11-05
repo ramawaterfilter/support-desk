@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "ES2022",
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "noImplicitAny": true,
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["apps/*", "packages/*"],
+      "@shared/*": ["packages/shared/*"],
+      "@policy/*": ["packages/policy/*"],
+      "@db/*": ["packages/db/*"],
+      "@storage/*": ["packages/storage/*"],
+      "@api/*": ["apps/api/*"],
+      "@web/*": ["apps/web/*"],
+      "@worker/*": ["apps/worker/*"]
+    },
+    "lib": ["ES2022", "DOM"],
+    "outDir": "./dist",
+    "rootDir": ".",
+    "strictPropertyInitialization": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true
+  },
+  "include": [
+    "apps/**/*",
+    "packages/**/*",
+    "scripts/**/*"
+  ],
+  "exclude": ["node_modules", "dist", "*.test.ts"]
+}

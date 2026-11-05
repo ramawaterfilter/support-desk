@@ -1,0 +1,20 @@
+{
+  "name": "support-desk-db",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Support Desk database configuration",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc -p ../../tsconfig.build.json"
+  },
+  "dependencies": {
+    "pg": "^8.13.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/pg": "^8.11.6"
+  },
+  "exports": {
+    ".": "./index.ts"
+  }
+}

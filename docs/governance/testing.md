@@ -35,7 +35,7 @@ External failure simulation must cover timeout,429,5xx, malformed response and u
 - All 30 governance categories, explicit state/evidence/gap/owner fields and justified N/A, including owner assignment (ASSIGNED / PENDING OWNER ASSIGNMENT) and gate status (NONE / BLOCKED with reason).
 - Requirement ID uniqueness, observable Given/When/Then acceptance criteria, valid dependencies/design links, meaningful priority, every failure scenario linked to at least one requirement and vice versa, and no unsupported implementation/test evidence. Requirements with an unresolved decision must carry `PENDING DECISION` plus a `decisionRef` and claim no evidence.
 - Failure register shape, traceable scenarios and catalogue coverage: every approved scenario name maps to at least one register entry; no fabricated production verification.
-- Verification-claim integrity: foundation-phase VERIFIED claims must be allow-listed in `foundation.json`, match a structured `verification` block, match an execution-record entry with identical command/exit/evidence/markers, cite non-governance-record evidence, and appear in the recorded output with its markers. Stale, contradictory or missing records fail.
+- Verification-claim integrity: VERIFIED claims must be allow-listed in `foundation.json` `verification.foundationVerifiableControls`, match a structured `verification` block, match an execution-record entry with identical command/exit/evidence/markers, cite non-governance-record evidence, and appear in the recorded output with its markers. Stale, contradictory or missing records fail.
 - Ownership and authorisation registers: required roles present, pending roles name nobody, controls agree with register status, and authorisation records reject missing fields, invalid sources/outcomes, missing expiry, or an agent/AI named as requester or approver.
 - Review-gated path completeness, pinned instruction digests (re-pin requires deliberate review) and forbidden weakened-instruction phrases.
 - `.gitattributes` byte-preservation coverage of every protected reference, including quoted patterns with spaces.
@@ -45,13 +45,13 @@ External failure simulation must cover timeout,429,5xx, malformed response and u
 - Exact SHA-256 of preserved references plus previous workspace files declared unchanged.
 - Root instruction safeguards, `.gitignore` exclusions and minimally privileged/pinned CI configuration invariants.
 - Limited high-confidence secret-like patterns; only path/rule is reported, never matched content. No blanket whole-disk/credential scan.
-- Foundation phase rejects application source under `apps/`, `packages/`, `tests/` or `db/migrations/` and any top-level path outside the configured allowlist until application-specific gates are deliberately activated.
+- Phase guards: the foundation phase rejects application source under `apps/`, `packages/`, `tests/` or `db/migrations/`. The application phase replaces that absence-of-code guard with tested stage controls (delivery.md application gate activation step 5): required non-placeholder package scripts, an intact lockfile, non-empty application roots and recorded passing `npm run typecheck` evidence in `verification.json`. The top-level allowlist applies in both phases; reference hash, link and register checks are preserved.
 
 The checker fails nonzero, it never rewrites files/fixes violations. Tests include broken links, escaped/symlinked paths, changed protected file, bad/duplicate register IDs, missing approval evidence, credential-like dummy fixture, unexpected application source, forged verification claims, register-as-evidence, stale/contradictory execution records, category-review drift, instruction digest mismatch, weakened instruction phrases, missing review-gated paths, ownership inconsistency, agent-as-approver authorisations, unmapped catalogue scenarios and uncovered `.gitattributes` paths. Manual review must still inspect policy adequacy, workflow semantics, dependency security and hosted permissions. Do not call a substring/configuration check a complete YAML parser or malicious-code detector.
 
 ## Prototype visual parity
 
-Requirement REQ-027 requires the future React UI to preserve the prototype's visual language. The procedure, until application gates exist:
+Requirement REQ-027 requires the future React UI to preserve the prototype's visual language. The procedure, until the full application gates exist:
 
 1. Compare against the approved captures in `docs/reference/screenshots/` and the screen inventory `docs/reference/screens.json` — never against a freshly rendered page.
 2. Record per-screen: matching structure/hierarchy, named divergences, and whether the divergence is an approved fix (e.g. narrow-viewport identity) or a gap.

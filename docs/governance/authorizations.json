@@ -40,7 +40,7 @@
       "environment": "production-github",
       "expiry": "2028-01-01T00:00:00Z",
       "evidence": "email",
-      "executionOutcome": "NOT_EXECUTED",
+      "executionOutcome": "EXECUTED",
       "authorizationSource": "EMAIL_CONFIRMATION",
       "recordedAtUtc": "2026-11-04T08:30:00+05:30"
     }

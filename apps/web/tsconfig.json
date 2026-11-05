@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*", "shared/*"],
+      "@shared/*": ["shared/*"],
+      "@policy/*": ["policy/*"],
+      "@db/*": ["db/*"],
+      "@storage/*": ["storage/*"],
+      "@api/*": ["../api/*"],
+      "@web/*": ["*"],
+      "@worker/*": ["../worker/*"]
+    },
+    "lib": ["ES2022", "DOM"],
+    "outDir": "./dist",
+    "rootDir": ".",
+    "strictPropertyInitialization": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true
+  },
+  "include": ["src/**/*", "shared/**/*", "policy/**/*", "db/**/*", "storage/**/*"],
+  "exclude": ["node_modules", "dist", "*.test.ts"]
+}

@@ -11,7 +11,7 @@ import {
   validateVerificationRecord, validateVerificationClaims, validateOwnership,
   validateAuthorizations, validateCatalogueMapping, parseGitAttributes,
   checkAttributeCoverage, validateReviewGatedPaths, validateInstructionIntegrity,
-  renderCategoryReview,
+  validateApplicationStage, renderCategoryReview,
 } from './check-foundation.mjs';
 
 const root = process.cwd();
@@ -285,7 +285,30 @@ test('verification claims outside the foundation allow-list and without executio
     ? { ...entry, command: claimed.verification.command, exitCode: claimed.verification.exitCode,
         evidence: [...claimed.verification.evidence], expectedOutputMarkers: [...claimed.verification.expectedOutputMarkers] }
     : entry);
-  assert(validateVerificationClaims(unlisted.controls, record2, config2).some(message => message.includes('not permitted in the foundation phase')));
+  assert(validateVerificationClaims(unlisted.controls, record2, config2).some(message => message.includes('not permitted without an allow-listed check')));
+});
+
+test('application stage controls require real scripts, lockfile and recorded typecheck evidence', async () => {
+  const config = await load('foundation');
+  const record = JSON.parse(await readFile(path.join(root, 'docs/governance/verification.json'), 'utf8'));
+  const pkg = JSON.parse(await readFile(path.join(root, 'package.json'), 'utf8'));
+  const files = ['apps/api/src/index.ts'];
+  assert.deepEqual(validateApplicationStage(config, record, pkg, files, true), []);
+  const placeholder = { ...pkg, scripts: { ...pkg.scripts, typecheck: 'echo all good' } };
+  assert(validateApplicationStage(config, record, placeholder, files, true).some(message => message.includes('placeholder')));
+  const missing = { ...pkg, scripts: { ...pkg.scripts, build: undefined } };
+  assert(validateApplicationStage(config, record, missing, files, true).some(message => message.includes('missing the build script')));
+  assert(validateApplicationStage(config, record, pkg, files, false).some(message => message.includes('lockfile')));
+  assert(validateApplicationStage(config, record, pkg, [], true).some(message => message.includes('empty')));
+  const noRun = structuredClone(record);
+  noRun.commands = noRun.commands.filter(entry => entry.command !== config.applicationGate.typecheckCommand);
+  assert(validateApplicationStage(config, noRun, pkg, files, true).some(message => message.includes('not recorded')));
+  const failedRun = structuredClone(record);
+  failedRun.commands.find(entry => entry.command === config.applicationGate.typecheckCommand).exitCode = 1;
+  assert(validateApplicationStage(config, failedRun, pkg, files, true).some(message => message.includes('failing exit')));
+  const brokenGate = structuredClone(config);
+  delete brokenGate.applicationGate;
+  assert(validateApplicationStage(brokenGate, record, pkg, files, true).some(message => message.includes('incomplete')));
 });
 
 test('a verification record claiming a non-claimed control fails', async () => {

@@ -1,0 +1,16 @@
+{
+  "name": "support-desk-policy",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Support Desk policy functions",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc -p ../../tsconfig.build.json"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6"
+  },
+  "exports": {
+    ".": "./index.ts"
+  }
+}

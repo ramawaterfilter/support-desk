@@ -4,7 +4,7 @@ Readiness: **READY TO BEGIN CONTROLLED IMPLEMENTATION**, limited to reviewed app
 
 ## Assessment and design
 
-The workspace began as design/reference artifacts without Git, application code/manifests, tests, CI or infrastructure. See [discovery](discovery.md). Existing design and captured prototype/source artifacts remain the product reference; no application is built here.
+The workspace began as design/reference artifacts without Git, application code/manifests, tests, CI or infrastructure. See [discovery](discovery.md). Existing design and captured prototype/source artifacts remain the product reference. A reviewed application-gate activation then added a local development baseline (Express API, React UI, shared packages, synthetic data only) under `apps/`/`packages/`, gated by the stage controls in [testing](testing.md); no production workflow, live integration or deployment is built here.
 
 The approved foundation adds concise agent/contributor/security entrypoints; authoritative engineering/security/testing/delivery/operations policies; significant ADRs; reusable feature/threat/test/incident/PR templates; requirement/control/failure registers; bounded local checks with fixture tests; and a pinned minimally privileged GitHub CI configuration. [files.json](files.json) lists every created/updated path and purpose. Only governance navigation is appended to the previous docs index; previous artifacts declared unchanged are hash-protected.
 

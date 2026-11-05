@@ -1,0 +1,504 @@
+openapi: 3.1.0
+info:
+  title: Support Desk V6 API
+  version: 1.0.0
+  description: Modular monolith support portal API — modular monolith architecture, PostgreSQL, React UI, outbox worker
+  contact:
+    name: Support Desk Team
+license:
+  name: Proprietary
+servers:
+  - url: http://localhost:3000
+    description: Local development server
+paths:
+  /staff/auth/login:
+    post:
+      summary: Staff login
+      operationId: staffLogin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StaffLoginRequest"
+      responses:
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StaffLoginResponse"
+        "401":
+          description: Invalid credentials
+        "422":
+          description: Validation errors
+
+  /staff/auth/invite:
+    post:
+      summary: Invite staff member
+      operationId: staffInvite
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StaffInviteRequest"
+      responses:
+        "201":
+          description: Invitation sent
+        "400":
+          description: Invalid invitation data
+        "403":
+          description: Not authorized to invite
+
+  /staff/auth/recovery:
+    post:
+      summary: Initiate password recovery
+      operationId: staffRecovery
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StaffRecoveryRequest"
+      responses:
+        "200":
+          description: Recovery initiated
+        "400":
+          description: Invalid email format
+
+  /tickets:
+    get:
+      summary: List tickets with filters
+      operationId: listTickets
+      parameters:
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [open, in-progress, resolved, closed]
+        - name: assigneeId
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uuid
+        - name: priority
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [low, medium, high, critical]
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: cursor
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Paginated ticket list
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TicketListResponse"
+        "401":
+          description: Unauthorized
+
+    post:
+      summary: Create new ticket
+      operationId: createTicket
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TicketCreateRequest"
+      responses:
+        "201":
+          description: Ticket created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TicketResponse"
+        "400":
+          description: Validation errors
+        "403":
+          description: Not authorized to create tickets
+
+  /tickets/{ticketId}:
+    parameters:
+      - name: ticketId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Get ticket by ID
+      operationId: getTicket
+      responses:
+        "200":
+          description: Ticket details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TicketResponse"
+        "404":
+          description: Ticket not found
+        "401":
+          description: Unauthorized
+
+    patch:
+      summary: Update ticket (claim, take over, add comment)
+      operationId: updateTicket
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TicketUpdateRequest"
+      responses:
+        "200":
+          description: Ticket updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TicketResponse"
+        "400":
+          description: Validation errors
+        "403":
+          description: Not authorized to update this ticket
+
+  /tickets/{ticketId}/comments:
+    parameters:
+      - name: ticketId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    post:
+      summary: Add comment to ticket
+      operationId: addComment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CommentCreateRequest"
+      responses:
+        "201":
+          description: Comment added
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CommentResponse"
+        "400":
+          description: Validation errors
+
+  /exports:
+    get:
+      summary: List available export datasets
+      operationId: listExports
+      responses:
+        "200":
+          description: Available export datasets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ExportDefinition"
+        "401":
+          description: Unauthorized
+
+  /exports/{datasetId}:
+    parameters:
+      - name: datasetId
+        in: path
+        required: true
+        schema:
+          type: string
+    post:
+      summary: Generate export dataset
+      operationId: generateExport
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExportGenerateRequest"
+      responses:
+        "202":
+          description: Export generation started
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExportJobResponse"
+        "400":
+          description: Invalid dataset or access denied
+
+  /admin/override:
+    post:
+      summary: Manager override for decision
+      operationId: managerOverride
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ManagerOverrideRequest"
+      responses:
+        "200":
+          description: Override applied
+        "403":
+          description: Not an eligible manager
+        "422":
+          description: Override not applicable
+
+components:
+schemas:
+  StaffLoginRequest:
+    type: object
+    required:
+      - email
+      - password
+    properties:
+      email:
+        type: string
+        format: email
+      password:
+        type: string
+        format: password
+
+  StaffLoginResponse:
+    type: object
+    required:
+      - accessToken
+      - staffId
+      - roles
+    properties:
+      accessToken:
+        type: string
+      staffId:
+        type: string
+      roles:
+        type: array
+        items:
+          type: string
+          enum: [staff, manager, admin]
+
+  StaffInviteRequest:
+    type: object
+    required:
+      - email
+      - role
+    properties:
+      email:
+        type: string
+        format: email
+      role:
+        type: string
+        enum: [staff, manager]
+
+  StaffRecoveryRequest:
+    type: object
+    required:
+      - email
+    properties:
+      email:
+        type: string
+        format: email
+
+  TicketListResponse:
+    type: object
+    properties:
+      items:
+        type: array
+        items:
+          $ref: "#/components/schemas/TicketSummary"
+      nextCursor:
+        type: string
+        nullable: true
+
+  TicketSummary:
+    type: object
+    required:
+      - id
+      - title
+      - status
+      - createdAt
+    properties:
+      id:
+        type: string
+        format: uuid
+      title:
+        type: string
+      status:
+        type: string
+        enum: [open, in-progress, resolved, closed]
+      priority:
+        type: string
+        enum: [low, medium, high, critical]
+      createdAt:
+        type: string
+        format: date-time
+      assigneeId:
+        type: string
+        format: uuid
+        nullable: true
+
+  TicketCreateRequest:
+    type: object
+    required:
+      - title
+      - description
+    properties:
+      title:
+        type: string
+      description:
+        type: string
+
+  TicketResponse:
+    type: object
+    required:
+      - id
+      - title
+      - status
+      - createdAt
+      - updatedAt
+    properties:
+      id:
+        type: string
+        format: uuid
+      title:
+        type: string
+      status:
+        type: string
+        enum: [open, in-progress, resolved, closed]
+      priority:
+        type: string
+        enum: [low, medium, high, critical]
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+      assigneeId:
+        type: string
+        format: uuid
+        nullable: true
+
+  TicketUpdateRequest:
+    type: object
+    properties:
+      status:
+        type: string
+        enum: [open, in-progress, resolved, closed]
+      assigneeId:
+        type: string
+        format: uuid
+        nullable: true
+      addComment:
+        type: boolean
+
+  CommentCreateRequest:
+    type: object
+    required:
+      - content
+    properties:
+      content:
+        type: string
+
+  CommentResponse:
+    type: object
+    required:
+      - id
+      - content
+      - createdAt
+      - authorId
+    properties:
+      id:
+        type: string
+        format: uuid
+      content:
+        type: string
+      createdAt:
+        type: string
+        format: date-time
+      authorId:
+        type: string
+        format: uuid
+
+  ExportDefinition:
+    type: object
+    required:
+      - id
+      - name
+      - description
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      datasetType:
+        type: string
+        enum: [tickets, customers, reports, finance, returns, fulfilment, service, analytics]
+
+  ExportGenerateRequest:
+    type: object
+    required:
+      - datasetId
+      - filters
+    properties:
+      datasetId:
+        type: string
+      filters:
+        type: object
+
+  ExportJobResponse:
+    type: object
+    required:
+      - jobId
+      - status
+      - downloadUrl
+    properties:
+      jobId:
+        type: string
+      status:
+        type: string
+        enum: [pending, processing, completed, failed]
+      downloadUrl:
+        type: string
+        nullable: true
+
+  ManagerOverrideRequest:
+    type: object
+    required:
+      - requestId
+      - decision
+      - justification
+    properties:
+      requestId:
+        type: string
+      decision:
+        type: string
+      justification:
+        type: string
+        format: paragraph
+
+# Security schemes
+securitySchemes:
+  bearerAuth:
+    type: http
+    scheme: bearer
+    bearerFormat: JWT
