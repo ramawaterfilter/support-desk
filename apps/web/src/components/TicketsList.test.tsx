@@ -10,7 +10,12 @@ describe("TicketsList", () => {
     render(
       <TicketsList
         tickets={[
-          { id: "TICKET-001", title: "RO membrane replacement question", status: "open", priority: "medium" },
+          {
+            id: "TICKET-001",
+            title: "RO membrane replacement question",
+            status: "open",
+            priority: "medium",
+          },
         ]}
       />,
     );
